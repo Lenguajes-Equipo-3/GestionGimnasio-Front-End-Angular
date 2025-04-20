@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    background-color: rgb(145, 93, 248);
+  }
+  .title {
+    font-weight: bold;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 40px;
+    margin: 0 12px;
+  }

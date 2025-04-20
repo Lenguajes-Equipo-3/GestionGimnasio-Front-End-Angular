@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
@@ -15,19 +16,22 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    FormsModule  // Necesario para ngModel
+    FormsModule,
+    MatIconModule  
   ],    
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  selectedRole: string = 'role'; // Valor por defecto
+  selectedRole: string = 'admin'; // Valor por defecto
   roles: string[] = ['admin', 'usuario']; // Opciones disponibles para el rol
-
+  email: string = '';
+  password: string = '';
+  hide = true;
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    if (this.roles.includes(this.selectedRole)) {  // Validación básica del rol
+    if (true) {  // Validación básica del rol
       this.authService.login(this.selectedRole); // Guardar el rol
       this.router.navigate(['/dashboard']); // Redirigir a la página de dashboard después del login
     } else {

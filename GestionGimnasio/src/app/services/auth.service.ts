@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RoleGuard } from '../guards/role.guard';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,8 @@ export class AuthService {
   }
 
   login(role: string) {
-    this.role = role;
     localStorage.setItem('role', role);
+    // RoleGuard.setRole(role); // Removed as RoleGuard does not have a setRole method
   }
 
   logout() {

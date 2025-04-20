@@ -1,20 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar'; // Necesario para mat-toolbar
+import { Component, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    MatToolbarModule  // Necesario para mat-toolbar
-  ],
-  template: `
-    <mat-toolbar>
-      <mat-toolbar-row>
-        <span>Header</span>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  `
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule],
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  @Input() isHandset: boolean = false; // Propiedad de entrada 'isHandset'
+  @Output() toggleSidebar = new EventEmitter<void>();
 }

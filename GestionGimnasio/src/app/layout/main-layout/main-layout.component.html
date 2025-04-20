@@ -1,22 +1,9 @@
-<mat-sidenav-container class="sidenav-container">
-    <mat-sidenav
-      #drawer
-      [mode]="isHandset ? 'over' : 'side'"
-      [opened]="!isHandset"
-      class="sidenav"
-    >
-      <app-sidebar [role]="role" (logout)="logout()"></app-sidebar>
-    </mat-sidenav>
-  
-    <mat-sidenav-content>
-      <app-header
-        [isHandset]="isHandset"
-        (toggleSidebar)="drawer.toggle()"
-      ></app-header>
-  
-      <div class="main-content">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
+<div class="layout-container">
+  <app-header (toggleSidebar)="toggleSidebar()"></app-header>
+  <div class="main-content">
+    <app-sidebar [collapsed]="isSidebarCollapsed"></app-sidebar>
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

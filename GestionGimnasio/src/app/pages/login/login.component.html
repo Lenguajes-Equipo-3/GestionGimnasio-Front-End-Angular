@@ -1,11 +1,31 @@
-<form (ngSubmit)="login()">
-    <mat-form-field appearance="fill">
-      <mat-label>Selecciona tu rol</mat-label>
-      <mat-select [(ngModel)]="selectedRole" name="role">
-        <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+<div class="login-wrapper">
+    <div class="login-box">
+      <h2 class="title">Bienvenido</h2>
+      <p class="subtitle">Ingrese sus credenciales para acceder</p>
   
-    <button mat-raised-button color="primary" type="submit">Iniciar sesión</button>
-  </form>
+      <button mat-button class="ghost-button">Iniciar Sesión</button>
+  
+      <form (ngSubmit)="login()" class="form">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput type="email" [(ngModel)]="email" name="email" placeholder="ejemplo@correo.com" required />
+          <button mat-icon-button matSuffix disabled>
+            <mat-icon>mail</mat-icon>
+          </button>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" name="password" placeholder="Mínimo 8 caracteres" required />
+          <button mat-icon-button matSuffix type="button" (click)="hide = !hide">
+            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" class="submit-button" type="submit">Iniciar Sesión</button>
+      </form>
+  
+      <a class="forgot-password" href="#">¿Olvidó su contraseña?</a>
+    </div>
+  </div>
   

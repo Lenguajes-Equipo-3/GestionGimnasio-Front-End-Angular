@@ -1,0 +1,24 @@
+.sidebar {
+    width: 240px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    background: #c7c7e8;
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+  .collapsed {
+    width: 70px;
+  }
+  mat-icon {
+    margin-right: 12px;
+    color: #000;
+  }
+
+  span {
+    font-size: 16px;
+    color: #000;
+  }
+  a {
+    display: flex;
+    align-items: center;
+  }
