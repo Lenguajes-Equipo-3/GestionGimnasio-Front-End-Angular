@@ -1,1 +1,11 @@
-<p>login works!</p>
+<form (ngSubmit)="login()">
+    <mat-form-field appearance="fill">
+      <mat-label>Selecciona tu rol</mat-label>
+      <mat-select [(ngModel)]="selectedRole" name="role">
+        <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Iniciar sesión</button>
+  </form>
+  
