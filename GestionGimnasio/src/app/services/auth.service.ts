@@ -5,7 +5,7 @@ import { RoleGuard } from '../guards/role.guard';
   providedIn: 'root',
 })
 export class AuthService {
-  private role: string = 'admin'; // Valor fijo por ahora
+  private role: string = 'usuario'; // Valor fijo por ahora
 
   constructor() {
     const savedRole = localStorage.getItem('role');
