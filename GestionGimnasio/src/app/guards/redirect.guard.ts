@@ -19,6 +19,8 @@ export const RedirectGuard: CanActivateFn = () => {
     router.navigate(['/admin']);
   } else if (role === 'usuario') {
     router.navigate(['/dashboard']);
+    router.navigate(['/CategortiaEjercicioListComponent']);
+
   } else {
     router.navigate(['/login']);
   }

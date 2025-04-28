@@ -1,0 +1,33 @@
+<div class="categoria-list">
+  <h2>Categorías de Ejercicio</h2>
+  <div class="buscador-container">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="filtrarCategorias()"
+      placeholder="Buscar categoría..."
+      class="buscador-input"
+    /> 
+   
+   
+  </div>
+  <div class="boton-agregar-container">
+    <button mat-raised-button color="primary" (click)="abrirModalAgregarCategoria()">
+      Agregar Categoría
+    </button>
+  </div>
+  <div class="exercise-grid">
+    <mat-card class="exercise-card" *ngFor="let categoria of categoriasFiltradas">
+      <mat-card-content>
+        <div class="exercise-info">
+          <div class="exercise-name">{{ categoria.nombreCategoria }}</div>
+          <img mat-card-image [src]="categoria.imagen" alt="Imagen de {{ categoria.nombreCategoria }}">
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+
+ 
+
+</div>

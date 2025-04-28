@@ -1,0 +1,18 @@
+<h2>Agregar Nueva Categoría</h2>
+
+<form [formGroup]="categoriaForm" (ngSubmit)="guardarCategoria()">
+  <div>
+    <label>Nombre:</label>
+    <input formControlName="nombreCategoria" type="text" placeholder="Nombre de la categoría" />
+  </div>
+
+  <div>
+    <label>URL Imagen:</label>
+    <input formControlName="imagen" type="text" placeholder="URL de la imagen" />
+  </div>
+
+  <div class="botones">
+    <button type="submit" [disabled]="categoriaForm.invalid">Guardar</button>
+    <button type="button" (click)="cerrar()">Cancelar</button>
+  </div>
+</form>

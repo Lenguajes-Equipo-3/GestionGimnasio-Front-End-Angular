@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategortiaEjercicioaAddComponent } from './categortia-ejercicioa-add.component';
+import { CategortiaEjercicioaAddComponent } from './categoria-ejercicio-add.component';
 
 describe('CategortiaEjercicioaAddComponent', () => {
   let component: CategortiaEjercicioaAddComponent;
