@@ -5,6 +5,7 @@ import { RedirectGuard } from './guards/redirect.guard';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { MedidasCorporalesComponent} from './pages/medidaCorporal/medida-corporal-list/medida-corporal-list.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,12 @@ export const routes: Routes = [
         component: AdminComponent,
         canActivate: [RoleGuard],
         data: { roles: ['admin'] }
+      },
+      {
+        path: 'medidasCorporales',  
+        component: MedidasCorporalesComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['admin', 'usuario']  }  
       }
     ]
   },
