@@ -22,11 +22,11 @@ export class ClienteListaComponent implements OnInit {
       this.clientes = clientes;
     });
   }
-/*
+
   eliminarCliente(id: number): void {
     this.clienteService.eliminar(id).subscribe(() => {
       this.cargarClientes(); // Recargar la lista después de eliminar
     });
   }
-    */
+    
 }

@@ -37,7 +37,7 @@ export class ClienteEditarComponent implements OnInit {
       });
     }
   }
-/*
+
   guardar(): void {
     if (this.cliente.idCliente === 0) {
       this.clienteService.insertar(this.cliente).subscribe(() => {
@@ -49,5 +49,5 @@ export class ClienteEditarComponent implements OnInit {
       });
     }
   }
-    */
+
 }

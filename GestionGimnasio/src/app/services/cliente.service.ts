@@ -38,16 +38,15 @@ export class ClienteService {
   insertar(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(`${this.baseUrl}`, cliente);
   }
-/*
+
   // Actualizar los datos de un cliente
   actualizar(cliente: Cliente): Observable<Cliente> {
-    return this.http.put<Cliente>(${this.baseUrl}, cliente);
+    return this.http.put<Cliente>(`${this.baseUrl}`, cliente);
   }
 
   // Eliminar un cliente
   eliminar(id: number): Observable<void> {
-    return this.http.delete<void>(${this.baseUrl}${id});
+    return this.http.delete<void>(`${this.baseUrl}${id}`);
   }
-    */
 }
 

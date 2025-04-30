@@ -1,6 +1,6 @@
-<div>
+<div class="clientes-container">
   <h2>Lista de Clientes</h2>
-  <table>
+  <table class="tabla-clientes">
     <thead>
       <tr>
         <th>ID</th>
@@ -15,7 +15,7 @@
         <td>{{ cliente.nombreCliente }} {{ cliente.apellidosCliente }}</td>
         <td>{{ cliente.telefono }}</td>
         <td>
-          <!--<button (click)="eliminarCliente(cliente.idCliente)">Eliminar</button> -->
+          <button (click)="eliminarCliente(cliente.idCliente)">Eliminar</button>
         </td>
       </tr>
     </tbody>
