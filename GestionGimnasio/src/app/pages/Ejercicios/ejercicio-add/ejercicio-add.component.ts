@@ -66,13 +66,13 @@ export class EjercicioAddComponent implements OnInit {
     if (this.ejercicioForm.valid) {
       this.ejercicioService.createEjercicio(this.ejercicioForm.value).subscribe({
         next: () => {
-          alert('Ejercicio registrado con éxito');
+          alert('Ejercicio registrado con éxito'); // Mensaje de éxito
           this.ejercicioForm.reset();
           this.imagenes.clear();
         },
         error: (err) => {
           console.error(err);
-          alert('Error al registrar el ejercicio');
+          alert('Error al registrar el ejercicio'); // Mensaje de error
         },
       });
     }

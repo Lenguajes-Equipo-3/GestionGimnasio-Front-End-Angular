@@ -6,11 +6,17 @@ import { CategoriaEjercicioService } from '../../../services/categoriaEjercicio.
 import { Ejercicio } from '../../../Domain/Ejercicio.interface';
 import { Categoria } from '../../../Domain/CategoriaEjercicio.interface';
 import { EjercicioAddComponent } from '../ejercicio-add/ejercicio-add.component';
+import { EjercicioUpdateComponent } from '../ejercicio-update/ejercicio-update.component';
 
 @Component({
   selector: 'app-ejercicio-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, EjercicioAddComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    EjercicioAddComponent,
+    EjercicioUpdateComponent,
+  ],
   templateUrl: './ejercicio-list.component.html',
   styleUrls: ['./ejercicio-list.component.css'],
 })
@@ -58,13 +64,37 @@ export class EjercicioListComponent implements OnInit {
   }
 
   obtenerNombreCategoria(idCategoria: number): string {
-    const categoria = this.categorias.find((cat) => cat.idCategoria === idCategoria);
+    const categoria = this.categorias.find(
+      (cat) => cat.idCategoria === idCategoria
+    );
     return categoria ? categoria.nombreCategoria : 'Sin categoría';
   }
 
   filtrarEjercicios(): void {
     this.ejerciciosFiltrados = this.ejercicios.filter((ejercicio) =>
-      ejercicio.nombreEjercicio.toLowerCase().includes(this.searchTerm.toLowerCase())
+      ejercicio.nombreEjercicio
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase())
     );
+  }
+
+  ejercicioSeleccionado: Ejercicio | null = null;
+
+  editarEjercicio(ejercicio: Ejercicio): void {
+    if (!ejercicio.id) {
+      console.error('El ejercicio seleccionado no tiene un ID válido.');
+      alert('Error: El ejercicio seleccionado no tiene un ID válido.');
+      return;
+    }
+    this.ejercicioSeleccionado = ejercicio; // Actualiza el ejercicio seleccionado
+  }
+
+  cancelarEdicion(): void {
+    this.ejercicioSeleccionado = null;
+  }
+
+  onEjercicioActualizado(): void {
+    this.cargarEjercicios(); // Refrescar la lista de ejercicios
+    this.ejercicioSeleccionado = null; // Cerrar el formulario de actualización
   }
 }
