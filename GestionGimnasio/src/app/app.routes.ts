@@ -40,7 +40,15 @@ export const routes: Routes = [
         component: AdminComponent,
         canActivate: [RoleGuard],
         data: { roles: ['admin'] }
+      },
+      {
+        path: 'ejercicios',
+        loadComponent: () => import('./pages/Ejercicios/ejercicio-list/ejercicio-list.component')
+          .then(m => m.EjercicioListComponent),
+        canActivate: [RoleGuard],
+        data: { roles: ['admin', 'usuario'] },
       }
+
       
     ]
   },

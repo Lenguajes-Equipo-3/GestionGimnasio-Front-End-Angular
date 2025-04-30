@@ -1,0 +1,63 @@
+<div class="container">
+    <h2>Gestión de Ejercicios</h2>
+  
+    <!-- Botones para alternar entre vistas -->
+    <div class="view-toggle">
+      <button class="btn btn-primary" (click)="mostrarFormulario = !mostrarFormulario">
+        {{ mostrarFormulario ? 'Ver Lista de Ejercicios' : 'Registrar Ejercicio' }}
+      </button>
+    </div>
+  
+    <!-- Vista de Registro -->
+    <div *ngIf="mostrarFormulario">
+      <h3>Registrar Ejercicio</h3>
+      <app-ejercicio-add></app-ejercicio-add>
+    </div>
+  
+    <!-- Vista de Lista -->
+    <div *ngIf="!mostrarFormulario">
+      <h3>Lista de Ejercicios</h3>
+  
+      <!-- Barra de búsqueda -->
+      <div class="search-bar">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Buscar ejercicio..."
+          class="search-input"
+        />
+      </div>
+  
+      <!-- Mensaje de carga -->
+      <div *ngIf="isLoading" class="loading">
+        <p>Cargando ejercicios...</p>
+      </div>
+  
+      <!-- Mensaje cuando no hay datos -->
+      <div *ngIf="!isLoading && ejerciciosFiltrados.length === 0" class="no-data">
+        <p>No se encontraron ejercicios.</p>
+      </div>
+  
+      <!-- Tarjetas de ejercicios -->
+      <div class="card-container" *ngIf="!isLoading && ejerciciosFiltrados.length > 0">
+        <div class="card" *ngFor="let ejercicio of ejerciciosFiltrados">
+          <div class="card-header">
+            <h3>{{ ejercicio.nombreEjercicio }}</h3>
+          </div>
+          <div class="card-body">
+            <p><strong>Descripción:</strong> {{ ejercicio.descripcionEjercicio }}</p>
+            <p><strong>Categoría:</strong> {{ ejercicio.idCategoriaEjercicio }}</p>
+            <p><strong>Código Equipo:</strong> {{ ejercicio.codigoEquipo || 'N/A' }}</p>
+            <div class="imagenes">
+              <img
+                *ngFor="let imagen of ejercicio.imagenes"
+                [src]="imagen.urlImagen"
+                [alt]="imagen.descripcionImagen || 'Imagen del ejercicio'"
+                class="imagen-ejercicio"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
