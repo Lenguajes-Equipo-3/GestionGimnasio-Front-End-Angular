@@ -5,6 +5,8 @@ import { RedirectGuard } from './guards/redirect.guard';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ClienteEditarComponent } from './pages/Clientes/cliente-editar/cliente-editar.component';
+import { ClienteListaComponent } from './pages/Clientes/cliente-lista/cliente-lista.component';
 import { MedidasCorporalesComponent} from './pages/medidaCorporal/medida-corporal-list/medida-corporal-list.component';
 
 export const routes: Routes = [
@@ -43,6 +45,24 @@ export const routes: Routes = [
         data: { roles: ['admin'] }
       },
       {
+
+        path: 'clientes',
+        component: ClienteListaComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['admin', 'usuario'] }
+      },
+      {
+        path: 'clientes/nuevo',  // Ruta para agregar nuevo cliente
+        component: ClienteEditarComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['admin', 'usuario'] }
+      },
+      {
+        path: 'clientes/editar/:id',
+        component: ClienteEditarComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['admin', 'usuario'] },
+        {
         path: 'medidasCorporales',  
         component: MedidasCorporalesComponent,
         canActivate: [RoleGuard],
@@ -53,6 +73,7 @@ export const routes: Routes = [
           .then(m => m.EjercicioListComponent),
         canActivate: [RoleGuard],
         data: { roles: ['admin', 'usuario'] },
+
       }
       
     ]
