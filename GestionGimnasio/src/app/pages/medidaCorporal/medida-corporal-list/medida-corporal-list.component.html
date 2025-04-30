@@ -1,19 +1,50 @@
+<h2 class="titulo-principal">Medidas corporales</h2>
+<mat-card *ngFor="let categoria of categorias">
+  <!-- Usamos ng-container para evaluar la condición y mostrar encabezado completo -->
+  <ng-container *ngIf="medidasAgrupadas[categoria.nombreCategoria] && medidasAgrupadas[categoria.nombreCategoria].length > 0; else sinMedidas">
+    
+    <mat-card-header class="categoria-header">
+      <mat-card-title class="categoria-titulo">{{ categoria.nombreCategoria }}</mat-card-title>
+     
+    </mat-card-header>
+    <mat-card-content>
+      <div class="medidas-row">
+        <div *ngFor="let medida of medidasAgrupadas[categoria.nombreCategoria]" class="medida-item">
+          <div class="medida-info">
+            <p class="medida-nombre">{{ medida.nombreMedida }} ({{ medida.unidadMedida }})</p>
+          </div>
+          <div class="medida-actions">
+            <button mat-icon-button color="accent" (click)="editarMedida(medida)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminarMedida(medida)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        <button mat-icon-button color="primary" (click)="agregarMedida(categoria)">
+          <mat-icon>add</mat-icon> 
+        </button>
+      </div>
+      
+    </mat-card-content>
 
-   <mat-card *ngFor="let categoria of categorias">
+  </ng-container>
+
+  <!-- Cuando no hay medidas -->
+  <ng-template #sinMedidas>
     <mat-card-header>
       <mat-card-title>{{ categoria.nombreCategoria }}</mat-card-title>
     </mat-card-header>
-    
-    <mat-card-content *ngIf="medidasAgrupadas[categoria.nombreCategoria]">
-      <div *ngFor="let medida of medidasAgrupadas[categoria.nombreCategoria]" class="medida-item">
-        <div class="medida-info">
-          <p class="medida-nombre">{{ medida.nombreMedida }} ({{ medida.unidadMedida }})</p>
-        </div>
-        <div class="medida-actions">
-          <mat-icon (click)="editarMedida(medida)" class="action-icon">edit</mat-icon>
-          <mat-icon (click)="eliminarMedida(medida)" class="action-icon">delete</mat-icon>
-        </div>
+    <mat-card-content>
+      <div class="sin-medidas-container">
+        <mat-icon>info</mat-icon>
+        <p class="sin-medidas-text">No hay medidas registradas en esta categoría.</p>
+        <button mat-icon-button color="primary" (click)="agregarMedida(categoria)">
+          <mat-icon>add</mat-icon> 
+        </button>
+        
       </div>
     </mat-card-content>
-  </mat-card>
-  
+  </ng-template>
+</mat-card>
