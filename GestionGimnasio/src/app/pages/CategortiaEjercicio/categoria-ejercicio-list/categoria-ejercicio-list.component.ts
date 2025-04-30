@@ -76,6 +76,16 @@ export class CategoriaEjercicioListComponent implements OnInit {
   }
   
   eliminarCategoria(id: number) {
-    // Confirmación y eliminación
+    if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
+      this.categoriaEjercicioService.deleteCategoria(id).subscribe(
+        () => {
+          this.categorias = this.categorias.filter(cat => cat.idCategoria !== id);
+          this.categoriasFiltradas = this.categoriasFiltradas.filter(cat => cat.idCategoria !== id);
+        },
+        (error: any) => {
+          console.error('Error al eliminar la categoría:', error);
+        }
+      );
+    }
   }
 }

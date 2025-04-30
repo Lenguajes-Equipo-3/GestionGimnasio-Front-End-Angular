@@ -24,6 +24,7 @@ export class CategoriaEjercicioService {
   }
 
   updateCategoria(categoria: Categoria): Observable<Categoria> {
+    console.log(categoria);
     const url = `${this.apiUrl}/${categoria.idCategoria}`;
     return this.http.put<Categoria>(url, categoria);
   }
