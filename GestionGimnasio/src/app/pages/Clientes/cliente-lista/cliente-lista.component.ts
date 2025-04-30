@@ -25,8 +25,8 @@ export class ClienteListaComponent implements OnInit {
     });
   }
 
-  eliminarCliente(id: number): void {
-    if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
+  eliminarCliente(id: number) {
+    if (confirm('¿Estás seguro de que quieres eliminar este cliente?')) {
       this.clienteService.eliminar(id).subscribe(() => {
         this.cargarClientes(); // Recarga la lista después de eliminar
       });

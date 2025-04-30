@@ -43,13 +43,13 @@ export class ClienteEditarComponent implements OnInit {
   guardar(): void {
     if (this.cliente.idCliente === 0) {
       this.clienteService.insertar(this.cliente).subscribe(() => {
-        this.router.navigate(['/clientes']); // 👈 Redirige después de insertar
+        this.router.navigate(['/clientes']);
       });
     } else {
       this.clienteService.actualizar(this.cliente).subscribe(() => {
-        this.router.navigate(['/clientes']); // 👈 Redirige después de actualizar
+        this.router.navigate(['/clientes']);
       });
     }
   }
-  
+
 }

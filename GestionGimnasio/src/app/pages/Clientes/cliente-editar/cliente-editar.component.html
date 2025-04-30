@@ -1,34 +1,36 @@
+<div class="formulario-container">
+  <h2>{{ esNuevo ? 'Registrar Cliente' : 'Editar Cliente' }}</h2>
 
-<h2>{{ esNuevo ? 'Registrar Cliente' : 'Editar Cliente' }}</h2>
-<form (ngSubmit)="guardar()">
-  <label>Número de Identificación:</label>
-  <input [(ngModel)]="cliente.numeroIdentificacion" name="numeroIdentificacion" required>
+  <form (ngSubmit)="guardar()">
+    <label>Número de Identificación:</label>
+    <input [(ngModel)]="cliente.numeroIdentificacion" name="numeroIdentificacion" required>
 
-  <label>Nombre:</label>
-  <input [(ngModel)]="cliente.nombreCliente" name="nombreCliente" required>
+    <label>Nombre:</label>
+    <input [(ngModel)]="cliente.nombreCliente" name="nombreCliente" required>
 
-  <label>Apellidos:</label>
-  <input [(ngModel)]="cliente.apellidosCliente" name="apellidosCliente" required>
+    <label>Apellidos:</label>
+    <input [(ngModel)]="cliente.apellidosCliente" name="apellidosCliente" required>
 
-  <label>Fecha de Nacimiento:</label>
-  <input [(ngModel)]="cliente.fechaNacimiento" name="fechaNacimiento" type="date" required>
+    <label>Fecha de Nacimiento:</label>
+    <input [(ngModel)]="cliente.fechaNacimiento" name="fechaNacimiento" type="date" required>
 
-  <label>Teléfono:</label>
-  <input [(ngModel)]="cliente.telefono" name="telefono" required>
+    <label>Teléfono:</label>
+    <input [(ngModel)]="cliente.telefono" name="telefono" required>
 
-  <label>Dirección:</label>
-  <input [(ngModel)]="cliente.direccion" name="direccion" required>
+    <label>Dirección:</label>
+    <input [(ngModel)]="cliente.direccion" name="direccion" required>
 
-  <label>Nombre de Contacto de Emergencia:</label>
-  <input [(ngModel)]="cliente.nombreContactoEmergencia" name="nombreContactoEmergencia" required>
+    <label>Nombre de Contacto de Emergencia:</label>
+    <input [(ngModel)]="cliente.nombreContactoEmergencia" name="nombreContactoEmergencia" required>
 
-  <label>Teléfono de Emergencia:</label>
-  <input [(ngModel)]="cliente.telefonoContactoEmergencia" name="telefonoContactoEmergencia" required>
+    <label>Teléfono de Emergencia:</label>
+    <input [(ngModel)]="cliente.telefonoContactoEmergencia" name="telefonoContactoEmergencia" required>
 
-  <label>Fotografía (URL o base64):</label>
-  <input [(ngModel)]="cliente.fotografia" name="fotografia">
+    <label>Fotografía:</label>
+    <input [(ngModel)]="cliente.fotografia" name="fotografia">
 
-  <button type="submit" class="boton-agregar-categoria">
-    {{ esNuevo ? 'Guardar Cliente' : 'Actualizar Cliente' }}
-  </button>
-</form>
+    <button type="submit" class="boton-agregar-cliente">
+      {{ esNuevo ? 'Guardar Cliente' : 'Actualizar Cliente' }}
+    </button>
+  </form>
+</div>
