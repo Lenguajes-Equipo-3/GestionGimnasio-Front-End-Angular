@@ -1,3 +1,33 @@
+// import { Injectable } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
+// import { Observable } from 'rxjs';
+
+// export interface Medida {
+//   idMedida: number;
+//   nombreMedida: string;
+//   unidadMedida: string;
+//   esObligatoria: boolean;
+//   idCategoria: number;
+// }
+
+// export interface Categoria {
+//   dCategoria: number;    // o number, dependiendo de tu API
+//   nombreCategoria: string;
+// }
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class MedidasService {
+//   private apiUrl = 'http://localhost:8080/proyecto/api/medidascorporales';
+
+//   constructor(private http: HttpClient) { }
+
+//   obtenerMedidas(): Observable<Medida[]> {
+//     return this.http.get<Medida[]>(this.apiUrl);
+//   }
+  
+// }
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,7 +41,7 @@ export interface Medida {
 }
 
 export interface Categoria {
-  idCategoria: number; 
+  idCategoria: number;  // Ajusté el nombre del campo a 'idCategoria' para que coincida con el resto de la lógica
   nombreCategoria: string;
 }
 
@@ -23,26 +53,11 @@ export class MedidasService {
   private apiUrlCategorias = 'http://localhost:8080/proyecto/api/categoriasmedidascorporales';
   constructor(private http: HttpClient) {}
 
+  obtenerMedidas(): Observable<Medida[]> {
+    return this.http.get<Medida[]>(this.apiUrlMedidas);
+  }
 
   obtenerCategorias(): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(this.apiUrlCategorias);
   }
-  obtenerMedidas(): Observable<Medida[]> {
-    return this.http.get<Medida[]>(this.apiUrlMedidas);
-  }
-  agregarMedida(medida: Medida): Observable<Medida> {
-    return this.http.post<Medida>(this.apiUrlMedidas, medida);
-  }
-  updateMedida(id: number, medida: Medida): Observable<Medida> {
-    return this.http.put<Medida>(`${this.apiUrlMedidas}/${id}`, medida); 
-  }
-  getMedidaById(id: number): Observable<Medida> {
-    console.log("ID DE GEYMEDIDAbY ID",id);
-    return this.http.get<Medida>(`${this.apiUrlMedidas}/${id}`);
-  }
-  eliminarMedida(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrlMedidas}/${id}`);
-  }
-  
-  
 }
