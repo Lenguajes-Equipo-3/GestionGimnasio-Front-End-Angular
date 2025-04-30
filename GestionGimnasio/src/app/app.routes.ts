@@ -61,12 +61,14 @@ export const routes: Routes = [
         path: 'clientes/editar/:id',
         component: ClienteEditarComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['admin', 'usuario'] },
-        {
+        data: { roles: ['admin', 'usuario'] }
+      },
+      {
         path: 'medidasCorporales',  
         component: MedidasCorporalesComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['admin', 'usuario']  },
+        data: { roles: ['admin', 'usuario']  }
+      },
         {
         path: 'ejercicios',
         loadComponent: () => import('./pages/Ejercicios/ejercicio-list/ejercicio-list.component')
