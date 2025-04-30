@@ -1,0 +1,128 @@
+/* Contenedor principal del formulario */
+.editar-medida-form {
+    max-width: 480px;
+    margin: 10 auto;
+    padding: 32px 24px;
+    background-color: #fff0f6; /* Rosa pastel muy claro */
+    border-radius: 24px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Título */
+  .titulo-editar {
+    color: #6a1b9a;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin: 16px 0 12px;
+    letter-spacing: 0.6px;
+  }
+  
+  /* Campo de formulario */
+  .full-width {
+    width: 100%;
+  }
+  
+  /* Campos de entrada */
+  mat-form-field {
+    background-color: #f8bbd0;
+    border-radius: 12px;
+    padding: 4px 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  mat-form-field .mat-label {
+    color: #6a1b9a;
+    font-weight: 500;
+  }
+  
+  /* Grupo de radio buttons */
+  .grupo-obligatoria label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  mat-radio-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 15px;
+  }
+  
+  mat-radio-button {
+    background-color: #f8bbd0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #333;
+    transition: background-color 0.2s ease;
+  }
+  
+  mat-radio-button:hover {
+    background-color: #f48fb1;
+  }
+  
+  mat-radio-button.mat-radio-checked .mat-radio-inner-circle {
+    background-color: #f06292;
+  }
+  
+  /* Botones */
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  
+  .buttons button {
+    flex: 1 1 45%;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 12px;
+    transition: background-color 0.2s ease;
+  }
+  
+  button[mat-raised-button] {
+    background-color: #aee4ff;
+    color: #222;
+  }
+  
+  button[mat-raised-button]:hover {
+    background-color: #81d4fa;
+  }
+  
+  button[mat-button] {
+    background-color: #ffffff;
+    color: #6a1b9a;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  button[mat-button]:hover {
+    background-color: #f3f3f3;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .editar-medida-form {
+      padding: 24px 16px;
+    }
+  
+    .buttons {
+      flex-direction: column;
+    }
+  
+    .buttons button {
+      flex: 1 1 100%;
+    }
+  
+    mat-radio-group {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+  

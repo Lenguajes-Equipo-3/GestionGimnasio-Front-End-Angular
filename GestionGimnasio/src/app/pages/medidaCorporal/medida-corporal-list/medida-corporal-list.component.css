@@ -1,0 +1,162 @@
+.medidas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    padding: 20px;
+    background-color: #fafafa; 
+    min-height: 10vh;
+  }
+  
+  .medida-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+  }
+  
+  mat-card {
+    background: #ffeefc; /* Rosa pastel */
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 12px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  mat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  mat-card-header {
+    text-align: center;
+  }
+  
+  mat-card-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #5d5d5d;
+  }
+  
+  mat-card-subtitle {
+    font-size: 0.9rem;
+    color: #888;
+  }
+  
+  mat-card-content {
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    margin: 8px 0;
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  button {
+    background-color: #c7eaff; /* Azul pastel */
+    color: #444;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #aee4ff;
+  }
+  
+  /* Íconos más suaves */
+  mat-icon {
+    color: #777;
+  }
+  
+  .mat-card {
+    margin: 20px;
+  }
+  
+
+
+  .medida-item {
+    width: 100px;  /* Establecer ancho */
+    height: 100px; /* Establecer alto */
+    background-color: #f8bbd0; /* Rosa pastel suave */
+    padding: 5px; /* Espaciado interno */
+    margin-bottom: 5px; /* Espaciado entre los items */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    aspect-ratio: 1;  /* Mantener proporción cuadrada */
+  }
+  
+  .medidas-container {
+    gap: 12px;  /* Espacio entre los items */
+  }
+  
+  .medida-info {
+    flex: 1; 
+    font-size: 14px; /* Ajustamos el tamaño de la fuente */
+    font-weight: bold;
+    color: #5e35b1; /* Color morado suave y elegante */
+  }
+  
+  .medida-actions {
+    display: flex;
+    gap: 8px; /* Reducimos el espacio entre los botones */
+  }
+  .medidas-row {
+    display: flex;
+    flex-wrap: wrap; /* Para permitir que las medidas pasen a la siguiente línea si no hay espacio suficiente */
+    gap: 16px; /* Espacio entre cada medida */
+  }
+  .action-icon {
+    cursor: pointer;
+    color: #007bff; /* Azul pastel para los iconos */
+    transition: color 0.3s ease;
+    font-size: 18px; /* Ajustamos el tamaño del icono */
+  }
+  
+  .action-icon:hover {
+    color: #003c8f; /* Azul más oscuro al pasar el mouse */
+  }
+
+  
+  .categoria-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .categoria-titulo {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .medidas-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .medida-item {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  

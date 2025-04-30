@@ -1,0 +1,18 @@
+<h2 class="modal-title">Agregar Nueva Categoría</h2>
+
+<form [formGroup]="categoriaForm" (ngSubmit)="guardarCategoria()" class="modal-form">
+  <div class="form-field">
+    <label for="nombreCategoria">Nombre:</label>
+    <input id="nombreCategoria" formControlName="nombreCategoria" type="text" placeholder="Nombre de categoría" />
+  </div>
+
+  <div class="form-field">
+    <label for="imagen">URL Imagen:</label>
+    <input id="imagen" formControlName="imagen" type="text" placeholder="URL de imagen" />
+  </div>
+
+  <div class="modal-buttons">
+    <button type="submit" [disabled]="categoriaForm.invalid" class="btn btn-guardar">Guardar</button>
+    <button type="button" (click)="cerrar()" class="btn btn-cancelar">Cancelar</button>
+  </div>
+</form>
