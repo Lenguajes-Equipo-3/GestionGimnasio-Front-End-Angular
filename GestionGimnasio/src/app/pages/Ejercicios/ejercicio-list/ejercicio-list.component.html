@@ -72,9 +72,21 @@
               class="imagen-ejercicio"
             />
           </div>
-          <button class="btn btn-primary" (click)="editarEjercicio(ejercicio)">
-            Editar
-          </button>
+          <!-- Contenedor para los botones -->
+          <div class="button-group">
+            <button
+              class="btn btn-primary"
+              (click)="editarEjercicio(ejercicio)"
+            >
+              Editar
+            </button>
+            <button
+              class="btn btn-danger"
+              (click)="ejercicio.id ? eliminarEjercicio(ejercicio.id) : null"
+            >
+              Eliminar
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -84,13 +96,13 @@
 
     <!-- Componente de Actualización -->
     <div *ngIf="ejercicioSeleccionado" class="update-section">
-        <app-ejercicio-update
-          [ejercicio]="ejercicioSeleccionado"
-          (ejercicioActualizado)="onEjercicioActualizado()"
-        ></app-ejercicio-update>
-        <button class="btn btn-secondary" (click)="cancelarEdicion()">
-          Cancelar
-        </button>
-      </div>
+      <app-ejercicio-update
+        [ejercicio]="ejercicioSeleccionado"
+        (ejercicioActualizado)="onEjercicioActualizado()"
+      ></app-ejercicio-update>
+      <button class="btn btn-secondary" (click)="cancelarEdicion()">
+        Cancelar
+      </button>
+    </div>
   </div>
 </div>

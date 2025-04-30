@@ -33,4 +33,9 @@ export class EjercicioService {
     }
     return this.http.put<Ejercicio>(`${this.apiUrl}/${ejercicio.id}`, ejercicio);
   }
+
+  deleteEjercicio(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
 }

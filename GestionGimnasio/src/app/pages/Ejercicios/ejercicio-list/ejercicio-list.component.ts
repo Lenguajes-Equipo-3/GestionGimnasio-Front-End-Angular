@@ -97,4 +97,19 @@ export class EjercicioListComponent implements OnInit {
     this.cargarEjercicios(); // Refrescar la lista de ejercicios
     this.ejercicioSeleccionado = null; // Cerrar el formulario de actualización
   }
+
+  eliminarEjercicio(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este ejercicio?')) {
+      this.ejercicioService.deleteEjercicio(id).subscribe({
+        next: () => {
+          alert('Ejercicio eliminado con éxito');
+          this.cargarEjercicios(); // Refrescar la lista de ejercicios
+        },
+        error: (err) => {
+          console.error('Error al eliminar el ejercicio:', err);
+          alert('Error al eliminar el ejercicio');
+        },
+      });
+    }
+  }
 }
