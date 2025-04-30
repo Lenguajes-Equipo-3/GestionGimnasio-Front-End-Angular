@@ -30,6 +30,13 @@ export const routes: Routes = [
         data: { roles: ['admin', 'usuario'] }
       },
       {
+        path: 'CategoriaEjercicio',
+        loadComponent: () => import('./pages/CategortiaEjercicio/categoria-ejercicio-list/categoria-ejercicio-list.component')
+          .then(m => m.CategoriaEjercicioListComponent),
+        canActivate: [RoleGuard],
+        data: { roles: ['admin','usuario'] }
+      },
+      {
         path: 'admin',
         component: AdminComponent,
         canActivate: [RoleGuard],
@@ -39,8 +46,15 @@ export const routes: Routes = [
         path: 'medidasCorporales',  
         component: MedidasCorporalesComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['admin', 'usuario']  }  
+        data: { roles: ['admin', 'usuario']  },
+        {
+        path: 'ejercicios',
+        loadComponent: () => import('./pages/Ejercicios/ejercicio-list/ejercicio-list.component')
+          .then(m => m.EjercicioListComponent),
+        canActivate: [RoleGuard],
+        data: { roles: ['admin', 'usuario'] },
       }
+      
     ]
   },
   {

@@ -1,0 +1,97 @@
+
+
+
+.boton-agregar-categoria{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  
+  color: #f7f2f2;
+  background-color: #ac70ff;
+}
+
+.buscador-agregar-container {
+  display: flex;
+  justify-content: space-between;  /* Distribuye input a la izquierda, botón a la derecha */
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.buscador-input {
+  width: 200px;           /* Ancho fijo más pequeño */
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+
+}
+
+.boton-agregar {
+  border-radius: 16px;
+  font-weight: bold;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+
+}
+
+.boton-agregar:hover {
+  background-color: #7a42f4;
+  color: white;
+}
+.exercise-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: start;
+  margin-top: 2rem;
+}
+
+.exercise-card {
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.exercise-card:hover {
+  transform: translateY(-3px);
+}
+
+.card-header {
+  background-color: #c8aef3;
+  padding: 0.4rem 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exercise-name {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.2rem;
+}
+
+/* Ajuste correcto de imagen */
+.card-image {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  background-color: #f4f4f4;
+  display: block;
+}
+
+
