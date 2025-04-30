@@ -31,7 +31,7 @@ export class ActualizarCategoriaEjercicioComponent {
     if (this.categoriaForm.invalid) return;
 
     const categoriaActualizada: Categoria = this.categoriaForm.value;
-
+    console.log('Enviando datos al backend:', categoriaActualizada);
     this.categoriaEjercicioService.updateCategoria(categoriaActualizada).subscribe({
       next: () => this.dialogRef.close('refresh'),
       error: err => {
