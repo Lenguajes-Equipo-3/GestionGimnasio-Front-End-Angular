@@ -5,6 +5,8 @@ import { RedirectGuard } from './guards/redirect.guard';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ClienteEditarComponent } from './pages/Clientes/cliente-editar/cliente-editar.component';
+import { ClienteListaComponent } from './pages/Clientes/cliente-lista/cliente-lista.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +35,12 @@ export const routes: Routes = [
         component: AdminComponent,
         canActivate: [RoleGuard],
         data: { roles: ['admin'] }
+      },
+      {
+        path: 'clientes',
+        component: ClienteListaComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['admin', 'usuario'] }
       }
     ]
   },
