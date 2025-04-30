@@ -46,7 +46,7 @@
           </div>
           <div class="card-body">
             <p><strong>Descripción:</strong> {{ ejercicio.descripcionEjercicio }}</p>
-            <p><strong>Categoría:</strong> {{ ejercicio.idCategoriaEjercicio }}</p>
+            <p><strong>Categoría:</strong> {{ obtenerNombreCategoria(ejercicio.idCategoriaEjercicio) }}</p>
             <p><strong>Código Equipo:</strong> {{ ejercicio.codigoEquipo || 'N/A' }}</p>
             <div class="imagenes">
               <img
