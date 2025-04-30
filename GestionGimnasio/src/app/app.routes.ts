@@ -41,6 +41,18 @@ export const routes: Routes = [
         component: ClienteListaComponent,
         canActivate: [RoleGuard],
         data: { roles: ['admin', 'usuario'] }
+      },
+      {
+        path: 'clientes/nuevo',  // Ruta para agregar nuevo cliente
+        component: ClienteEditarComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['admin', 'usuario'] }
+      },
+      {
+        path: 'clientes/editar/:id',
+        component: ClienteEditarComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['admin', 'usuario'] }
       }
     ]
   },

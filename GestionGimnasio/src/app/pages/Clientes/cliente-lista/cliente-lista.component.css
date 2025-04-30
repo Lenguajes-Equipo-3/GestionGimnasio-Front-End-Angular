@@ -39,6 +39,12 @@
   background-color: #f2eaff;
 }
 
+/* Contenedor para los botones de editar y eliminar */
+.acciones-container {
+  display: flex;
+  gap: 10px; /* Separación entre los botones */
+}
+
 .tabla-clientes button {
   background-color: #ac70ff;
   color: white;
@@ -53,4 +59,41 @@
 .tabla-clientes button:hover {
   background-color: #8f5cd6;
   transform: scale(1.05);
+}
+
+/* Estilos individuales para los botones */
+.btn-editar {
+  background-color: #4CAF50; /* Verde para editar */
+}
+
+.btn-editar:hover {
+  background-color: #45a049;
+}
+
+.btn-eliminar {
+  background-color: #f44336; /* Rojo para eliminar */
+}
+
+.btn-eliminar:hover {
+  background-color: #e53935;
+}
+
+.boton-agregar-cliente {
+  margin: 10px 0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-align: right;
+  margin-bottom: 20px;
+  border: none;
+  color: #fff;
+  background-color: #ac70ff;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.boton-agregar-cliente:hover {
+  background-color: #9246ff;
 }

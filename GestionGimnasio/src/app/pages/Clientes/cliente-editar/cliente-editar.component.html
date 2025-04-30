@@ -1,36 +1,34 @@
-<p>cliente-editar works!</p>
 
-<div>
-  <h2>{{ cliente.idCliente === 0 ? 'Nuevo Cliente' : 'Editar Cliente' }}</h2>
-  <form (ngSubmit)="guardar()">
-    <label for="numeroIdentificacion">Identificación:</label>
-    <input [(ngModel)]="cliente.numeroIdentificacion" name="numeroIdentificacion" required>
+<h2>{{ esNuevo ? 'Registrar Cliente' : 'Editar Cliente' }}</h2>
+<form (ngSubmit)="guardar()">
+  <label>Número de Identificación:</label>
+  <input [(ngModel)]="cliente.numeroIdentificacion" name="numeroIdentificacion" required>
 
-    <label for="nombreCliente">Nombre:</label>
-    <input [(ngModel)]="cliente.nombreCliente" name="nombreCliente" required>
+  <label>Nombre:</label>
+  <input [(ngModel)]="cliente.nombreCliente" name="nombreCliente" required>
 
-    <label for="apellidosCliente">Apellidos:</label>
-    <input [(ngModel)]="cliente.apellidosCliente" name="apellidosCliente" required>
+  <label>Apellidos:</label>
+  <input [(ngModel)]="cliente.apellidosCliente" name="apellidosCliente" required>
 
-    <label for="fechaNacimiento">Fecha de nacimiento:</label>
-    <input type="date" [(ngModel)]="cliente.fechaNacimiento" name="fechaNacimiento" required>
+  <label>Fecha de Nacimiento:</label>
+  <input [(ngModel)]="cliente.fechaNacimiento" name="fechaNacimiento" type="date" required>
 
-    <label for="telefono">Teléfono:</label>
-    <input [(ngModel)]="cliente.telefono" name="telefono" required>
+  <label>Teléfono:</label>
+  <input [(ngModel)]="cliente.telefono" name="telefono" required>
 
-    <label for="direccion">Dirección:</label>
-    <input [(ngModel)]="cliente.direccion" name="direccion" required>
+  <label>Dirección:</label>
+  <input [(ngModel)]="cliente.direccion" name="direccion" required>
 
-    <label for="nombreContactoEmergencia">Nombre de contacto de emergencia:</label>
-    <input [(ngModel)]="cliente.nombreContactoEmergencia" name="nombreContactoEmergencia" required>
+  <label>Nombre de Contacto de Emergencia:</label>
+  <input [(ngModel)]="cliente.nombreContactoEmergencia" name="nombreContactoEmergencia" required>
 
-    <label for="telefonoContactoEmergencia">Teléfono de contacto de emergencia:</label>
-    <input [(ngModel)]="cliente.telefonoContactoEmergencia" name="telefonoContactoEmergencia" required>
+  <label>Teléfono de Emergencia:</label>
+  <input [(ngModel)]="cliente.telefonoContactoEmergencia" name="telefonoContactoEmergencia" required>
 
-    <label for="fotografia">Fotografía (URL):</label>
-    <input [(ngModel)]="cliente.fotografia" name="fotografia" required>
+  <label>Fotografía (URL o base64):</label>
+  <input [(ngModel)]="cliente.fotografia" name="fotografia">
 
-    <button type="submit">Guardar</button>
-  </form>
-  
-</div>
+  <button type="submit" class="boton-agregar-categoria">
+    {{ esNuevo ? 'Guardar Cliente' : 'Actualizar Cliente' }}
+  </button>
+</form>
