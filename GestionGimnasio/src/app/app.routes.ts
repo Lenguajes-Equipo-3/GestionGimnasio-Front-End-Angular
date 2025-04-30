@@ -29,11 +29,19 @@ export const routes: Routes = [
         data: { roles: ['admin', 'usuario'] }
       },
       {
+        path: 'CategoriaEjercicio',
+        loadComponent: () => import('./pages/CategortiaEjercicio/categoria-ejercicio-list/categoria-ejercicio-list.component')
+          .then(m => m.CategoriaEjercicioListComponent),
+        canActivate: [RoleGuard],
+        data: { roles: ['admin','usuario'] }
+      },
+      {
         path: 'admin',
         component: AdminComponent,
         canActivate: [RoleGuard],
         data: { roles: ['admin'] }
       }
+      
     ]
   },
   {
