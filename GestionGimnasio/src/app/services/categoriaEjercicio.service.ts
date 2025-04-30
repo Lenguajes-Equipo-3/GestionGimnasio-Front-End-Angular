@@ -22,4 +22,13 @@ export class CategoriaEjercicioService {
   createCategoria(categoria: Categoria): Observable<Categoria> {
     return this.http.post<Categoria>(this.apiUrl, categoria);
   }
+
+  updateCategoria(categoria: Categoria): Observable<Categoria> {
+    const url = `${this.apiUrl}/${categoria.idCategoria}`;
+    return this.http.put<Categoria>(url, categoria);
+  }
+  deleteCategoria(id: number): Observable<void> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<void>(url);
+  }  
 }

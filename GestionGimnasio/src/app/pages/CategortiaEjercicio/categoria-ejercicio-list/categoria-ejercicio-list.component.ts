@@ -6,11 +6,13 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CategoriaEjercicioService } from '../../../services/categoriaEjercicio.service';
 import { Categoria } from '../../../Domain/CategoriaEjercicio.interface';
 import { CategoriaEjercicioAddComponent } from '../categoria-ejercicio-add/categoria-ejercicio-add.component';
+import { MatIconModule } from '@angular/material/icon';
+import { ActualizarCategoriaEjercicioComponent } from '../actualizar-categoria-ejercicio/actualizar-categoria-ejercicio.component';
 
 @Component({
   selector: 'app-categoria-ejercicio-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatDialogModule, CategoriaEjercicioAddComponent],
+  imports: [CommonModule, FormsModule, MatCardModule, MatDialogModule, MatIconModule],
   templateUrl: './categoria-ejercicio-list.component.html',
   styleUrls: ['./categoria-ejercicio-list.component.css']
 })
@@ -58,5 +60,22 @@ export class CategoriaEjercicioListComponent implements OnInit {
         this.obtenerCategorias();
       }
     });
+  }
+  
+  editarCategoria(categoria: Categoria): void {
+    const dialogRef = this.dialog.open(ActualizarCategoriaEjercicioComponent, {
+      width: '400px',
+      data: categoria
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'refresh') {
+        this.obtenerCategorias(); // Reemplaza con tu lógica para refrescar la lista
+      }
+    });
+  }
+  
+  eliminarCategoria(id: number) {
+    // Confirmación y eliminación
   }
 }
