@@ -16,17 +16,18 @@
   }
   
   mat-card {
-    background: #ffeefc; /* Rosa pastel */
+    background: #ffeefc; 
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s, box-shadow 0.2s;
     padding: 12px;
+    margin: 20px;
     min-height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  
+
   mat-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -61,7 +62,7 @@
   }
   
   button {
-    background-color: #c7eaff; /* Azul pastel */
+    background-color: #c7eaff;
     color: #444;
     border-radius: 8px;
     padding: 4px 8px;
@@ -72,24 +73,17 @@
   button:hover {
     background-color: #aee4ff;
   }
-  
-  /* Íconos más suaves */
+
   mat-icon {
     color: #777;
   }
   
-  .mat-card {
-    margin: 20px;
-  }
-  
-
-
   .medida-item {
-    width: 100px;  /* Establecer ancho */
-    height: 100px; /* Establecer alto */
-    background-color: #f8bbd0; /* Rosa pastel suave */
-    padding: 5px; /* Espaciado interno */
-    margin-bottom: 5px; /* Espaciado entre los items */
+    width: 100px;  
+    height: 100px; 
+    background-color: #f8bbd0;
+    padding: 5px; 
+    margin-bottom: 5px; 
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 14px;
@@ -98,38 +92,38 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    aspect-ratio: 1;  /* Mantener proporción cuadrada */
+    aspect-ratio: 1;  
   }
   
   .medidas-container {
-    gap: 12px;  /* Espacio entre los items */
+    gap: 12px;  
   }
   
   .medida-info {
     flex: 1; 
-    font-size: 14px; /* Ajustamos el tamaño de la fuente */
+    font-size: 14px; 
     font-weight: bold;
-    color: #5e35b1; /* Color morado suave y elegante */
+    color: #5e35b1; 
   }
   
   .medida-actions {
     display: flex;
-    gap: 8px; /* Reducimos el espacio entre los botones */
+    gap: 8px; 
   }
   .medidas-row {
     display: flex;
-    flex-wrap: wrap; /* Para permitir que las medidas pasen a la siguiente línea si no hay espacio suficiente */
-    gap: 16px; /* Espacio entre cada medida */
+    flex-wrap: wrap; 
+    gap: 16px; 
   }
   .action-icon {
     cursor: pointer;
-    color: #007bff; /* Azul pastel para los iconos */
+    color: #007bff; 
     transition: color 0.3s ease;
-    font-size: 18px; /* Ajustamos el tamaño del icono */
+    font-size: 18px; 
   }
   
   .action-icon:hover {
-    color: #003c8f; /* Azul más oscuro al pasar el mouse */
+    color: #003c8f;
   }
 
   
