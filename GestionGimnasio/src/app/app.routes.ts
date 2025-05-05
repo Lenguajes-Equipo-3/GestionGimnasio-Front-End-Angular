@@ -76,6 +76,13 @@ export const routes: Routes = [
         canActivate: [RoleGuard],
         data: { roles: ['admin', 'usuario'] },
 
+      },
+      {
+        path: 'empleados',
+        loadComponent: () => import('./pages/Empleados/empleado-list/empleado-list.component')
+          .then(m => m.EmpleadoListComponent),
+        canActivate: [RoleGuard],
+        data: { roles: ['admin', 'usuario'] },
       }
       
     ]
