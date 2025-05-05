@@ -16,9 +16,8 @@ import { AgregarMedidaDialogComponent } from '../agregar-medida/agregar-medida.c
      MatCardModule, 
      MatIconModule,
      HttpClientModule,
-     MatDialogModule,
-     EditarMedidaDialogComponent,
-    AgregarMedidaDialogComponent ], 
+     MatDialogModule
+    ], 
   templateUrl: './medida-corporal-list.component.html',
   styleUrls: ['./medida-corporal-list.component.css']
 })

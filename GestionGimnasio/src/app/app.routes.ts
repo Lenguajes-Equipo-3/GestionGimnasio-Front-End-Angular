@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { RoleGuard } from './guards/role.guard';
-import { RedirectGuard } from './guards/redirect.guard';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AdminComponent } from './pages/admin/admin.component';
@@ -23,58 +22,58 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent, // Layout principal
     canActivate: [RoleGuard],
-    data: { roles: ['admin', 'usuario'] },
+    data: { roles: ['ADMIN', 'ENTRENADOR'] },
     children: [
       {
         path: 'dashboard',
         component: DashboardComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['admin', 'usuario'] }
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
       },
       {
         path: 'CategoriaEjercicio',
         loadComponent: () => import('./pages/CategortiaEjercicio/categoria-ejercicio-list/categoria-ejercicio-list.component')
           .then(m => m.CategoriaEjercicioListComponent),
         canActivate: [RoleGuard],
-        data: { roles: ['admin','usuario'] }
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
       },
       {
         path: 'admin',
         component: AdminComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['admin'] }
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
       },
       {
 
         path: 'clientes',
         component: ClienteListaComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['admin', 'usuario'] }
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
       },
       {
         path: 'clientes/nuevo',  // Ruta para agregar nuevo cliente
         component: ClienteEditarComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['admin', 'usuario'] }
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
       },
       {
         path: 'clientes/editar/:id',
         component: ClienteEditarComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['admin', 'usuario'] }
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
       },
       {
         path: 'medidasCorporales',  
         component: MedidasCorporalesComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['admin', 'usuario']  }
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
       },
         {
         path: 'ejercicios',
         loadComponent: () => import('./pages/Ejercicios/ejercicio-list/ejercicio-list.component')
           .then(m => m.EjercicioListComponent),
         canActivate: [RoleGuard],
-        data: { roles: ['admin', 'usuario'] },
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
 
       },
       {
