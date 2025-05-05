@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EjercicioService } from '../../../services/ejercicio.service';
@@ -8,11 +8,13 @@ import { Categoria } from '../../../Domain/CategoriaEjercicio.interface';
 @Component({
   selector: 'app-ejercicio-add',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule], // Importar ReactiveFormsModule aquí
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './ejercicio-add.component.html',
   styleUrls: ['./ejercicio-add.component.css'],
 })
 export class EjercicioAddComponent implements OnInit {
+  @Output() ejercicioRegistrado = new EventEmitter<void>();
+
   ejercicioForm: FormGroup;
   categorias: Categoria[] = [];
 
@@ -66,13 +68,14 @@ export class EjercicioAddComponent implements OnInit {
     if (this.ejercicioForm.valid) {
       this.ejercicioService.createEjercicio(this.ejercicioForm.value).subscribe({
         next: () => {
-          alert('Ejercicio registrado con éxito'); // Mensaje de éxito
+          alert('Ejercicio registrado con éxito');
           this.ejercicioForm.reset();
           this.imagenes.clear();
+          this.ejercicioRegistrado.emit(); 
         },
         error: (err) => {
           console.error(err);
-          alert('Error al registrar el ejercicio'); // Mensaje de error
+          alert('Error al registrar el ejercicio');
         },
       });
     }
