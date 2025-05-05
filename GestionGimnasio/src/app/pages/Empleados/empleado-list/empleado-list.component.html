@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Empleados</h2>
+    <button class="boton-agregar-empleado" (click)="openAddEmpleadoModal()">
+      <i class="bi bi-plus-circle"></i> Crear Nuevo Empleado
+    </button>
+  </div>
+  <hr>
+
+  <div class="search-bar-container mb-3"> <mat-icon class="search-icon">search</mat-icon> <input type="text"
+      class="search-input form-control" placeholder="Buscar empleado por nombre, usuario, rol..."
+      [(ngModel)]="terminoBusqueda" (ngModelChange)="filtrarEmpleados()">
+  </div>
+
+  <div *ngIf="isLoading" class="text-center my-3">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading" class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ errorMessage }}
+    <button type="button" class="btn-close" (click)="errorMessage = null" aria-label="Close"></button>
+  </div>
+
+  <div *ngIf="operationMessage && !isLoading" class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ operationMessage }}
+    <button type="button" class="btn-close" (click)="operationMessage = null" aria-label="Close"></button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && empleadosFiltrados.length === 0" class="alert alert-secondary"
+    role="alert">
+    {{ terminoBusqueda ? 'No se encontraron empleados con ese criterio.' : 'No hay empleados registrados para mostrar.'
+    }}
+  </div>
+
+  <table class="simple-striped-table" *ngIf="!isLoading && empleadosFiltrados.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Rol</th>
+        <th scope="col" class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empleado of empleadosFiltrados">
+        <th scope="row">{{ empleado.idEmpleado }}</th>
+        <td>{{ empleado.nombreUsuario }}</td>
+        <td>{{ empleado.nombreEmpleado }}</td>
+        <td>{{ empleado.apellidosEmpleado }}</td>
+        <td>{{ empleado.nombreRol }}</td>
+        <td class="text-center actions-cell">
+          <button mat-icon-button color="primary" (click)="openEditEmpleadoModal(empleado)"
+            aria-label="Editar empleado">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteEmpleado(empleado)" aria-label="Eliminar empleado">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

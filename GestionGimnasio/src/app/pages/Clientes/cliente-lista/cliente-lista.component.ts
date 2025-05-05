@@ -12,6 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class ClienteListaComponent implements OnInit {
   clientes: Cliente[] = [];
+  nombreBusqueda: string = '';
 
   constructor(private clienteService: ClienteService, private router: Router) {}
 
@@ -35,6 +36,17 @@ export class ClienteListaComponent implements OnInit {
 
   editarCliente(id: number): void {
     this.router.navigate(['/clientes/editar', id]);
+  }
+
+  buscarPorNombre(nombre: string): void {
+    this.clienteService.buscarClientes(nombre).subscribe({
+      next: (data) => {
+        this.clientes = data;
+      },
+      error: (err) => {
+        console.error('Error al buscar clientes:', err);
+      }
+    });
   }
 
 }

@@ -1,0 +1,122 @@
+:host {
+    display: block;
+    padding: 1rem;
+  }
+  
+  .simple-striped-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+    vertical-align: middle;
+  }
+  
+  .simple-striped-table th:first-child{
+    border-top-left-radius: 5px;
+  }
+
+  .simple-striped-table th:last-child{
+    border-top-right-radius: 5px;
+  }
+
+  .simple-striped-table th,
+  .simple-striped-table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+    text-align: left;
+  }
+  
+  .simple-striped-table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #ac70ff;
+    color: #f8f9fa;
+  }
+  
+  .simple-striped-table tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .simple-striped-table th.text-center,
+  .simple-striped-table td.text-center {
+    text-align: center;
+  }
+  
+  .actions-cell button {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  
+  .actions-cell .mat-mdc-icon-button {
+      vertical-align: middle;
+  }
+
+  .boton-agregar-empleado {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    color: #fff;
+    background-color: #ac70ff;
+    font-weight: bold;
+    text-decoration: none; 
+    display: inline-block; 
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    line-height: 1;
+  }
+  
+  .boton-agregar-empleado:hover {
+    background-color: #9246ff;
+  }
+  
+  .boton-agregar-empleado .bi {
+    vertical-align: middle;
+  }
+
+  .search-bar-container {
+    position: relative;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-input {
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #ced4da; 
+    border-radius: 20px; 
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .search-input:focus {
+    border-color: #80bdff; 
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); 
+  }
+
+  .search-input::placeholder {
+    color: #888;
+    font-style: italic;
+  }
+  
+  .search-icon {
+    position: absolute; 
+    left: 12px; 
+    top: 50%; 
+    transform: translateY(-50%);
+    color: #888; 
+    pointer-events: none;
+  }
+  
+
+  .search-icon.mat-icon {
+      font-size: 1.4em; 
+      height: auto;
+      width: auto;
+  }

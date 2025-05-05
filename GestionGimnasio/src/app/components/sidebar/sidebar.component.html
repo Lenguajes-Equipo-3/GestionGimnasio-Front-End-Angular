@@ -13,6 +13,16 @@
       <mat-icon>group</mat-icon>
       <span *ngIf="!collapsed">Clientes</span>
     </a>
+    
+    
+      <a
+      mat-list-item
+      routerLink="/empleados"
+      *ngIf="userRole === 'ADMIN' '"
+    >
+      <mat-icon>group</mat-icon>
+      <span *ngIf="!collapsed">Empleados</span>
+    </a>
 
     <a
       mat-list-item
@@ -60,10 +70,12 @@
       <p class="apellidos">{{ apellidos }}</p>
     </span>
     <mat-nav-list>
+
       <a mat-list-item class="logout" (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span *ngIf="!collapsed">Cerrar sesión</span>
       </a>
+
     </mat-nav-list>
 
    

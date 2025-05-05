@@ -1,0 +1,75 @@
+<div class="container">
+  <h2 class="title">{{ isEditMode ? 'Editar Empleado' : 'Crear Nuevo Empleado' }}</h2>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <div class="spinner-border" role="status">
+      </div>
+     Cargando...
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading" class="error-alert">
+    {{ errorMessage }}
+    </div>
+
+  <form [formGroup]="empleadoForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading" class="form-container" novalidate>
+
+    <div class="form-group">
+      <label for="nombreUsuario" class="form-label">Nombre de Usuario:</label>
+      <input type="text" id="nombreUsuario" class="form-control" formControlName="nombreUsuario">
+      <div *ngIf="nombreUsuario?.invalid && (nombreUsuario?.dirty || nombreUsuario?.touched)" class="error-message">
+        <small *ngIf="nombreUsuario?.errors?.['required']">El nombre de usuario es requerido.</small>
+        <small *ngIf="nombreUsuario?.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+       <label for="contrasena" class="form-label">Contraseña:</label>
+       <input type="password" id="contrasena" class="form-control" formControlName="contrasena" autocomplete="new-password"
+              placeholder="{{ isEditMode ? 'Dejar vacío para no cambiar' : '' }}">
+       <div *ngIf="contrasena?.invalid && (contrasena?.dirty || contrasena?.touched)" class="error-message">
+         <small *ngIf="contrasena?.errors?.['required']">La contraseña es requerida{{ !isEditMode ? '' : ' (si desea cambiarla)'}}.</small>
+         <small *ngIf="contrasena?.errors?.['minlength']">Mínimo 4 caracteres.</small>
+         <small *ngIf="contrasena?.errors?.['maxlength']">Máximo 50 caracteres.</small>
+       </div>
+       <small *ngIf="isEditMode" class="password-help-text">Deje este campo vacío si no desea cambiar la contraseña actual.</small>
+    </div>
+
+    <div class="form-group">
+       <label for="nombreEmpleado" class="form-label">Nombre:</label>
+       <input type="text" id="nombreEmpleado" class="form-control" formControlName="nombreEmpleado">
+       <div *ngIf="nombreEmpleado?.invalid && (nombreEmpleado?.dirty || nombreEmpleado?.touched)" class="error-message">
+         <small *ngIf="nombreEmpleado?.errors?.['required']">El nombre es requerido.</small>
+         <small *ngIf="nombreEmpleado?.errors?.['maxlength']">Máximo 50 caracteres.</small>
+       </div>
+    </div>
+
+    <div class="form-group">
+       <label for="apellidosEmpleado" class="form-label">Apellidos:</label>
+       <input type="text" id="apellidosEmpleado" class="form-control" formControlName="apellidosEmpleado">
+       <div *ngIf="apellidosEmpleado?.invalid && (apellidosEmpleado?.dirty || apellidosEmpleado?.touched)" class="error-message">
+         <small *ngIf="apellidosEmpleado?.errors?.['required']">Los apellidos son requeridos.</small>
+         <small *ngIf="apellidosEmpleado?.errors?.['maxlength']">Máximo 50 caracteres.</small>
+       </div>
+    </div>
+
+    <div class="form-group">
+      <label for="rolId" class="form-label">Rol:</label>
+      <select id="rolId" class="form-control" formControlName="rolId">
+        <option [ngValue]="null" disabled>-- Seleccione un rol --</option>
+        <option *ngFor="let rol of roles" [ngValue]="rol.idRol">{{ rol.nombreRol }}</option>
+      </select>
+      <div *ngIf="rolId?.invalid && (rolId?.dirty || rolId?.touched)" class="error-message">
+        <small *ngIf="rolId?.errors?.['required']">Debe seleccionar un rol.</small>
+      </div>
+   </div>
+
+    <div class="button-container">
+       <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+       <button type="submit" class="btn btn-success" [disabled]="empleadoForm.invalid || isLoading">
+         <span *ngIf="isLoading" class="spinner-border" role="status" aria-hidden="true"></span>
+         {{ isEditMode ? 'Actualizar' : 'Crear' }} Empleado
+       </button>
+    </div>
+
+  </form>
+</div>
