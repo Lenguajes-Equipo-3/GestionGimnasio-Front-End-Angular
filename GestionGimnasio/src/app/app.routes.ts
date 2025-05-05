@@ -81,7 +81,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/Empleados/empleado-list/empleado-list.component')
           .then(m => m.EmpleadoListComponent),
         canActivate: [RoleGuard],
-        data: { roles: ['admin', 'usuario'] },
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
       }
       
     ]
