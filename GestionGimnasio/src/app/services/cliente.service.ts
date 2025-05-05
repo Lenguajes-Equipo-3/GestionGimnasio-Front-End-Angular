@@ -49,6 +49,12 @@ export class ClienteService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
+  buscarClientes(nombre: string): Observable<Cliente[]> {
+    return this.http.get<Cliente[]>(`${this.baseUrl}/buscar`, {
+      params: { nombre }
+    });
+  }
+
 
 }
 

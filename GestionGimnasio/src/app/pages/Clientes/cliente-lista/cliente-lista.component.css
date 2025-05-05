@@ -12,6 +12,60 @@
   margin-bottom: 20px;
 }
 
+.clientes-header {
+  display: flex;
+  justify-content: space-between; /* Coloca los elementos en los extremos */
+  align-items: center; /* Alinea verticalmente los elementos */
+  margin-bottom: 20px; /* Espacio debajo del encabezado */
+}
+
+.boton-agregar-cliente {
+  margin: 0; /* Elimina el margen inferior que lo separaba */
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  background-color: #ac70ff;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.boton-agregar-cliente:hover {
+  background-color: #9246ff;
+}
+
+.buscar-container {
+  display: flex;
+  align-items: center;
+}
+
+.buscar-input {
+  border: 1px solid #d1d5db;
+  border-radius: 25px;
+  padding: 10px 15px;
+  font-size: 16px;
+  margin-left: auto; /* Empuja el input hacia la derecha */
+  width: 200px; /* Ajusta el ancho según necesites */
+}
+
+.buscar-boton {
+  background-color: #a855f7; /* Morado similar */
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px; /* Espacio entre el input y el botón */
+}
+
+.buscar-boton:hover {
+  background-color: #9333ea; /* Morado más oscuro al pasar el ratón */
+}
+
 .tabla-clientes {
   width: 100%;
   border-collapse: collapse;
@@ -76,24 +130,4 @@
 
 .btn-eliminar:hover {
   background-color: #e53935;
-}
-
-.boton-agregar-cliente {
-  margin: 10px 0;
-  padding: 10px 16px;
-  border-radius: 8px;
-  text-align: right;
-  margin-bottom: 20px;
-  border: none;
-  color: #fff;
-  background-color: #ac70ff;
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s ease;
-}
-
-.boton-agregar-cliente:hover {
-  background-color: #9246ff;
 }
