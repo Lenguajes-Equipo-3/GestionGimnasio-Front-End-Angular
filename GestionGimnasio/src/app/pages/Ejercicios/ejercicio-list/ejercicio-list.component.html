@@ -1,37 +1,40 @@
 <div class="container">
   <h2>Gestión de Ejercicios</h2>
 
-  <!-- Botones para alternar entre vistas -->
-  <div class="view-toggle">
+  <!-- Contenedor para los botones de acción -->
+  <div class="action-bar">
+    <!-- Botón de Registrar Ejercicio -->
     <button
-      class="btn btn-primary"
+      class="btn btn-primary btn-registrar"
       (click)="mostrarFormulario = !mostrarFormulario"
     >
-      {{
-        mostrarFormulario ? "Ver Lista de Ejercicios" : "Registrar Ejercicio"
-      }}
+      <span class="material-icons">add</span>
+      {{ mostrarFormulario ? "Ver Lista de Ejercicios" : "Registrar Ejercicio" }}
     </button>
+
+    <!-- Barra de búsqueda (solo visible en la lista de ejercicios) -->
+    <div class="search-bar" *ngIf="!mostrarFormulario">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Buscar ejercicio por nombre..."
+        class="search-input"
+      />
+      <button class="btn btn-primary btn-buscar" (click)="buscarEjercicio()">
+        <span class="material-icons">search</span>
+      </button>
+    </div>
   </div>
 
   <!-- Vista de Registro -->
   <div *ngIf="mostrarFormulario">
     <h3>Registrar Ejercicio</h3>
-    <app-ejercicio-add></app-ejercicio-add>
+    <app-ejercicio-add (ejercicioRegistrado)="cargarEjercicios()"></app-ejercicio-add>
   </div>
 
   <!-- Vista de Lista -->
   <div *ngIf="!mostrarFormulario">
     <h3>Lista de Ejercicios</h3>
-
-    <!-- Barra de búsqueda -->
-    <div class="search-bar">
-      <input
-        type="text"
-        [(ngModel)]="searchTerm"
-        placeholder="Buscar ejercicio..."
-        class="search-input"
-      />
-    </div>
 
     <!-- Mensaje de carga -->
     <div *ngIf="isLoading" class="loading">
@@ -77,14 +80,16 @@
             <button
               class="btn btn-primary"
               (click)="editarEjercicio(ejercicio)"
+              aria-label="Editar ejercicio"
             >
-              Editar
+              <span class="material-icons">edit</span>
             </button>
             <button
               class="btn btn-danger"
               (click)="ejercicio.id ? eliminarEjercicio(ejercicio.id) : null"
+              aria-label="Eliminar ejercicio"
             >
-              Eliminar
+              <span class="material-icons">delete</span>
             </button>
           </div>
         </div>

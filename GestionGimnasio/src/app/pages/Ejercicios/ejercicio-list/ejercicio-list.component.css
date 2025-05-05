@@ -1,211 +1,225 @@
 /* Contenedor principal */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Título principal */
-  h2 {
-    text-align: center;
-    color: #4caf50;
-    margin-bottom: 20px;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  /* Botones para alternar vistas */
-  .view-toggle {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Botones generales */
-  .btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
-  .btn-secondary {
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #5a6268;
-  }
-  
-  /* Barra de búsqueda */
-  .search-bar {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .search-input {
-    padding: 10px;
-    font-size: 16px;
-    width: 50%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Contenedor de tarjetas */
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  /* Tarjetas */
-  .card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  }
-  
-  .card-header {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .card-body {
-    text-align: left;
-    width: 100%;
-  }
-  
-  .card-body p {
-    margin: 5px 0;
-  }
-  
-  /* Imágenes */
-  .imagenes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-    justify-content: center;
-  }
-  
-  .imagen-ejercicio {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    transition: transform 0.3s;
-  }
-  
-  .imagen-ejercicio:hover {
-    transform: scale(1.1);
-    border-color: #4caf50;
-  }
-  
-  /* Contenedor para los botones */
-  .button-group {
-    display: flex;
-    justify-content: space-between; /* Espaciado entre los botones */
-    gap: 10px; /* Espacio entre los botones */
-    margin-top: 15px; /* Espacio superior */
-  }
-  
-  /* Espaciado entre las tarjetas y la sección de actualización */
-  .spacer {
-    height: 30px; /* Espacio entre las tarjetas y la sección de actualización */
-  }
-  
-  /* Sección de actualización */
-  .update-section {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Estilos del Modal */
-  .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 600px;
-    max-width: 90%;
-  }
-  
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #333;
-  }
-  
-  .close:hover {
-    color: #ff0000;
-  }
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f5ff; /* Fondo claro */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título principal */
+h2 {
+  text-align: center;
+  color: #ac70ff; /* Color principal */
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Contenedor para los botones de acción */
+.action-bar {
+  display: flex;
+  justify-content: space-between; /* Espaciado entre los botones */
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Botón de Registrar Ejercicio */
+.btn-registrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px; /* Espacio entre el ícono y el texto */
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #ac70ff; /* Color principal */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-registrar:hover {
+  background-color: #8c5bcc; /* Color más oscuro */
+  transform: scale(1.05); /* Efecto de escala */
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre el input y el botón */
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  width: 300px; /* Ancho fijo */
+  border: 1px solid #ac70ff; /* Borde principal */
+  border-radius: 5px;
+}
+
+.btn-buscar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #ac70ff; /* Color principal */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-buscar:hover {
+  background-color: #8c5bcc; /* Color más oscuro */
+  transform: scale(1.05); /* Efecto de escala */
+}
+
+.btn-buscar .material-icons {
+  font-size: 20px; /* Tamaño del ícono */
+  color: white;
+}
+
+/* Contenedor de tarjetas */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Tarjetas */
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ac70ff; /* Color principal */
+}
+
+.card-body {
+  text-align: left;
+  width: 100%;
+}
+
+.card-body p {
+  margin: 5px 0;
+}
+
+/* Imágenes */
+.imagenes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.imagen-ejercicio {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ac70ff; /* Borde principal */
+  transition: transform 0.3s;
+}
+
+.imagen-ejercicio:hover {
+  transform: scale(1.1);
+  border-color: #8c5bcc; /* Color más oscuro */
+}
+
+/* Contenedor para los botones */
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Espaciado entre los botones */
+  gap: 10px; /* Espacio entre los botones */
+  margin-top: 15px;
+}
+
+/* Botones generales */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px; /* Espacio entre el ícono y el texto */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn .material-icons {
+  font-size: 20px; /* Tamaño del ícono */
+  color: white; /* Color del ícono */
+}
+
+/* Botón primario */
+.btn-primary {
+  background-color: #ac70ff; /* Color principal */
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #8c5bcc; /* Color más oscuro */
+  transform: scale(1.05); /* Efecto de escala */
+}
+
+/* Botón de peligro */
+.btn-danger {
+  background-color: #ff6b6b; /* Rojo para eliminar */
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #cc5656; /* Rojo más oscuro */
+  transform: scale(1.05); /* Efecto de escala */
+}
+
+/* Botón secundario */
+.btn-secondary {
+  background-color: #6c757d; /* Gris */
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Gris más oscuro */
+  transform: scale(1.05); /* Efecto de escala */
+}
+
+/* Espaciado entre las tarjetas y la sección de actualización */
+.spacer {
+  height: 30px; /* Espacio entre las tarjetas y la sección de actualización */
+}
+
+/* Sección de actualización */
+.update-section {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

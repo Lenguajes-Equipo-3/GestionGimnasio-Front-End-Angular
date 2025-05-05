@@ -38,4 +38,13 @@ export class EjercicioService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  getEjercicioByNombre(nombre: string): Observable<Ejercicio> {
+    return this.http.get<Ejercicio>(`${this.apiUrl}/nombre/${nombre}`).pipe(
+      map((ejercicio: any) => ({
+        ...ejercicio,
+        id: ejercicio.idEjercicio, // Mapear idEjercicio a id
+      }))
+    );
+  }
+
 }
