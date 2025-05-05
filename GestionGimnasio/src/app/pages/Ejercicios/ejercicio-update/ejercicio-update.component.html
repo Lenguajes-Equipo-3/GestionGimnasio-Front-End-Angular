@@ -1,92 +1,92 @@
 <div class="container">
-    <h2 class="title">Actualizar Ejercicio</h2>
-    <form [formGroup]="ejercicioForm" (ngSubmit)="onSubmit()" class="form-container">
-      <!-- Selección de Categoría -->
-      <div class="form-group">
-        <label for="idCategoriaEjercicio" class="form-label">Categoría</label>
-        <select
-          id="idCategoriaEjercicio"
-          formControlName="idCategoriaEjercicio"
-          class="form-control"
-        >
-          <option value="" disabled>Seleccione una categoría</option>
-          <option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">
-            {{ categoria.nombreCategoria }}
-          </option>
-        </select>
-      </div>
-  
-      <!-- Nombre del Ejercicio -->
-      <div class="form-group">
-        <label for="nombreEjercicio" class="form-label">Nombre del Ejercicio</label>
+  <h2 class="title">Actualizar Ejercicio</h2>
+  <form [formGroup]="ejercicioForm" (ngSubmit)="onSubmit()" class="form-container">
+    <!-- Selección de Categoría -->
+    <div class="form-group">
+      <label for="idCategoriaEjercicio" class="form-label">Categoría</label>
+      <select
+        id="idCategoriaEjercicio"
+        formControlName="idCategoriaEjercicio"
+        class="form-control"
+      >
+        <option value="" disabled>Seleccione una categoría</option>
+        <option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">
+          {{ categoria.nombreCategoria }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Nombre del Ejercicio -->
+    <div class="form-group">
+      <label for="nombreEjercicio" class="form-label">Nombre del Ejercicio</label>
+      <input
+        id="nombreEjercicio"
+        formControlName="nombreEjercicio"
+        type="text"
+        class="form-control"
+        placeholder="Nombre del ejercicio"
+      />
+    </div>
+
+    <!-- Descripción del Ejercicio -->
+    <div class="form-group">
+      <label for="descripcionEjercicio" class="form-label">Descripción</label>
+      <textarea
+        id="descripcionEjercicio"
+        formControlName="descripcionEjercicio"
+        class="form-control"
+        placeholder="Descripción del ejercicio"
+      ></textarea>
+    </div>
+
+    <!-- Código del Equipo -->
+    <div class="form-group">
+      <label for="codigoEquipo" class="form-label">Código del Equipo</label>
+      <input
+        id="codigoEquipo"
+        formControlName="codigoEquipo"
+        type="text"
+        class="form-control"
+        placeholder="Código del equipo (opcional)"
+      />
+    </div>
+
+    <!-- Imágenes -->
+    <div formArrayName="imagenes" class="imagenes-container">
+      <h3>Imágenes</h3>
+      <div
+        *ngFor="let imagen of imagenes.controls; let i = index"
+        [formGroupName]="i"
+        class="form-group"
+      >
+        <label for="urlImagen" class="form-label">URL de la Imagen</label>
         <input
-          id="nombreEjercicio"
-          formControlName="nombreEjercicio"
+          id="urlImagen"
+          formControlName="urlImagen"
           type="text"
           class="form-control"
-          placeholder="Nombre del ejercicio"
+          placeholder="URL de la imagen"
         />
-      </div>
-  
-      <!-- Descripción del Ejercicio -->
-      <div class="form-group">
-        <label for="descripcionEjercicio" class="form-label">Descripción</label>
-        <textarea
-          id="descripcionEjercicio"
-          formControlName="descripcionEjercicio"
-          class="form-control"
-          placeholder="Descripción del ejercicio"
-        ></textarea>
-      </div>
-  
-      <!-- Código del Equipo -->
-      <div class="form-group">
-        <label for="codigoEquipo" class="form-label">Código del Equipo</label>
+        <label for="descripcionImagen" class="form-label">Descripción de la Imagen</label>
         <input
-          id="codigoEquipo"
-          formControlName="codigoEquipo"
+          id="descripcionImagen"
+          formControlName="descripcionImagen"
           type="text"
           class="form-control"
-          placeholder="Código del equipo (opcional)"
+          placeholder="Descripción de la imagen (opcional)"
         />
-      </div>
-  
-      <!-- Imágenes -->
-      <div formArrayName="imagenes" class="imagenes-container">
-        <h3>Imágenes</h3>
-        <div
-          *ngFor="let imagen of imagenes.controls; let i = index"
-          [formGroupName]="i"
-          class="form-group"
-        >
-          <label for="urlImagen" class="form-label">URL de la Imagen</label>
-          <input
-            id="urlImagen"
-            formControlName="urlImagen"
-            type="text"
-            class="form-control"
-            placeholder="URL de la imagen"
-          />
-          <label for="descripcionImagen" class="form-label">Descripción de la Imagen</label>
-          <input
-            id="descripcionImagen"
-            formControlName="descripcionImagen"
-            type="text"
-            class="form-control"
-            placeholder="Descripción de la imagen (opcional)"
-          />
-          <button type="button" (click)="removeImagen(i)" class="btn btn-danger">
-            Eliminar Imagen
-          </button>
-        </div>
-        <button type="button" (click)="addImagen()" class="btn btn-primary">
-          Agregar Imagen
+        <button type="button" (click)="removeImagen(i)" class="btn btn-danger">
+          Eliminar Imagen
         </button>
       </div>
-  
-      <!-- Botón de Guardar -->
-      <button type="submit" [disabled]="!ejercicioForm.valid" class="btn btn-success">
-        Actualizar Ejercicio
+      <button type="button" (click)="addImagen()" class="btn btn-primary">
+        Agregar Imagen
       </button>
-    </form>
-  </div>
+    </div>
+
+    <!-- Botón de Guardar -->
+    <button type="submit" [disabled]="!ejercicioForm.valid" class="btn btn-success">
+      Actualizar Ejercicio
+    </button>
+  </form>
+</div>

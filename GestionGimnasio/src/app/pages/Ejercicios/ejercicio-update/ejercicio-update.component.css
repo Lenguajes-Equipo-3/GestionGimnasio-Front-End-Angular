@@ -1,99 +1,105 @@
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .title {
-    text-align: center;
-    color: #4caf50;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .form-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
-  .form-control {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-  }
-  
-  .imagenes-container h3 {
-    color: #4caf50;
-    margin-bottom: 15px;
-  }
-  
-  .btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
-  .btn-success {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .btn-success:hover {
-    background-color: #218838;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
-  .imagenes-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .imagenes-container .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  max-width: 600px; /* Reducir el ancho máximo */
+  margin: 0 auto; /* Centrar el formulario */
+  padding: 20px;
+  background-color: #f9f5ff; /* Fondo claro */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para un diseño más limpio */
+}
+
+.title {
+  text-align: center;
+  color: #ac70ff; /* Color principal */
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Reducir el espacio entre los campos */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Reducir el espacio entre el label y el input */
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-control {
+  padding: 10px;
+  border: 1px solid #ac70ff; /* Borde principal */
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #8c5bcc; /* Color más oscuro al enfocar */
+  box-shadow: 0 0 5px rgba(140, 91, 204, 0.5);
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.imagenes-container h3 {
+  color: #ac70ff; /* Color principal */
+  margin-bottom: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: #ac70ff; /* Color principal */
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #8c5bcc; /* Color más oscuro */
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-danger {
+  background-color: #ff6b6b; /* Rojo para eliminar */
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #cc5656; /* Rojo más oscuro */
+}
+
+.imagenes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.imagenes-container .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

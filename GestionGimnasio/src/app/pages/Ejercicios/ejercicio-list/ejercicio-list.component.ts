@@ -112,4 +112,23 @@ export class EjercicioListComponent implements OnInit {
       });
     }
   }
+
+  buscarEjercicio(): void {
+    if (this.searchTerm.trim() === '') {
+      this.cargarEjercicios(); // Si el campo de búsqueda está vacío, recargar todos los ejercicios
+      return;
+    }
+  
+    this.ejercicioService.getEjercicioByNombre(this.searchTerm).subscribe({
+      next: (ejercicio) => {
+        this.ejerciciosFiltrados = [ejercicio]; // Mostrar solo el ejercicio encontrado
+      },
+      error: (err) => {
+        console.error('Error al buscar el ejercicio:', err);
+        alert('No se encontró ningún ejercicio con ese nombre.');
+        this.ejerciciosFiltrados = []; // Limpiar la lista si no se encuentra el ejercicio
+      },
+    });
+  }
+
 }
