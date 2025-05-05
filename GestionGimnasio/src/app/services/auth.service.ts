@@ -1,34 +1,53 @@
 import { Injectable } from '@angular/core';
-import { RoleGuard } from '../guards/role.guard';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { UsuarioLoginRequest } from '../Domain/usuario-login-request';
+import { UsuarioLoginResponse } from '../Domain/usuario-login-response';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  private role: string = 'usuario'; // Valor fijo por ahora
 
-  constructor() {
-    const savedRole = localStorage.getItem('role');
-    if (savedRole) {
-      this.role = savedRole;
-    }
+  private baseUrl = 'http://localhost:8083/security/api/auth/login';
+
+  constructor(private http: HttpClient) { }
+
+  login(datos: UsuarioLoginRequest): Observable<UsuarioLoginResponse> {
+    return this.http.post<UsuarioLoginResponse>(this.baseUrl, datos).pipe(
+      tap(response => {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('nombre', response.nombreEmpleado);
+        localStorage.setItem('apellidos', response.apellidosEmpleado);
+
+        localStorage.setItem('rol', response.rol);
+        localStorage.setItem('lastAction', Date.now().toString());
+      })
+    );
   }
 
-  login(role: string) {
-    localStorage.setItem('role', role);
-    // RoleGuard.setRole(role); // Removed as RoleGuard does not have a setRole method
-  }
-
-  logout() {
-    this.role = '';
-    localStorage.removeItem('role');
-  }
-
-  getUserRole(): string {
-    return this.role;
+  logout(): void {
+    localStorage.clear();
   }
 
   isAuthenticated(): boolean {
-    return !!this.role;
+    return !!localStorage.getItem('token');
+  }
+
+  getRol(): string | null {
+    return localStorage.getItem('rol');
+  }
+
+  isSessionActive(): boolean {
+    const lastAction = localStorage.getItem('lastAction');
+    if (!lastAction) return false;
+
+    const currentTime = Date.now();
+    const timeout = 5 * 60 * 1000; // 5 minutos
+    return (currentTime - parseInt(lastAction, 10)) < timeout;
+  }
+
+  refreshLastAction(): void {
+    localStorage.setItem('lastAction', Date.now().toString());
   }
 }

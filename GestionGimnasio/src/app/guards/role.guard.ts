@@ -11,15 +11,15 @@ export const RoleGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
   const router = inject(Router);
 
   const expectedRoles = route.data['roles'] as string[];
-  const userRole = authService.getUserRole();
+  const userRole = authService.getRol(); // Método ya implementado en tu AuthService
+
   console.log('RoleGuard → expectedRoles:', expectedRoles, 'userRole:', userRole);
 
-  if (!authService.isAuthenticated() || !expectedRoles.includes(userRole)) {
+  // Verifica si hay token y si el rol del usuario está autorizado
+  if (!authService.isAuthenticated() || !userRole || !expectedRoles.includes(userRole.toUpperCase())) {
     router.navigate(['/login']);
     return false;
   }
 
   return true;
 };
-
-
