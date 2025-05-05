@@ -1,26 +1,24 @@
-<div class.="confirm-container">
+<div class="confirm-container">
     <h2 mat-dialog-title class="confirm-title">
-        <mat-icon color="warn">warning</mat-icon> Confirmar Eliminación
+      <mat-icon color="warn">warning</mat-icon> Confirmar Eliminación
     </h2>
-
+  
     <mat-dialog-content class="confirm-content">
-        <p>¿Está seguro de que desea eliminar permanentemente al siguiente empleado?</p>
-
-        <div class="employee-info">
-            <div><strong>ID:</strong> {{ empleado?.idEmpleado ?? 'N/A' }}</div>
-            <div><strong>Nombre:</strong> {{ empleado?.nombreEmpleado ?? '' }} {{ empleado?.apellidosEmpleado ?? '' }}
-            </div>
-            <div><strong>Usuario:</strong> {{ empleado?.nombreUsuario ?? 'N/A' }}</div>
-            <div><strong>Rol:</strong> {{ empleado?.nombreRol ?? 'N/A' }}</div>
-        </div>
-
-        <p class="warning-text"><strong>¡Atención!</strong> Esta acción no se puede deshacer.</p>
+      <p>¿Está seguro de que desea eliminar permanentemente al siguiente empleado?</p>
+  
+      <div class="employee-info">
+        <div><strong>ID:</strong> {{ empleado?.idEmpleado ?? 'N/A' }}</div>
+        <div><strong>Nombre:</strong> {{ empleado?.nombreEmpleado ?? '' }} {{ empleado?.apellidosEmpleado ?? '' }}</div>
+        <div><strong>Usuario:</strong> {{ empleado?.nombreUsuario ?? 'N/A' }}</div>
+        <div><strong>Rol:</strong> {{ empleado?.nombreRol ?? 'N/A' }}</div>
+      </div>
+  
+      <p class="warning-text"><strong>¡Atención!</strong> Esta acción no se puede deshacer.</p>
     </mat-dialog-content>
-
+  
     <mat-dialog-actions align="end" class="confirm-actions">
-        <button mat-button (click)="cancel()">Cancelar</button>
-        <button mat-flat-button color="warn" (click)="confirmDelete()">
-            Eliminar Empleado
-        </button>
+      <button mat-button (click)="cancel()">Cancelar</button>
+      <button mat-flat-button color="warn" (click)="confirmDelete()">Eliminar Empleado</button>
     </mat-dialog-actions>
-</div>
+  </div>
+  
