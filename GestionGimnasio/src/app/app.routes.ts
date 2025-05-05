@@ -62,12 +62,14 @@ export const routes: Routes = [
         component: ClienteEditarComponent,
         canActivate: [RoleGuard],
         data: { roles: ['admin', 'usuario'] },
-        {
-        path: 'medidasCorporales',  
+      },
+      {
+        path: 'medidasCorporales',
         component: MedidasCorporalesComponent,
         canActivate: [RoleGuard],
         data: { roles: ['admin', 'usuario']  },
-        {
+      },
+      {
         path: 'ejercicios',
         loadComponent: () => import('./pages/Ejercicios/ejercicio-list/ejercicio-list.component')
           .then(m => m.EjercicioListComponent),
@@ -75,7 +77,7 @@ export const routes: Routes = [
         data: { roles: ['admin', 'usuario'] },
 
       }
-      
+
     ]
   },
   {
