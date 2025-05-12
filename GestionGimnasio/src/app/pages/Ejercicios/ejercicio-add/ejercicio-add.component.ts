@@ -24,7 +24,7 @@ export class EjercicioAddComponent implements OnInit {
     private categoriaEjercicioService: CategoriaEjercicioService
   ) {
     this.ejercicioForm = this.fb.group({
-      idCategoriaEjercicio: [null, Validators.required],
+      categoriaEjercicio: [null, Validators.required], // Cambiado a un objeto
       nombreEjercicio: ['', [Validators.required, Validators.maxLength(50)]],
       descripcionEjercicio: ['', [Validators.required, Validators.maxLength(100)]],
       codigoEquipo: ['', [Validators.maxLength(20)]],

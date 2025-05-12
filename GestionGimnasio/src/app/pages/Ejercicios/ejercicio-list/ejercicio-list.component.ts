@@ -63,11 +63,8 @@ export class EjercicioListComponent implements OnInit {
     });
   }
 
-  obtenerNombreCategoria(idCategoria: number): string {
-    const categoria = this.categorias.find(
-      (cat) => cat.idCategoria === idCategoria
-    );
-    return categoria ? categoria.nombreCategoria : 'Sin categoría';
+  obtenerNombreCategoria(categoriaEjercicio: Categoria): string {
+    return categoriaEjercicio ? categoriaEjercicio.nombreCategoria : 'Sin categoría';
   }
 
   filtrarEjercicios(): void {

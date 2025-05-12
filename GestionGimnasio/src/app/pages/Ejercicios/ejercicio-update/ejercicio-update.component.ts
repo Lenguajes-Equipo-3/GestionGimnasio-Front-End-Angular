@@ -39,7 +39,7 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
     private ejercicioService: EjercicioService
   ) {
     this.ejercicioForm = this.fb.group({
-      idCategoriaEjercicio: [null, Validators.required],
+      categoriaEjercicio: [null, Validators.required],
       nombreEjercicio: ['', [Validators.required, Validators.maxLength(50)]],
       descripcionEjercicio: [
         '',

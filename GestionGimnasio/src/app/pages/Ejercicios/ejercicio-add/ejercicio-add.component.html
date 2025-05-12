@@ -1,27 +1,35 @@
 <div class="container">
   <h2 class="title">Registrar Nuevo Ejercicio</h2>
-  <form [formGroup]="ejercicioForm" (ngSubmit)="onSubmit()" class="form-container">
+  <form
+    [formGroup]="ejercicioForm"
+    (ngSubmit)="onSubmit()"
+    class="form-container"
+  >
     <!-- Selección de Categoría -->
     <div class="form-group">
       <label for="idCategoriaEjercicio" class="form-label">Categoría</label>
-      <select
-        id="idCategoriaEjercicio"
-        formControlName="idCategoriaEjercicio"
-        class="form-control"
-      >
+      <select formControlName="categoriaEjercicio" class="form-control">
         <option value="" disabled>Seleccione una categoría</option>
-        <option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">
+        <option *ngFor="let categoria of categorias" [ngValue]="categoria">
           {{ categoria.nombreCategoria }}
         </option>
       </select>
-      <div *ngIf="ejercicioForm.get('idCategoriaEjercicio')?.invalid && ejercicioForm.get('idCategoriaEjercicio')?.touched" class="error-message">
+      <div
+        *ngIf="
+          ejercicioForm.get('idCategoriaEjercicio')?.invalid &&
+          ejercicioForm.get('idCategoriaEjercicio')?.touched
+        "
+        class="error-message"
+      >
         Seleccione una categoría válida.
       </div>
     </div>
 
     <!-- Nombre del Ejercicio -->
     <div class="form-group">
-      <label for="nombreEjercicio" class="form-label">Nombre del Ejercicio</label>
+      <label for="nombreEjercicio" class="form-label"
+        >Nombre del Ejercicio</label
+      >
       <input
         id="nombreEjercicio"
         formControlName="nombreEjercicio"
@@ -29,7 +37,13 @@
         class="form-control"
         placeholder="Nombre del ejercicio"
       />
-      <div *ngIf="ejercicioForm.get('nombreEjercicio')?.invalid && ejercicioForm.get('nombreEjercicio')?.touched" class="error-message">
+      <div
+        *ngIf="
+          ejercicioForm.get('nombreEjercicio')?.invalid &&
+          ejercicioForm.get('nombreEjercicio')?.touched
+        "
+        class="error-message"
+      >
         El nombre del ejercicio es obligatorio y no debe exceder 50 caracteres.
       </div>
     </div>
@@ -43,7 +57,13 @@
         class="form-control"
         placeholder="Descripción del ejercicio"
       ></textarea>
-      <div *ngIf="ejercicioForm.get('descripcionEjercicio')?.invalid && ejercicioForm.get('descripcionEjercicio')?.touched" class="error-message">
+      <div
+        *ngIf="
+          ejercicioForm.get('descripcionEjercicio')?.invalid &&
+          ejercicioForm.get('descripcionEjercicio')?.touched
+        "
+        class="error-message"
+      >
         La descripción es obligatoria y no debe exceder 100 caracteres.
       </div>
     </div>
@@ -58,7 +78,13 @@
         class="form-control"
         placeholder="Código del equipo (opcional)"
       />
-      <div *ngIf="ejercicioForm.get('codigoEquipo')?.invalid && ejercicioForm.get('codigoEquipo')?.touched" class="error-message">
+      <div
+        *ngIf="
+          ejercicioForm.get('codigoEquipo')?.invalid &&
+          ejercicioForm.get('codigoEquipo')?.touched
+        "
+        class="error-message"
+      >
         El código del equipo no debe exceder 20 caracteres.
       </div>
     </div>
@@ -79,7 +105,9 @@
           class="form-control"
           placeholder="URL de la imagen"
         />
-        <label for="descripcionImagen" class="form-label">Descripción de la Imagen</label>
+        <label for="descripcionImagen" class="form-label"
+          >Descripción de la Imagen</label
+        >
         <input
           id="descripcionImagen"
           formControlName="descripcionImagen"
@@ -97,7 +125,11 @@
     </div>
 
     <!-- Botón de Guardar -->
-    <button type="submit" [disabled]="!ejercicioForm.valid" class="btn btn-success">
+    <button
+      type="submit"
+      [disabled]="!ejercicioForm.valid"
+      class="btn btn-success"
+    >
       Guardar Ejercicio
     </button>
   </form>

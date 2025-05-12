@@ -1,16 +1,16 @@
 <div class="container">
   <h2 class="title">Actualizar Ejercicio</h2>
-  <form [formGroup]="ejercicioForm" (ngSubmit)="onSubmit()" class="form-container">
+  <form
+    [formGroup]="ejercicioForm"
+    (ngSubmit)="onSubmit()"
+    class="form-container"
+  >
     <!-- Selección de Categoría -->
     <div class="form-group">
       <label for="idCategoriaEjercicio" class="form-label">Categoría</label>
-      <select
-        id="idCategoriaEjercicio"
-        formControlName="idCategoriaEjercicio"
-        class="form-control"
-      >
+      <select formControlName="categoriaEjercicio" class="form-control">
         <option value="" disabled>Seleccione una categoría</option>
-        <option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">
+        <option *ngFor="let categoria of categorias" [ngValue]="categoria">
           {{ categoria.nombreCategoria }}
         </option>
       </select>
@@ -18,7 +18,9 @@
 
     <!-- Nombre del Ejercicio -->
     <div class="form-group">
-      <label for="nombreEjercicio" class="form-label">Nombre del Ejercicio</label>
+      <label for="nombreEjercicio" class="form-label"
+        >Nombre del Ejercicio</label
+      >
       <input
         id="nombreEjercicio"
         formControlName="nombreEjercicio"
@@ -67,7 +69,9 @@
           class="form-control"
           placeholder="URL de la imagen"
         />
-        <label for="descripcionImagen" class="form-label">Descripción de la Imagen</label>
+        <label for="descripcionImagen" class="form-label"
+          >Descripción de la Imagen</label
+        >
         <input
           id="descripcionImagen"
           formControlName="descripcionImagen"
@@ -85,7 +89,11 @@
     </div>
 
     <!-- Botón de Guardar -->
-    <button type="submit" [disabled]="!ejercicioForm.valid" class="btn btn-success">
+    <button
+      type="submit"
+      [disabled]="!ejercicioForm.valid"
+      class="btn btn-success"
+    >
       Actualizar Ejercicio
     </button>
   </form>
