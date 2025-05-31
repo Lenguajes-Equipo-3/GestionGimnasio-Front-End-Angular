@@ -9,7 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { UsuarioLoginRequest } from '../../Domain/usuario-login-request';
- // ✅ IMPORTA TU MODELO
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { SelectRoleDialogComponent } from '../../components/select-role-dialog.component';
+
 
 @Component({
   selector: 'app-login',
@@ -22,6 +24,9 @@ import { UsuarioLoginRequest } from '../../Domain/usuario-login-request';
     MatIconModule,
     MatSelectModule,
     MatOptionModule,
+    MatDialogModule,
+
+    
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -31,9 +36,8 @@ export class LoginComponent {
   password: string = '';
   hide = true;
 
-  constructor(private authService: AuthService, private router: Router) {}
-
-  login() {
+  constructor(private authService: AuthService, private router: Router, private dialog: MatDialog) {}
+ login() {
     const credenciales: UsuarioLoginRequest = {
       usuario: this.email,
       contrasena: this.password
@@ -42,7 +46,28 @@ export class LoginComponent {
     this.authService.login(credenciales).subscribe({
       next: (res) => {
         console.log('Login exitoso', res);
-        this.router.navigate(['/dashboard']);
+
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('nombre', res.nombreEmpleado);
+        localStorage.setItem('apellidos', res.apellidosEmpleado);
+        localStorage.setItem('lastAction', Date.now().toString());
+
+        if (res.roles.length === 1) {
+          localStorage.setItem('rol', res.roles[0]);
+          this.router.navigate(['/dashboard']);
+        } else {
+          const dialogRef = this.dialog.open(SelectRoleDialogComponent, {
+            disableClose: true,
+            data: { roles: res.roles }
+          });
+
+          dialogRef.afterClosed().subscribe((rolSeleccionado: string) => {
+            if (rolSeleccionado) {
+              localStorage.setItem('rol', rolSeleccionado);
+              this.router.navigate(['/dashboard']);
+            }
+          });
+        }
       },
       error: (err) => {
         console.error('Error en login:', err);
