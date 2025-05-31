@@ -1,0 +1,23 @@
+
+<div class="dialog-container">
+    <img src="assets/images/wolflogo.png" alt="Logo GYM WOLF" class="logo">
+    <h2 class="dialog-title">Seleccione un rol para continuar</h2>
+    <div class="dialog-content">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Rol</mat-label>
+        <mat-select [(ngModel)]="selectedRol">
+          <mat-option *ngFor="let rol of data.roles" [value]="rol">
+   
+            {{ rol === "ADMIN" ? "Administrador" : "Entrenador" }}
+
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="dialog-actions">
+      <button mat-flat-button color="primary" (click)="confirmar()" [disabled]="!selectedRol">
+        Confirmar
+      </button>
+    </div>
+  </div>
+  
