@@ -12,9 +12,10 @@ export class EjercicioService {
 
   constructor(private http: HttpClient) {}
 
-  createEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
-    return this.http.post<Ejercicio>(this.apiUrl, ejercicio);
+  createEjercicioFormData(formData: FormData): Observable<Ejercicio> {
+    return this.http.post<Ejercicio>(this.apiUrl, formData);
   }
+  
 
   getAllEjercicios(): Observable<Ejercicio[]> {
     return this.http.get<Ejercicio[]>(this.apiUrl).pipe(
@@ -27,13 +28,25 @@ export class EjercicioService {
     );
   }
 
-  updateEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
+  updateEjercicioConImagenes(ejercicio: Ejercicio, imagenes: File[]): Observable<Ejercicio> {
     if (!ejercicio.id) {
       console.error('El ejercicio no tiene un ID válido.');
       throw new Error('El ejercicio no tiene un ID válido.');
     }
-    return this.http.put<Ejercicio>(`${this.apiUrl}/${ejercicio.id}`, ejercicio);
+  
+    const formData = new FormData();
+  
+    // Convertir el objeto ejercicio a JSON y agregarlo como string
+    formData.append('ejercicio', new Blob([JSON.stringify(ejercicio)], { type: 'application/json' }));
+  
+    // Agregar cada imagen al FormData
+    imagenes.forEach((file, index) => {
+      formData.append('imagenes', file); // Si tu backend espera múltiples archivos con el mismo nombre
+    });
+  
+    return this.http.put<Ejercicio>(`${this.apiUrl}/${ejercicio.id}`, formData);
   }
+  
 
   deleteEjercicio(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);

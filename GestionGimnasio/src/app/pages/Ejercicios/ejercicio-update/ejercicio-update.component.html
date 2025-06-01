@@ -54,39 +54,59 @@
     </div>
 
     <!-- Imágenes -->
-    <div formArrayName="imagenes" class="imagenes-container">
-      <h3>Imágenes</h3>
-      <div
-        *ngFor="let imagen of imagenes.controls; let i = index"
-        [formGroupName]="i"
-        class="form-group"
-      >
-        <label for="urlImagen" class="form-label">URL de la Imagen</label>
-        <input
-          id="urlImagen"
-          formControlName="urlImagen"
-          type="text"
-          class="form-control"
-          placeholder="URL de la imagen"
-        />
-        <label for="descripcionImagen" class="form-label"
-          >Descripción de la Imagen</label
-        >
-        <input
-          id="descripcionImagen"
-          formControlName="descripcionImagen"
-          type="text"
-          class="form-control"
-          placeholder="Descripción de la imagen (opcional)"
-        />
-        <button type="button" (click)="removeImagen(i)" class="btn btn-danger">
-          Eliminar Imagen
-        </button>
-      </div>
-      <button type="button" (click)="addImagen()" class="btn btn-primary">
-        Agregar Imagen
-      </button>
+<div formArrayName="imagenes" class="imagenes-container">
+  <h3>Imágenes</h3>
+
+  <div
+    *ngFor="let imagen of imagenes.controls; let i = index"
+    [formGroupName]="i"
+    class="form-group"
+  >
+    <!-- Label dinámico -->
+    <label class="form-label">Imagen {{ i + 1 }}</label>
+
+    <!-- Input de archivo -->
+    <input
+      type="file"
+      accept="image/*"
+      (change)="onFileSelected($event, i)"
+      class="form-control mb-2"
+    />
+
+    <!-- Vista previa -->
+    <div *ngIf="previews[i]" class="mb-2">
+      <img [src]="previews[i]" class="img-thumbnail" style="max-width: 200px;" />
     </div>
+
+    <!-- Descripción -->
+    <label class="form-label">Descripción de la Imagen</label>
+    <input
+      type="text"
+      formControlName="descripcionImagen"
+      class="form-control"
+      placeholder="Descripción de la imagen"
+    />
+
+    <!-- Botón eliminar -->
+    <button
+      type="button"
+      (click)="removeImagen(i)"
+      class="btn btn-danger mt-2"
+    >
+      Eliminar Imagen
+    </button>
+  </div>
+
+  <!-- Botón para agregar nuevas imágenes -->
+  <button
+    type="button"
+    (click)="addImagen()"
+    class="btn btn-primary mt-3"
+  >
+    Agregar Imagen
+  </button>
+</div>
+
 
     <!-- Botón de Guardar -->
     <button

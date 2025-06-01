@@ -32,7 +32,9 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
   @Output() ejercicioActualizado = new EventEmitter<void>(); // Evento para notificar al padre
   ejercicioForm: FormGroup;
   categorias: Categoria[] = [];
-
+  archivosSeleccionados: File[] = [];
+  nombreArchivos: string[] = [];
+  previews: string[] = [];
   constructor(
     private fb: FormBuilder,
     private categoriaEjercicioService: CategoriaEjercicioService,
@@ -101,29 +103,70 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
         descripcionImagen: ['', Validators.maxLength(255)],
       })
     );
+    this.archivosSeleccionados.push(null as any);
+    this.nombreArchivos.push('');
+    this.previews.push('');
   }
-
   removeImagen(index: number): void {
     this.imagenes.removeAt(index);
+    this.archivosSeleccionados.splice(index, 1);
+    this.nombreArchivos.splice(index, 1);
+    this.previews.splice(index, 1);
   }
-
-  onSubmit(): void {
-    if (this.ejercicioForm.valid) {
-      const updatedEjercicio = {
-        ...this.ejercicio,
-        ...this.ejercicioForm.value,
+  onFileSelected(event: Event, index: number): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.archivosSeleccionados[index] = file;
+      this.nombreArchivos[index] = file.name;
+      this.imagenes.at(index).get('urlImagen')?.setValue(file.name);
+  
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.previews[index] = reader.result as string;
       };
-
-      if (!updatedEjercicio.id) {
-        console.error('El ejercicio no tiene un ID válido.');
-        alert('Error: El ejercicio no tiene un ID válido.');
-        return;
-      }
-
-      this.ejercicioService.updateEjercicio(updatedEjercicio).subscribe({
+      reader.readAsDataURL(file);
+    }
+  }
+  onSubmit(): void {
+    const hayAlMenosUnaImagen = this.archivosSeleccionados.some((file) => !!file);
+  
+    if (!hayAlMenosUnaImagen) {
+      alert('Debe seleccionar al menos una imagen para actualizar el ejercicio.');
+      return;
+    }
+  
+    if (this.ejercicioForm.valid) {
+      const formData = new FormData();
+  
+      // Construir el objeto ejercicio sin las urlImagen
+      const ejercicioActualizado = {
+        id: this.ejercicio.id, // Asegura que se incluya el ID
+        ...this.ejercicioForm.value,
+        imagenes: this.ejercicioForm.value.imagenes.map((img: any) => ({
+          descripcionImagen: img.descripcionImagen || '',
+        })),
+      };
+  
+      formData.append(
+        'ejercicio',
+        new Blob([JSON.stringify(ejercicioActualizado)], {
+          type: 'application/json',
+        })
+      );
+  
+      // Agregar imágenes nuevas
+      this.archivosSeleccionados.forEach((archivo) => {
+        if (archivo) {
+          formData.append('imagenes', archivo);
+        }
+      });
+  
+      // Consumir servicio
+      this.ejercicioService.updateEjercicioConImagenes(this.ejercicio, this.archivosSeleccionados).subscribe({
         next: () => {
           alert('Ejercicio actualizado con éxito');
-          this.ejercicioActualizado.emit(); // Notificar al componente padre
+          this.ejercicioActualizado.emit();
         },
         error: (err) => {
           console.error(err);
@@ -132,4 +175,6 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
       });
     }
   }
+  
 }
+  
