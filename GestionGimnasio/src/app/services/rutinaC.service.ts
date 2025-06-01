@@ -42,6 +42,7 @@ export class RutinaContextService {
     this.rutinaSubject.next(rutina);
   }
 
+
   setEmpleado(empleado: Empleado) {
     const rutina = this.rutinaSubject.getValue();
     rutina.empleado = empleado;
