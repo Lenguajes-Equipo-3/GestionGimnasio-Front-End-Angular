@@ -1,18 +1,18 @@
 import { Cliente } from "../services/cliente.service";
-import { ItemRutinaMedida } from "../services/rutina.service";
-import { Ejercicio } from "./Ejercicio.interface";
 import { Empleado } from "./Empleado.interface";
+import { ItemRutinaEjercicio } from "./ItemRutinaEjercicio";
+import { ItemRutinaMedida } from "./ItemRutinaMedida";
 
 export interface Rutina {
-  idRutina: number;
-  empleado: Empleado;
-  cliente: Cliente;
-  fechaCreacion: string;        // ISO format (YYYY-MM-DD)
-  fechaRenovacion: string;      // ISO format (YYYY-MM-DD)
+  
+  fechaCreacion: Date;
+  fechaRenovacion: Date;
+  esVigente: boolean;
   objetivo: string;
   lesiones: string;
   enfermedades: string;
-  esVigente: boolean;
-  ejercicios: Ejercicio[];
+  cliente?: Cliente;
+  empleado?: Empleado;
   medidas: ItemRutinaMedida[];
+  ejercicios: ItemRutinaEjercicio[];
 }

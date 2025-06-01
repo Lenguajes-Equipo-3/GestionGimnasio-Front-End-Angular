@@ -2,37 +2,52 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { RutinaContextService } from '../../../services/rutina.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { RutinaContextService } from '../../../services/rutinaC.service';
 import { Cliente } from '../../../services/cliente.service';
+
 @Component({
+  standalone: true,
   selector: 'app-rutina-list',
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, MatDialogModule,FormsModule, RouterModule],
   templateUrl: './rutina-list.component.html',
-  styleUrl: './rutina-list.component.css'
+  styleUrls: ['./rutina-list.component.css']
 })
 export class RutinaListComponent implements OnInit {
-clientes: Cliente[] = [];
+  clientes: Cliente[] = [];
   nombreBusqueda: string = '';
-   constructor(private rutinaContext: RutinaContextService,
-     private router: Router
-    ) {}
 
+  constructor(
+    private rutinaContext: RutinaContextService,
+    private router: Router
+  ) {}
 
+  ngOnInit(): void {
+    this.cargarClientes();
+  }
 
-ngOnInit(): void {
-  this.cargarClientes();
-}
-asignarClienteYCrearRutina(cliente: Cliente) {
-  this.rutinaContext.setClienteSeleccionado(cliente);
-  this.router.navigate(['/rutina/nueva']);
-}
-cargarClientes(): void {
-    this.rutinaContext.obtenerTodos().subscribe((clientes) => {
-      this.clientes = clientes;
+  asignarClienteYCrearRutina(cliente: Cliente) {
+    this.rutinaContext.setClienteSeleccionado(cliente);
+    this.router.navigate(['/rutina/nueva']);
+  }
+
+  cargarClientes(): void {
+    this.rutinaContext.obtenerTodos().subscribe({
+      next: (clientes: Cliente[]) => {
+        this.clientes = clientes;
+      },
+      error: (err) => {
+        console.error('Error al cargar clientes:', err);
+      }
     });
   }
- buscarPorNombre(nombre: string): void {
-        this.rutinaContext.buscarClientes(nombre).subscribe({
+
+  buscarPorNombre(nombre: string): void {
+    if (!nombre.trim()) {
+      this.cargarClientes();
+      return;
+    }
+    this.rutinaContext.buscarClientes(nombre).subscribe({
       next: (data) => {
         this.clientes = data;
       },
@@ -41,4 +56,4 @@ cargarClientes(): void {
       }
     });
   }
-}//end
+}

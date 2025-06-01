@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RutinaInfoTabComponent } from '../tabs/rutina-info-tab/rutina-info-tab.component';
-import { RutinaContextService } from '../../../services/rutina.service';
+import { RutinaContextService } from '../../../services/rutinaC.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Cliente } from '../../../services/cliente.service';
 import { RutinaMedidasCorporalesTabComponent } from "../tabs/rutina-medidas-corporales-tab/rutina-medidas-corporales-tab.component";
 import { RutinaEjerciciosTabComponent } from "../tabs/rutina-ejercicios-tab/rutina-ejercicios-tab.component";
@@ -15,14 +16,18 @@ import { RutinaResumenTabComponent } from "../tabs/rutina-resumen-tab/rutina-res
   templateUrl: './rutina-new.component.html',
   styleUrl: './rutina-new.component.css'
 })
-export class RutinaNewComponent {
+export class RutinaNewComponent implements OnInit, OnDestroy{
 cliente: Cliente | null = null;
+private subscription!: Subscription;
+
    constructor(private rutinaContext: RutinaContextService ) {}
 
-    ngOnInit(): void {
-    this.cliente = this.rutinaContext.getClienteSeleccionadoValor();
-
-    if (!this.cliente) {
-      // Podés redirigir o mostrar error si llegó sin cliente seleccionado
-    }}
+   ngOnInit(): void {
+    this.subscription = this.rutinaContext.rutina$.subscribe(rutina => {
+      this.cliente = rutina.cliente ?? null;
+    });
+  }
+   ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

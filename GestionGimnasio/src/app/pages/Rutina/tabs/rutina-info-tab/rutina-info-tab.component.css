@@ -15,15 +15,37 @@ input {
 label {
   font-weight: bold;
 }
+
 mat-card {
-  max-width: 500px;
-  margin-top: 1rem;
+  width: 100%;
+  max-width: 900px;
+  margin: 1rem auto;
   background-color: #ece6f44d;
+  padding: 1rem;
 }
 
 .info-row {
   margin-bottom: 0.8rem;
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   color: #3d3b3b;
+}
+
+.formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .formulario mat-form-field {
+    flex: 1 1 calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .formulario mat-form-field {
+    flex: 1 1 100%;
+  }
 }

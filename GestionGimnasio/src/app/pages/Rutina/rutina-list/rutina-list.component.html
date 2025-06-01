@@ -1,8 +1,14 @@
 <div class="clientes-header">
-  
   <div class="buscar-container">
-    <input type="text" [(ngModel)]="nombreBusqueda" placeholder="Buscar por nombre" class="buscar-input">
-    <button (click)="buscarPorNombre(nombreBusqueda)" class="buscar-boton">Buscar</button>
+    <input
+      type="text"
+      [(ngModel)]="nombreBusqueda"
+      placeholder="Buscar cliente por nombre"
+      class="buscar-input"
+    />
+    <button (click)="buscarPorNombre(nombreBusqueda)" class="buscar-boton">
+      Buscar
+    </button>
   </div>
 </div>
 
@@ -21,14 +27,12 @@
       <td>{{ cliente.nombreCliente }} {{ cliente.apellidosCliente }}</td>
       <td>{{ cliente.telefono }}</td>
       <td class="acciones-container">
-        <div class="boton-agregar-container">
-    <!-- <a routerLink="/rutina/nueva" class="boton-agregar-rutina">
-      + Agregar Rutina 
-    </a> -->
-    <button (click)="asignarClienteYCrearRutina(cliente)" class="boton-agregar-rutina">
-  + Agregar Rutina
-</button>
-  </div>
+        <button
+          (click)="asignarClienteYCrearRutina(cliente)"
+          class="boton-agregar-rutina"
+        >
+          + Agregar Rutina
+        </button>
       </td>
     </tr>
   </tbody>

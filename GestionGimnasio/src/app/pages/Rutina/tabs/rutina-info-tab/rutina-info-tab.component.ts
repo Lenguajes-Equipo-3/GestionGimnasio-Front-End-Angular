@@ -1,18 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Output,EventEmitter} from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { RutinaContextService } from '../../../../services/rutina.service';
+import { RutinaContextService } from '../../../../services/rutinaC.service';
 import { Cliente } from '../../../../services/cliente.service';
-import { debounceTime, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-rutina-info-tab',
@@ -26,32 +27,51 @@ import { MatButtonModule } from '@angular/material/button';
 export class RutinaInfoTabComponent  implements OnInit{
   
   cliente: Cliente | null = null;
+  private subscription!: Subscription;
   objetivo = '';
  lesiones = '';
  enfermedades = '';
  fechaRenovacion!: Date;
  esVigente = true;
  fechaCreacion: Date = new Date(); // Automáticamente asignada al cargar el componente
+formDesactivado = false;
 
-   constructor(private rutinaContext: RutinaContextService ) {}
+  @Output() datosGuardados = new EventEmitter<void>();
+   constructor(private rutinaContext: RutinaContextService,
+       private dialog: MatDialog
+    ) {}
 
-   ngOnInit(): void {
-    this.cliente = this.rutinaContext.getClienteSeleccionadoValor();
+     ngOnInit(): void {
+    // Fecha de renovación = fecha de creación + 3 meses
+  this.fechaRenovacion = new Date(this.fechaCreacion);
+  this.fechaRenovacion.setMonth(this.fechaRenovacion.getMonth() + 3);
 
-    if (!this.cliente) {
-      // Podés redirigir o mostrar error si llegó sin cliente seleccionado
-    }}
-    
-
-  guardar() {
-  this.rutinaContext.actualizarRutina({
-    objetivo: this.objetivo,
-    lesiones: this.lesiones,
-    enfermedades: this.enfermedades,
-    fechaRenovacion: this.fechaRenovacion,
-    esVigente: this.esVigente
+  // Suscripción para obtener el cliente
+  this.subscription = this.rutinaContext.rutina$.subscribe(rutina => {
+    this.cliente = rutina.cliente ?? null;
   });
-    
   }
+      ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  
+
+ guardar() {
+  if (!this.objetivo || !this.fechaRenovacion) {
+    alert('Por favor, complete todos los campos requeridos.');
+    return;
+  }
+
+  this.rutinaContext.setDatosGenerales(
+    this.objetivo,
+    this.lesiones,
+    this.enfermedades,
+    this.fechaRenovacion,
+    this.esVigente
+  );
+
+  alert('Pase al siguiente paso.');
+}
 }
 

@@ -1,1 +1,39 @@
-<p>rutina-medidas-corporales-tab works!</p>
+<mat-card class="medidas-card">
+  <h3 class="titulo-obligatorias">Medidas obligatorias</h3>
+  <div class="medidas-row">
+    <div *ngFor="let item of medidasObligatorias" class="info-item">
+      <label class="label-medida">{{ item.medidaCorporal.nombreMedida }} ({{ item.medidaCorporal.unidadMedida }}):</label>
+      <input
+        type="number"
+        [(ngModel)]="item.valor"
+        min="0"
+        class="input-pequeno-sin-mat"
+      />
+    </div>
+  </div>
+</mat-card>
+
+<mat-card class="medidas-card">
+  <h3 class="titulo-opcionales">Medidas opcionales</h3>
+  <div class="medidas-row">
+    <div *ngFor="let item of medidasOpcionales" class="info-item">
+      <label class="label-medida">{{ item.medidaCorporal.nombreMedida }} ({{ item.medidaCorporal.unidadMedida }}):</label>
+      <input
+        type="number"
+        [(ngModel)]="item.valor"
+        min="0"
+        class="input-pequeno-sin-mat"
+      />
+    </div>
+  </div>
+</mat-card>
+<div style="text-align: center; margin-top: 1rem;">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="guardarMedidas()"
+    [disabled]="!todasObligatoriasLlenas()"
+  >
+    Guardar medidas
+  </button>
+</div>
