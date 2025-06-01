@@ -20,6 +20,7 @@ export class AuthService {
         localStorage.setItem('nombre', response.nombreEmpleado);
         localStorage.setItem('apellidos', response.apellidosEmpleado);
         localStorage.setItem('lastAction', Date.now().toString());
+        localStorage.setItem('idEmpleado', response.idEmpleado);
 
       })
     );

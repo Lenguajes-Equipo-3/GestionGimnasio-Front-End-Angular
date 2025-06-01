@@ -4,4 +4,5 @@ export interface UsuarioLoginResponse {
   apellidosEmpleado: string;
   roles: string[]; // Cambiado de `rol: string` a `roles: string[]`
   token: string;
+  idEmpleado: string;
 }
