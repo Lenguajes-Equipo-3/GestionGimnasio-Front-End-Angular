@@ -125,7 +125,8 @@ previews: string[] = [];
       this.ejercicioService.createEjercicioFormData(formData).subscribe({
         next: () => {
           alert('Ejercicio creado con éxito');
-          this.ejercicioActualizado.emit(); // o cerrar modal, etc.
+          this.ejercicioRegistrado.emit(); // Emitir evento para notificar al componente padre
+       // o cerrar modal, etc.
         },
         error: (err) => {
           console.error('Error al crear el ejercicio:', err);
@@ -135,20 +136,5 @@ previews: string[] = [];
     }
   }
   
-  onSubmit(): void {
-    if (this.ejercicioForm.valid) {
-      this.ejercicioService.createEjercicio(this.ejercicioForm.value).subscribe({
-        next: () => {
-          alert('Ejercicio registrado con éxito');
-          this.ejercicioForm.reset();
-          this.imagenes.clear();
-          this.ejercicioRegistrado.emit(); 
-        },
-        error: (err) => {
-          console.error(err);
-          alert('Error al registrar el ejercicio');
-        },
-      });
-    }
-  }
+  
 }

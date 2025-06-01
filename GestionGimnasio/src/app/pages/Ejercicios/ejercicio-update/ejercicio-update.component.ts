@@ -19,6 +19,7 @@ import { Categoria } from '../../../Domain/CategoriaEjercicio.interface';
 import { CategoriaEjercicioService } from '../../../services/categoriaEjercicio.service';
 import { EjercicioService } from '../../../services/ejercicio.service';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-ejercicio-update',
@@ -35,6 +36,8 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
   archivosSeleccionados: File[] = [];
   nombreArchivos: string[] = [];
   previews: string[] = [];
+  urlImagenes: string = environment.apiURL + 'media/'; // URL base para las imágenes
+
   constructor(
     private fb: FormBuilder,
     private categoriaEjercicioService: CategoriaEjercicioService,
@@ -50,6 +53,8 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
       codigoEquipo: ['', [Validators.maxLength(20)]],
       imagenes: this.fb.array([]),
     });
+
+    // Inicializar previews con cadenas vacías
   }
 
   ngOnInit(): void {
@@ -76,21 +81,30 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
 
   cargarEjercicio(): void {
     if (this.ejercicio) {
-      this.ejercicioForm.patchValue(this.ejercicio); // Carga todos los valores, incluido el ID
-      this.imagenes.clear(); // Limpiar imágenes antes de cargarlas
+      this.ejercicioForm.patchValue({
+        categoriaEjercicio: this.ejercicio.categoriaEjercicio,
+        nombreEjercicio: this.ejercicio.nombreEjercicio,
+        descripcionEjercicio: this.ejercicio.descripcionEjercicio,
+        codigoEquipo: this.ejercicio.codigoEquipo,
+      });
+  
+      this.imagenes.clear();
+  
       this.ejercicio.imagenes.forEach((imagen) => {
         this.imagenes.push(
           this.fb.group({
-            urlImagen: [imagen.urlImagen, Validators.required],
-            descripcionImagen: [
-              imagen.descripcionImagen,
-              Validators.maxLength(255),
-            ],
+            urlImagen: [imagen.urlImagen],
+            descripcionImagen: [imagen.descripcionImagen || '', Validators.maxLength(255)],
           })
         );
       });
+  
+      this.previews = this.ejercicio.imagenes.map(
+        (imagen) => this.urlImagenes + imagen.urlImagen
+      );
     }
   }
+  
 
   get imagenes(): FormArray {
     return this.ejercicioForm.get('imagenes') as FormArray;
@@ -112,7 +126,7 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
     this.archivosSeleccionados.splice(index, 1);
     this.nombreArchivos.splice(index, 1);
     this.previews.splice(index, 1);
-  }
+   }
   onFileSelected(event: Event, index: number): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -131,21 +145,26 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
   onSubmit(): void {
     const hayAlMenosUnaImagen = this.archivosSeleccionados.some((file) => !!file);
   
-    if (!hayAlMenosUnaImagen) {
+    if (!hayAlMenosUnaImagen && this.imagenes.length === 0) {
       alert('Debe seleccionar al menos una imagen para actualizar el ejercicio.');
-      return;
+      return; 
     }
   
     if (this.ejercicioForm.valid) {
       const formData = new FormData();
   
-      // Construir el objeto ejercicio sin las urlImagen
-      const ejercicioActualizado = {
-        id: this.ejercicio.id, // Asegura que se incluya el ID
-        ...this.ejercicioForm.value,
-        imagenes: this.ejercicioForm.value.imagenes.map((img: any) => ({
-          descripcionImagen: img.descripcionImagen || '',
-        })),
+      const formValue = this.ejercicioForm.value;
+
+      const ejercicioActualizado: Ejercicio = {
+        id: this.ejercicio.id,
+        categoriaEjercicio: formValue.categoriaEjercicio,
+        nombreEjercicio: formValue.nombreEjercicio,
+        descripcionEjercicio: formValue.descripcionEjercicio,
+        codigoEquipo: formValue.codigoEquipo,
+        imagenes: formValue.imagenes.map((img: any) => ({
+          urlImagen: img.urlImagen, // el backend la completa
+          descripcionImagen: img.descripcionImagen || ''
+        }))
       };
   
       formData.append(
@@ -154,16 +173,17 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
           type: 'application/json',
         })
       );
-  
+      
       // Agregar imágenes nuevas
       this.archivosSeleccionados.forEach((archivo) => {
         if (archivo) {
           formData.append('imagenes', archivo);
         }
       });
-  
+      console.log('Ejercicio actualizado (formulario):', this.ejercicioForm.value);
+      console.log('Ejercicio armado para enviar:', ejercicioActualizado);
       // Consumir servicio
-      this.ejercicioService.updateEjercicioConImagenes(this.ejercicio, this.archivosSeleccionados).subscribe({
+      this.ejercicioService.updateEjercicioConImagenes(ejercicioActualizado, this.archivosSeleccionados).subscribe({
         next: () => {
           alert('Ejercicio actualizado con éxito');
           this.ejercicioActualizado.emit();
