@@ -1,8 +1,20 @@
 <!-- Título principal -->
 <h2 style="margin-bottom: 1rem;">Rutina de Ejercicios</h2>
 
+  <div style="margin-top: 1rem;">
+  <button mat-raised-button color="primary" 
+          (click)="guardarRutina()" 
+          [disabled]="itemRutinaEjercicio.length === 0">
+    Guardar rutina
+  </button>
+</div>
+<mat-hint *ngIf="itemRutinaEjercicio.length === 0" style="color: #c62828;">
+  Debes agregar al menos un ejercicio para guardar la rutina.
+</mat-hint>
+
 <!-- Tabla de ejercicios añadidos al cliente -->
 <mat-card style="margin-top: 3rem;">
+  
   <mat-card-title> Lista de ejercicios en rutina</mat-card-title>
   <mat-divider></mat-divider>
 

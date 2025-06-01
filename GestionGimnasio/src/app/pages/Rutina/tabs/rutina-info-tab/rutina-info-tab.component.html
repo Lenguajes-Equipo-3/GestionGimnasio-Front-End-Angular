@@ -98,4 +98,7 @@
         [disabled]="!objetivo || !fechaRenovacion">
   Guardar datos generales
 </button>
+<mat-hint *ngIf="!objetivo || !fechaRenovacion" style="color: #c62828;">
+  Debes agregar al menos el objetivo para guardar.
+</mat-hint>
 </mat-card>

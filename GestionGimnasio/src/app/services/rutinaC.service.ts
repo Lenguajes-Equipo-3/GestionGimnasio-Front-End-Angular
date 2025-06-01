@@ -83,7 +83,7 @@ export class RutinaContextService {
   setMedidas(medidas: ItemRutinaMedida[]) {
     const rutina = this.rutinaSubject.getValue();
     rutina.medidas = medidas;
-    console.log('📝 Datos medida  actualizados:', rutina);
+    console.log('📝 Datos medidas  actualizados:', rutina);
 
     this.rutinaSubject.next(rutina);
   }
@@ -92,6 +92,8 @@ export class RutinaContextService {
     const rutina = this.rutinaSubject.getValue();
     rutina.ejercicios = ejercicios;
     this.rutinaSubject.next(rutina);
+  console.log('📝 Datos Ejercicios  actualizados:', rutina);
+
   }
 
   actualizarRutina(rutina: Rutina) {

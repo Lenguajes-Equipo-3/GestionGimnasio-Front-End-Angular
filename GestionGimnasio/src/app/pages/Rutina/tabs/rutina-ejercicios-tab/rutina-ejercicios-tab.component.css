@@ -1,69 +1,123 @@
 :host {
   display: block;
   padding: 1rem;
-  background-color: #f9f1fb;
-  font-family: 'Segoe UI', sans-serif;
+  background-color: #f7f0fa; /* lila muy suave */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #4b2e83; /* morado oscuro */
+}
+
+h2 {
+  color: #6b3fa0;
+  font-weight: 700;
 }
 
 mat-card {
-  margin-bottom: 1rem;
-  background: #f5e9f7;
+  background: #f2e6fa; /* lila claro */
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(100, 0, 111, 0.1);
+  box-shadow: 0 4px 12px rgba(107, 63, 160, 0.15);
+  margin-bottom: 1.5rem;
 }
 
 mat-card-title {
-  font-size: 1.2rem;
-  color: #5e2c82;
-  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #582c83;
+  margin-bottom: 0.4rem;
 }
 
+mat-divider {
+  border-color: #bba1d6;
+  margin-bottom: 0.8rem;
+}
+
+/* Tabla de ejercicios */
+table {
+  width: 100%;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th.mat-header-cell {
+  background-color: #b295d9;
+  color: white;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+td.mat-cell {
+  color: #4b2e83;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+tr.mat-header-row {
+  height: 48px;
+}
+
+tr.mat-row:nth-child(even) {
+  background-color: #f3eaff;
+}
+
+/* Botones generales */
 button[mat-stroked-button],
 button[mat-raised-button],
 button[mat-button] {
   color: white;
-  background: linear-gradient(to right, #a4508b, #5f0a87);
+  background: linear-gradient(to right, #7e57c2, #512da8);
   border-radius: 8px;
-  padding: 4px 12px;
-  font-weight: 500;
+  padding: 6px 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transition: background 0.3s ease;
 }
 
 button[mat-button]:hover,
 button[mat-stroked-button]:hover,
 button[mat-raised-button]:hover {
-  background: linear-gradient(to right, #c471ed, #f64f59);
+  background: linear-gradient(to right, #9c75d6, #673ab7);
 }
 
+/* Formulario de agregar ejercicio */
 mat-form-field {
   width: 100%;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 input.mat-input-element {
-  color: #4a005f;
+  color: #4b2e83;
 }
 
-table {
-  width: 100%;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
+/* Grid ejercicios disponibles */
+.ejercicios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.8rem 1.2rem;
+  padding: 1rem 0;
 }
 
-th.mat-header-cell {
-  background-color: #e1b9ec;
-  color: #4a005f;
-  font-weight: bold;
+.ejercicio-item {
+  background-color: #d9c8f7; /* lila medio */
+  color: #3f2373; /* morado fuerte */
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(81, 45, 168, 0.2);
+  transition: box-shadow 0.3s ease;
 }
 
-td.mat-cell {
-  color: #5f0a87;
+.ejercicio-item:hover {
+  box-shadow: 0 4px 12px rgba(81, 45, 168, 0.35);
 }
 
-tr.mat-header-row {
-  height: 50px;
-}
-
-tr.mat-row:nth-child(even) {
-  background-color: #fbe9ff;
+/* Ajuste botón en item para que quede más pegado al texto */
+.ejercicio-item button {
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  min-width: 70px;
 }

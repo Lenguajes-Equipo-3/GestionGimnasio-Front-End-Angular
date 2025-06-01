@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
+import { RutinaContextService } from '../../../../services/rutinaC.service';
 
 @Component({
   selector: 'app-rutina-ejercicios-tab',
@@ -40,7 +41,9 @@ export class RutinaEjerciciosTabComponent implements OnInit {
   codigoEquipo: string = '';
   itemRutinaEjercicio: ItemRutinaEjercicio[] = [];// ejercicios del cliente
 
-constructor(private ejerciciosService: EjercicioService) {}
+constructor(private ejerciciosService: EjercicioService,
+  private rutinaContextService: RutinaContextService
+) {}
   
 ngOnInit(): void {
  this.ejerciciosService.getAllEjercicios().subscribe(ejercicios => {
@@ -77,6 +80,8 @@ ngOnInit(): void {
 
    eliminarEjercicio(index: number) {
     this.itemRutinaEjercicio.splice(index, 1);
+    this.itemRutinaEjercicio = [...this.itemRutinaEjercicio];
+
   }
 
     editarEjercicio(index: number) {
@@ -87,5 +92,10 @@ ngOnInit(): void {
     this.codigoEquipo = e.codigoEquipo;
     this.formVisible = true;
     this.itemRutinaEjercicio.splice(index, 1); // para que al guardar lo reemplace
+  }
+
+  guardarRutina(){
+     this.rutinaContextService.setEjercicios(this.itemRutinaEjercicio);
+  this.formVisible = false;
   }
 }//end 
