@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 // Definir el modelo Cliente directamente en el servicio
 export interface Cliente {
@@ -20,7 +21,7 @@ export interface Cliente {
   providedIn: 'root',
 })
 export class ClienteService {
-  private baseUrl = 'http://localhost:8080/proyecto/api/clientes';  // URL api
+  private baseUrl = `${environment.apiURL}`+'api/clientes';  // URL api
 
   constructor(private http: HttpClient) {}
 

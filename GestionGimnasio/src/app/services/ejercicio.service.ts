@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Ejercicio } from '../Domain/Ejercicio.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EjercicioService {
-  private apiUrl = 'http://localhost:8080/proyecto/api/ejercicios'; // Cambiar por la URL del backend
+  private apiUrl = `${environment.apiURL}`+'api/ejercicios'; // Cambiar por la URL del backend
 
   constructor(private http: HttpClient) {}
 
