@@ -1,27 +1,42 @@
+<!-- Contenedor horizontal para los dos bloques de cliente -->
+<div class="cliente-contenedor">
+  <!-- Información del cliente (editable o no editable según tu lógica) -->
+  <mat-card *ngIf="cliente" class="mat-elevation-z2 cliente-card">
+    <mat-card-title>Información del Cliente</mat-card-title>
+    <mat-card-content>
+      <div class="info-row">
+        <strong>Nombre:</strong>
+        <span>{{ cliente.nombreCliente }} {{ cliente.apellidosCliente }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Cédula:</strong>
+        <span>{{ cliente.numeroIdentificacion }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Teléfono:</strong>
+        <span>{{ cliente.telefono }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-<!-- Información del cliente (no editable) -->
-<mat-card *ngIf="cliente" class="mat-elevation-z2 mb-4">
-  <mat-card-title>Información del Cliente</mat-card-title>
-  <mat-card-content>
-    <div class="info-row">
-      <strong>Nombre:</strong>
-      <span>{{ cliente.nombreCliente }} {{ cliente.apellidosCliente }}</span>
-    </div>
-    <div class="info-row">
-      <strong>Cédula:</strong>
-      <span>{{ cliente.numeroIdentificacion }}</span>
-    </div>
-    <div class="info-row">
-      <strong>Teléfono:</strong>
-      <span>{{ cliente.telefono }}</span>
-    </div>
-  </mat-card-content>
-</mat-card>
-<mat-card *ngIf="!cliente" class="mat-elevation-z2">
-  <mat-card-content>
-    <span style="color: red;">No se ha seleccionado un cliente.</span>
-  </mat-card-content>
-</mat-card>
+  <mat-card *ngIf="!cliente" class="mat-elevation-z2 cliente-card">
+    <mat-card-content>
+      <span style="color: red;">No se ha seleccionado un cliente.</span>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Segundo bloque repetido (si lo necesitas realmente) -->
+  <mat-card *ngIf="cliente" class="mat-elevation-z2 cliente-card">
+    <mat-card-title>Información Entrenador</mat-card-title>
+    <mat-card-content>
+      <div class="info-row">
+        <strong>Nombre Entrenador:</strong>
+<span>{{ empleado?.nombreEmpleado }} {{ empleado?.apellidosEmpleado }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
 <!-- Formulario de rutina -->
 <mat-card *ngIf="cliente" class="mat-elevation-z2">
   <mat-card-title>Datos de la Rutina</mat-card-title>
@@ -83,3 +98,4 @@
         [disabled]="!objetivo || !fechaRenovacion">
   Guardar datos generales
 </button>
+</mat-card>

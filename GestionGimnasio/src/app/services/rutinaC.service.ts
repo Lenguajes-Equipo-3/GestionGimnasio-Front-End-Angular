@@ -7,6 +7,7 @@ import { ItemRutinaMedida } from '../Domain/ItemRutinaMedida';
 import { ItemRutinaEjercicio } from '../Domain/ItemRutinaEjercicio';
 import { HttpClient } from '@angular/common/http';
 import { Medida } from './medidas-corporales.service';
+import { EmpleadoService } from './empleado.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,12 @@ import { Medida } from './medidas-corporales.service';
 export class RutinaContextService {
   private rutinaSubject = new BehaviorSubject<Rutina>(this.crearRutinaVacia());
   rutina$ = this.rutinaSubject.asObservable();
+
    private clienteUrl = 'http://localhost:8080/proyecto/api/clientes'; 
   private MedidasUrl = 'http://localhost:8080/proyecto/api/medidascorporales';
 
 
-     constructor(private http: HttpClient) {}
+     constructor(private http: HttpClient, private empleadoService: EmpleadoService) {}
      
   private crearRutinaVacia(): Rutina {
     return {
@@ -33,6 +35,8 @@ export class RutinaContextService {
       medidas: [],
       ejercicios: []
     };
+
+    
   }
 
   // === SETTERS ===
@@ -43,11 +47,25 @@ export class RutinaContextService {
   }
 
 
-  setEmpleado(empleado: Empleado) {
-    const rutina = this.rutinaSubject.getValue();
-    rutina.empleado = empleado;
-    this.rutinaSubject.next(rutina);
+  setEmpleado(): void {
+  const rutina = this.rutinaSubject.getValue();
+  const idEmpleado = localStorage.getItem('idEmpleado');
+
+  if (!idEmpleado) {
+    console.error('No se encontró el idEmpleado en localStorage');
+    return;
   }
+   const id = parseInt(idEmpleado, 10);
+  this.empleadoService.getEmpleadoById(id).subscribe({
+    next: (empleado: Empleado) => {
+      rutina.empleado = empleado;
+      this.rutinaSubject.next(rutina);
+    },
+    error: err => {
+      console.error('Error al obtener el empleado:', err);
+    }
+  });
+}
 
   setDatosGenerales(objetivo: string, lesiones: string, enfermedades: string, fechaRenovacion: Date, esVigente: boolean) {
     const rutina = this.rutinaSubject.getValue();

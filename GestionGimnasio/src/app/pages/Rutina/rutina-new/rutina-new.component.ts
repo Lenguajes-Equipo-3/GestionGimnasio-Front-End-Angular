@@ -23,6 +23,7 @@ private subscription!: Subscription;
    constructor(private rutinaContext: RutinaContextService ) {}
 
    ngOnInit(): void {
+    this.rutinaContext.setEmpleado();
     this.subscription = this.rutinaContext.rutina$.subscribe(rutina => {
       this.cliente = rutina.cliente ?? null;
     });

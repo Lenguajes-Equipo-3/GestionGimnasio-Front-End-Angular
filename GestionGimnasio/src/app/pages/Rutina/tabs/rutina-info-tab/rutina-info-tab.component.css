@@ -49,3 +49,15 @@ mat-card {
     flex: 1 1 100%;
   }
 }
+.cliente-contenedor {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap; /* Para que se acomode en móvil */
+  margin-bottom: 1rem;
+}
+
+.cliente-card {
+  flex: 1 1 45%;
+  max-width: 430px;
+}

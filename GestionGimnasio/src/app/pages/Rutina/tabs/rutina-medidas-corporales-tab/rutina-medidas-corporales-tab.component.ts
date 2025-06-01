@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ItemRutinaMedida } from '../../../../Domain/ItemRutinaMedida';
 import { Medida, MedidasService } from '../../../../services/medidas-corporales.service';
 import { RutinaContextService } from '../../../../services/rutinaC.service';
+import { Subscription } from 'rxjs';
+import { Cliente } from '../../../../services/cliente.service';
 
 @Component({
   selector: 'app-rutina-medidas-corporales-tab',
@@ -22,8 +24,11 @@ import { RutinaContextService } from '../../../../services/rutinaC.service';
 })
 
 export class RutinaMedidasCorporalesTabComponent implements OnInit {
-   medidasObligatorias: ItemRutinaMedida[] = [];
+  cliente: Cliente | null = null; 
+  medidasObligatorias: ItemRutinaMedida[] = [];
   medidasOpcionales: ItemRutinaMedida[] = [];
+  private subscription!: Subscription;
+  
 
       constructor(private rutinaContextService: RutinaContextService) {}
 
@@ -40,7 +45,17 @@ export class RutinaMedidasCorporalesTabComponent implements OnInit {
         .filter(m => !m.esObligatoria)
         .map(m => ({ medidaCorporal: m, valor: 0 }));
     });
+
+    // Suscripción para obtener el cliente
+  this.subscription = this.rutinaContextService.rutina$.subscribe(rutina => {
+    this.cliente = rutina.cliente ?? null;
+  });
   }
+      ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+
  todasObligatoriasLlenas(): boolean {
     return this.medidasObligatorias.every(item => item.valor !== null && item.valor !== undefined && item.valor > 0);
   }

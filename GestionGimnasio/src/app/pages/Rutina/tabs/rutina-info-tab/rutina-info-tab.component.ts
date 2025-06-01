@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { Empleado } from '../../../../Domain/Empleado.interface';
 
 
 @Component({
@@ -27,6 +28,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class RutinaInfoTabComponent  implements OnInit{
   
   cliente: Cliente | null = null;
+  empleado: Empleado | null = null;
   private subscription!: Subscription;
   objetivo = '';
  lesiones = '';
@@ -49,6 +51,8 @@ formDesactivado = false;
   // Suscripción para obtener el cliente
   this.subscription = this.rutinaContext.rutina$.subscribe(rutina => {
     this.cliente = rutina.cliente ?? null;
+    this.empleado = rutina.empleado ?? null;
+    console.log('Empleado recibido:', this.empleado);
   });
   }
       ngOnDestroy(): void {
@@ -70,6 +74,7 @@ formDesactivado = false;
     this.fechaRenovacion,
     this.esVigente
   );
+  
 
   alert('Pase al siguiente paso.');
 }
