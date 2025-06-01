@@ -7,6 +7,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { ClienteEditarComponent } from './pages/Clientes/cliente-editar/cliente-editar.component';
 import { ClienteListaComponent } from './pages/Clientes/cliente-lista/cliente-lista.component';
 import { MedidasCorporalesComponent} from './pages/medidaCorporal/medida-corporal-list/medida-corporal-list.component';
+import { RutinaListComponent } from './pages/Rutina/rutina-list/rutina-list.component';
+import { RutinaNewComponent } from './pages/Rutina/rutina-new/rutina-new.component';
 
 export const routes: Routes = [
   {
@@ -82,7 +84,20 @@ export const routes: Routes = [
           .then(m => m.EmpleadoListComponent),
         canActivate: [RoleGuard],
         data: { roles: ['ADMIN', 'ENTRENADOR'] }
-      }
+      },
+      {
+
+        path: 'rutina',
+        component: RutinaListComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
+      },
+      {
+        path: 'rutina/nueva',  
+        component: RutinaNewComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMIN', 'ENTRENADOR'] }
+      },
       
     ]
   },

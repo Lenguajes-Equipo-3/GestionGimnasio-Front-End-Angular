@@ -1,0 +1,29 @@
+mat-form-field {
+  width: 100%;
+}
+
+input {
+  border-radius: 8px;
+}
+
+.purple-background {
+  background-color: #f3e8ff;
+  border: 1px solid #d8b4fe;
+  color: #4c1d95;
+}
+
+label {
+  font-weight: bold;
+}
+mat-card {
+  max-width: 500px;
+  margin-top: 1rem;
+  background-color: #ece6f44d;
+}
+
+.info-row {
+  margin-bottom: 0.8rem;
+  display: flex;
+  gap: 0.5rem;
+  color: #3d3b3b;
+}

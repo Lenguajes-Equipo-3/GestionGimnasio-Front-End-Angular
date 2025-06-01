@@ -1,0 +1,30 @@
+.rutina-container {
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8e1f4, #e0c3fc);
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(128, 0, 128, 0.2);
+}
+
+.titulo {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #6a1b9a; /* morado fuerte */
+  margin-bottom: 1.5rem;
+}
+
+
+::ng-deep .custom-tabs .mat-tab-label {
+  color: #8e24aa; /* morado claro */
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+::ng-deep .custom-tabs .mat-tab-label.mat-tab-label-active {
+  color: #d81b60; /* rosa fuerte */
+  border-bottom: 3px solid #d81b60;
+}
+
+::ng-deep .custom-tabs .mat-ink-bar {
+  background-color: #ba68c8; /* lila */
+}
