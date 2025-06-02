@@ -1,6 +1,6 @@
-import { Medida } from "../services/medidas-corporales.service";
+// import { Medida } from "../services/medidas-corporales.service";
 
-export interface ItemRutinaMedida {
-  medidaCorporal: Medida;
-  valor: number| null;
-}
+// export interface ItemRutinaMedida {
+//   medidaCorporal: Medida;
+//   valor: number| null;
+// }

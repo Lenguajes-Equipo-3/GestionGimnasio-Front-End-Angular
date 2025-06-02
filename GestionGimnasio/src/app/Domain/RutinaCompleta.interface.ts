@@ -5,8 +5,8 @@ import { Empleado } from "./Empleado.interface";
 
 
 
-export interface ItemRutinaEjercicioInterface {
-  rutina: RutinaCompleta;
+export interface ItemRutinaEjercicio {
+  rutina?: Rutina;
   ejercicio: Ejercicio;
   series: number;
   repeticiones: number;
@@ -14,13 +14,13 @@ export interface ItemRutinaEjercicioInterface {
 }
 
 
-export interface ItemRutinaMedidaInterface {
+export interface ItemRutinaMedida{
   medidaCorporal: Medida;
-   rutina: RutinaCompleta;
+   rutina?: Rutina;
   valor: number| null;
 }
-export interface RutinaCompleta {
-  
+export interface Rutina {
+   idRutina:number;
     empleado?: Empleado;
     cliente?: Cliente;
     fechaCreacion: Date;
@@ -29,7 +29,7 @@ export interface RutinaCompleta {
     lesiones: string;
     enfermedades: string;
     esVigente: boolean;
-    ejercicios: ItemRutinaEjercicioInterface[];
-    medidas: ItemRutinaMedidaInterface[];
+    ejercicios: ItemRutinaEjercicio[];
+    medidas: ItemRutinaMedida[];
     
 }

@@ -22,8 +22,10 @@ import { Empleado } from '../../../../Domain/Empleado.interface';
   MatNativeDateModule,
   MatSelectModule,
   MatButtonModule, MatCardModule, ReactiveFormsModule, MatAutocompleteModule,FormsModule, MatFormFieldModule, MatInputModule],
-  templateUrl: './rutina-info-tab.component.html',
+   standalone: true,
+   templateUrl: './rutina-info-tab.component.html',
   styleUrl: './rutina-info-tab.component.css'
+  
 })
 export class RutinaInfoTabComponent  implements OnInit{
   
@@ -65,6 +67,7 @@ formDesactivado = false;
   if (!this.objetivo || !this.fechaRenovacion) {
     alert('Por favor, complete todos los campos requeridos.');
     return;
+    
   }
 
   this.rutinaContext.setDatosGenerales(

@@ -94,12 +94,18 @@ ngOnInit(): void {
     this.itemRutinaEjercicio.splice(index, 1); // para que al guardar lo reemplace
   }
 
-  guardarRutina(){
-    console.log('📝 Datos  rutina actual', this.rutinaContextService.getRutinaActual.toString)
-     this.rutinaContextService.setEjercicios(this.itemRutinaEjercicio);
-          console.log('📝 Datos  crerar', this.rutinaContextService.getRutinaActual)
+  guardarRutina() {
+  this.rutinaContextService.setEjercicios(this.itemRutinaEjercicio);
+  const rutina = this.rutinaContextService.getRutinaActual();
+  this.rutinaContextService.insertar(rutina).subscribe({
+    next: (res) => {
+        alert(  "Rutina creada con éxito");
+    },
+    error: (err) => {
+      alert(' Error al crear rutina:');
+    }
+  });
+}
 
-  this.formVisible = false;
- 
-  }
+  
 }//end 

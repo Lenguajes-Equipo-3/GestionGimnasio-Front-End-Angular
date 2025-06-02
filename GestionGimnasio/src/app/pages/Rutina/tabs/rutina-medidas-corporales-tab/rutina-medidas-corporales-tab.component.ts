@@ -5,11 +5,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ItemRutinaMedida } from '../../../../Domain/ItemRutinaMedida';
 import { Medida, MedidasService } from '../../../../services/medidas-corporales.service';
 import { RutinaContextService } from '../../../../services/rutinaC.service';
 import { Subscription } from 'rxjs';
 import { Cliente } from '../../../../services/cliente.service';
+import { ItemRutinaMedida } from '../../../../Domain/RutinaCompleta.interface';
 
 @Component({
   selector: 'app-rutina-medidas-corporales-tab',
@@ -71,8 +71,6 @@ guardarMedidas(): void {
     ...this.medidasOpcionales,
   ];
 
-  // 
-  console.log('Medidas a guardar:', todasMedidas);
 
   this.rutinaContextService.setMedidas(todasMedidas);
   alert('Medidas guardadas. Puede pasar al siguiente paso.');
