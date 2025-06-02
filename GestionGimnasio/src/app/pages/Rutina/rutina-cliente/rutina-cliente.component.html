@@ -1,36 +1,50 @@
-<button (click)="volver()" style="margin-bottom: 1rem;">&larr; Volver</button>
+<button (click)="volver()" mat-stroked-button color="primary" style="margin-bottom: 1rem;">
+  <mat-icon>arrow_back</mat-icon> Volver
+</button>
 
 <div *ngIf="loading">Cargando...</div>
 
 <div *ngIf="!loading && rutinas && rutinas.length > 0" class="rutinas-lista">
   <div *ngFor="let rutina of rutinas" class="rutina-card">
     <div class="card-header">
-      <div>
+      <div *ngIf="rutina.empleado?.nombreEmpleado || rutina.empleado?.apellidosEmpleado">
         <strong>Entrenador:</strong> {{ rutina.empleado?.nombreEmpleado }} {{ rutina.empleado?.apellidosEmpleado }}
       </div>
-      <div>
+      <div *ngIf="rutina.fechaCreacion">
         <strong>Fecha:</strong> {{ rutina.fechaCreacion | date:'yyyy-MM-dd' }}
       </div>
     </div>
     <div class="card-body">
-      <div>
+      <div *ngIf="rutina.objetivo">
         <strong>Objetivo:</strong> {{ rutina.objetivo }}
       </div>
-      <div>
+      <div *ngIf="rutina.esVigente !== null">
         <strong>Vigente:</strong>
         <span [ngStyle]="{'color': rutina.esVigente ? 'green' : 'red'}">{{ rutina.esVigente ? 'Sí' : 'No' }}</span>
       </div>
-      <div>
+      <div *ngIf="rutina.ejercicios?.length > 0">
         <strong>Ejercicios:</strong>
-        <span *ngIf="rutina.ejercicios?.length > 0">
-          {{ getNombresEjercicios(rutina) }}
-        </span>
-        <span *ngIf="!rutina.ejercicios?.length">Sin ejercicios</span>
+        {{ getNombresEjercicios(rutina) }}
+      </div>
+      <div *ngIf="!rutina.ejercicios?.length">
+        <strong>Ejercicios:</strong> Sin ejercicios
+      </div>
+      <div *ngIf="rutina.medidas?.length > 0">
+        <strong>Medidas:</strong>
+        <ul>
+          <li *ngFor="let medida of rutina.medidas">
+            {{ medida.medidaCorporal.nombreMedida }} ({{ medida.medidaCorporal.unidadMedida }}): {{ medida.valor }}
+          </li>
+        </ul>
       </div>
     </div>
     <div class="card-actions">
-      <button (click)="editarRutina(rutina.idRutina)" class="btn-editar">Editar</button>
-      <button (click)="eliminarRutina(rutina.idRutina)" class="btn-eliminar">Eliminar</button>
+      <button mat-icon-button color="primary" (click)="editarRutina(rutina.idRutina)" title="Editar rutina">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="eliminarRutina(rutina.idRutina)" title="Eliminar rutina">
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
   </div>
 </div>

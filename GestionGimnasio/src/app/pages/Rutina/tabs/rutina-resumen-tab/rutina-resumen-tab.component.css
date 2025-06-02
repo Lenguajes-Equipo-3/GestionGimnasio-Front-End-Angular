@@ -1,0 +1,85 @@
+/* Contenedor principal */
+:host {
+  display: block;
+  padding: 1.5rem;
+  background-color: #f7f0fa; /* Fondo lila claro */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #4b2e83; /* Texto morado oscuro */
+}
+
+/* Título principal */
+h2 {
+  color: #6b3fa0; /* Morado fuerte */
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Tarjetas */
+mat-card {
+  background: #f2e6fa; /* Fondo lila claro */
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(107, 63, 160, 0.15);
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+mat-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #582c83; /* Morado oscuro */
+  margin-bottom: 0.8rem;
+}
+
+mat-card-content {
+  font-size: 1rem;
+  color: #4b2e83; /* Texto morado oscuro */
+  line-height: 1.6;
+}
+
+/* Divisiones */
+mat-divider {
+  border-color: #bba1d6; /* Lila claro */
+  margin: 1rem 0;
+}
+
+/* Texto destacado */
+strong {
+  color: #6b3fa0; /* Morado fuerte */
+  font-weight: 600;
+}
+
+/* Estilo para los valores */
+span {
+  color: #4b2e83; /* Texto morado oscuro */
+}
+
+/* Botones */
+button[mat-raised-button] {
+  background-color: #7e57c2; /* Morado medio */
+  color: white;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #673ab7; /* Morado más oscuro */
+  transform: scale(1.05);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  mat-card {
+    padding: 1rem;
+  }
+
+  mat-card-title {
+    font-size: 1.2rem;
+  }
+
+  mat-card-content {
+    font-size: 0.95rem;
+  }
+}

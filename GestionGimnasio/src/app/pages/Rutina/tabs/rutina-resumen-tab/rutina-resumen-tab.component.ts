@@ -31,10 +31,12 @@ export class RutinaResumenTabComponent implements OnInit {
   constructor(private rutinaContextService: RutinaContextService) {}
 
   ngOnInit(): void {
-    this.rutina = this.rutinaContextService.getRutinaActual();
-    this.cliente = this.rutina.cliente ?? null;
-    this.empleado = this.rutina.empleado ?? null;
-  }
+  this.rutinaContextService.rutina$.subscribe((rutina) => {
+    this.rutina = rutina;
+    this.cliente = rutina.cliente ?? null;
+    this.empleado = rutina.empleado ?? null;
+  });
+}
 
   getNombresEjercicios(): string {
     if (!this.rutina?.ejercicios?.length) return 'Sin ejercicios';
