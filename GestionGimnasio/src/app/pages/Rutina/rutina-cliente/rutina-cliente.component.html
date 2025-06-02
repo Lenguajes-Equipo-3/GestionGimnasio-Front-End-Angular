@@ -1,0 +1,40 @@
+<button (click)="volver()" style="margin-bottom: 1rem;">&larr; Volver</button>
+
+<div *ngIf="loading">Cargando...</div>
+
+<div *ngIf="!loading && rutinas && rutinas.length > 0" class="rutinas-lista">
+  <div *ngFor="let rutina of rutinas" class="rutina-card">
+    <div class="card-header">
+      <div>
+        <strong>Entrenador:</strong> {{ rutina.empleado?.nombreEmpleado }} {{ rutina.empleado?.apellidosEmpleado }}
+      </div>
+      <div>
+        <strong>Fecha:</strong> {{ rutina.fechaCreacion | date:'yyyy-MM-dd' }}
+      </div>
+    </div>
+    <div class="card-body">
+      <div>
+        <strong>Objetivo:</strong> {{ rutina.objetivo }}
+      </div>
+      <div>
+        <strong>Vigente:</strong>
+        <span [ngStyle]="{'color': rutina.esVigente ? 'green' : 'red'}">{{ rutina.esVigente ? 'Sí' : 'No' }}</span>
+      </div>
+      <div>
+        <strong>Ejercicios:</strong>
+        <span *ngIf="rutina.ejercicios?.length > 0">
+          {{ getNombresEjercicios(rutina) }}
+        </span>
+        <span *ngIf="!rutina.ejercicios?.length">Sin ejercicios</span>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button (click)="editarRutina(rutina.idRutina)" class="btn-editar">Editar</button>
+      <button (click)="eliminarRutina(rutina.idRutina)" class="btn-eliminar">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loading && (!rutinas || rutinas.length === 0)">
+  <p>No hay rutinas registradas para este cliente.</p>
+</div>

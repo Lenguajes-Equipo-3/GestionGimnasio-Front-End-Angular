@@ -1,0 +1,43 @@
+.rutinas-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.rutina-card {
+  background: linear-gradient(135deg, #f8e1f4, #e0c3fc);
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(128, 0, 128, 0.12);
+  padding: 1.2rem 1.5rem;
+  min-width: 270px;
+  max-width: 340px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-header {
+  font-size: 1rem;
+  color: #6a1b9a;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.card-body {
+  font-size: 0.98rem;
+  color: #4b2e83;
+  margin-bottom: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,104 @@
+<!-- Contenedor horizontal para los dos bloques de cliente -->
+<div class="cliente-contenedor">
+  <!-- Información del cliente (editable o no editable según tu lógica) -->
+  <mat-card *ngIf="cliente" class="mat-elevation-z2 cliente-card">
+    <mat-card-title>Información del Cliente</mat-card-title>
+    <mat-card-content>
+      <div class="info-row">
+        <strong>Nombre:</strong>
+        <span>{{ cliente.nombreCliente }} {{ cliente.apellidosCliente }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Cédula:</strong>
+        <span>{{ cliente.numeroIdentificacion }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Teléfono:</strong>
+        <span>{{ cliente.telefono }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="!cliente" class="mat-elevation-z2 cliente-card">
+    <mat-card-content>
+      <span style="color: red;">No se ha seleccionado un cliente.</span>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Segundo bloque repetido (si lo necesitas realmente) -->
+  <mat-card *ngIf="cliente" class="mat-elevation-z2 cliente-card">
+    <mat-card-title>Información Entrenador</mat-card-title>
+    <mat-card-content>
+      <div class="info-row">
+        <strong>Nombre Entrenador:</strong>
+<span>{{ empleado?.nombreEmpleado }} {{ empleado?.apellidosEmpleado }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Formulario de rutina -->
+<mat-card *ngIf="cliente" class="mat-elevation-z2">
+  <mat-card-title>Datos de la Rutina</mat-card-title>
+  <mat-card-content class="formulario">
+    <!-- Objetivo -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Objetivo</mat-label>
+      <input matInput [(ngModel)]="objetivo" name="objetivo">
+    </mat-form-field>
+
+    <!-- Lesiones -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Lesiones</mat-label>
+      <textarea matInput rows="2" [(ngModel)]="lesiones" name="lesiones"></textarea>
+    </mat-form-field>
+
+    <!-- Enfermedades -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Enfermedades</mat-label>
+      <textarea matInput rows="2" [(ngModel)]="enfermedades" name="enfermedades"></textarea>
+    </mat-form-field>
+
+    <!-- Fecha de Renovación -->
+    <!-- <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Fecha de Renovación</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="fechaRenovacion" name="fechaRenovacion">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field> -->
+    <mat-form-field appearance="outline" class="w-full">
+  <mat-label>Fecha de Renovación</mat-label>
+  <input matInput [value]="fechaRenovacion | date: 'yyyy-MM-dd'" readonly>
+</mat-form-field>
+
+
+    <!-- ¿Es vigente? -->
+    <!-- <mat-form-field appearance="outline" class="w-full">
+      <mat-label>¿Es vigente?</mat-label>
+      <mat-select [(ngModel)]="esVigente" name="esVigente">
+        <mat-option [value]="true">Sí</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <mat-form-field appearance="outline" class="w-full">
+  <mat-label>¿Es vigente?</mat-label>
+  <mat-select [value]="esVigente" disabled>
+    <mat-option [value]="true">Sí</mat-option>
+  </mat-select>
+</mat-form-field>
+
+    <!-- Fecha de creación (automática, solo lectura) -->
+    <div class="info-row mt-3">
+      <strong>Fecha de Creación:</strong>
+      <span>{{ fechaCreacion | date: 'yyyy-MM-dd' }}</span>
+    </div>
+  </mat-card-content>
+
+ <button mat-raised-button color="primary" (click)="guardar()"
+        [disabled]="!objetivo || !fechaRenovacion">
+  Guardar datos generales
+</button>
+<mat-hint *ngIf="!objetivo || !fechaRenovacion" style="color: #c62828;">
+  Debes agregar al menos el objetivo para guardar.
+</mat-hint>
+</mat-card>

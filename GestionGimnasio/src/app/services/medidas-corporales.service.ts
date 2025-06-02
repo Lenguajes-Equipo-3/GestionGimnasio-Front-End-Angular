@@ -37,7 +37,6 @@ export class MedidasService {
     return this.http.put<Medida>(`${this.apiUrlMedidas}/${id}`, medida); 
   }
   getMedidaById(id: number): Observable<Medida> {
-    console.log("ID DE GEYMEDIDAbY ID",id);
     return this.http.get<Medida>(`${this.apiUrlMedidas}/${id}`);
   }
   eliminarMedida(id: number): Observable<void> {

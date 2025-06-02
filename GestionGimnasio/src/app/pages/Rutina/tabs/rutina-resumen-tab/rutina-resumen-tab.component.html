@@ -1,0 +1,81 @@
+<h2 class="text-xl font-bold mb-4">Resumen de rutina</h2>
+
+<!-- Información del cliente y entrenador -->
+<div class="flex flex-col md:flex-row gap-4 mb-6">
+
+  <!-- Cliente -->
+  <mat-card *ngIf="cliente" class="mat-elevation-z2 w-full md:w-1/2">
+    <mat-card-title>Información del Cliente</mat-card-title>
+    <mat-card-content class="space-y-2">
+      <div><strong>Nombre:</strong> {{ cliente.nombreCliente }} {{ cliente.apellidosCliente }}</div>
+      <div><strong>Cédula:</strong> {{ cliente.numeroIdentificacion }}</div>
+      <div><strong>Teléfono:</strong> {{ cliente.telefono }}</div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="!cliente" class="mat-elevation-z2 w-full md:w-1/2">
+    <mat-card-content>
+      <span style="color: red;">No se ha seleccionado un cliente.</span>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Entrenador -->
+  <mat-card *ngIf="empleado" class="mat-elevation-z2 w-full md:w-1/2">
+    <mat-card-title>Información del Entrenador</mat-card-title>
+    <mat-card-content class="space-y-2">
+      <div><strong>Nombre:</strong> {{ empleado.nombreEmpleado }} {{ empleado.apellidosEmpleado }}</div>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
+<!-- Rutina general -->
+<mat-card class="mat-elevation-z2 mb-6">
+  <mat-card-title>Detalles Generales de la Rutina</mat-card-title>
+  <mat-card-content class="space-y-2">
+    <div><strong>Objetivo:</strong> {{ objetivo }}</div>
+    <div><strong>Lesiones:</strong> {{ lesiones }}</div>
+    <div><strong>Enfermedades:</strong> {{ enfermedades }}</div>
+    <div><strong>Fecha de renovación:</strong> {{ fechaRenovacion | date }}</div>
+    <div><strong>¿Es vigente?:</strong> {{ rutina.esVigente ? 'Sí' : 'No' }}</div>
+  </mat-card-content>
+</mat-card>
+
+<!-- Medidas corporales -->
+<mat-card class="mat-elevation-z2 mb-6">
+  <mat-card-title>Medidas Corporales</mat-card-title>
+  <mat-card-content>
+    <div *ngFor="let medida of rutina.medidas" class="flex justify-between border-b py-1">
+      <div>{{ medida.medida.nombreMedida }} ({{ medida.medida.unidadMedida }}):</div>
+      <div>{{ medida.valorMedida }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- Ejercicios -->
+<mat-card class="mat-elevation-z2 mb-6">
+  <mat-card-title>Ejercicios de la Rutina</mat-card-title>
+  <mat-card-content>
+    <div *ngFor="let ejercicio of rutina.ejercicios" class="grid grid-cols-1 md:grid-cols-4 gap-2 py-2 border-b">
+      <div><strong>Ejercicio:</strong> {{ ejercicio.ejercicio.nombreEjercicio }}</div>
+      <div><strong>Series:</strong> {{ ejercicio.series }}</div>
+      <div><strong>Repeticiones:</strong> {{ ejercicio.repeticiones }}</div>
+      <div><strong>Equipo:</strong> {{ ejercicio.codigoEquipo }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- Botón de acción final -->
+<div class="flex justify-end">
+  <button mat-raised-button color="primary" (click)="guardarRutina()">
+    Guardar rutina
+  </button>
+</div>
+
+
+  <div style="margin-top: 1rem;">
+  <button mat-raised-button color="primary" 
+          (click)="guardarRutina()" >
+    Guardar rutina
+  </button>
+</div>

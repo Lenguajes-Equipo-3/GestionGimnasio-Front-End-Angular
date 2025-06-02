@@ -1,0 +1,68 @@
+
+<div class="cliente-contenedor">
+  <!-- Información del cliente (editable o no editable según tu lógica) -->
+  <mat-card *ngIf="cliente" class="mat-elevation-z2 cliente-card">
+    <mat-card-title>Información del Cliente</mat-card-title>
+    <mat-card-content>
+      <div class="info-row">
+        <strong>Nombre:</strong>
+        <span>{{ cliente.nombreCliente }} {{ cliente.apellidosCliente }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Cédula:</strong>
+        <span>{{ cliente.numeroIdentificacion }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Teléfono:</strong>
+        <span>{{ cliente.telefono }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+  <mat-card *ngIf="!cliente" class="mat-elevation-z2 cliente-card">
+    <mat-card-content>
+      <span style="color: red;">No se ha seleccionado un cliente.</span>
+    </mat-card-content>
+  </mat-card>
+<mat-card class="medidas-card">
+  <h3 class="titulo-obligatorias">Medidas obligatorias</h3>
+  <div class="medidas-row">
+    <div *ngFor="let item of medidasObligatorias" class="info-item">
+      <label class="label-medida">{{ item.medidaCorporal.nombreMedida }} ({{ item.medidaCorporal.unidadMedida }}):</label>
+      <input
+        type="number"
+        [(ngModel)]="item.valor"
+        min="0"
+        class="input-pequeno-sin-mat"
+      />
+    </div>
+  </div>
+</mat-card>
+
+<mat-card class="medidas-card">
+  <h3 class="titulo-opcionales">Medidas opcionales</h3>
+  <div class="medidas-row">
+    <div *ngFor="let item of medidasOpcionales" class="info-item">
+      <label class="label-medida">{{ item.medidaCorporal.nombreMedida }} ({{ item.medidaCorporal.unidadMedida }}):</label>
+      <input
+        type="number"
+        [(ngModel)]="item.valor"
+        min="0"
+        class="input-pequeno-sin-mat"
+      />
+    </div>
+  </div>
+</mat-card>
+<div style="text-align: center; margin-top: 1rem;">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="guardarMedidas()"
+    [disabled]="!todasObligatoriasLlenas()"
+  >
+    Guardar medidas
+  </button>
+  <mat-hint *ngIf="!todasObligatoriasLlenas()" style="color: #c62828;">
+  Debes agregar las medidas obligatorias para guardar.
+</mat-hint>
+</div>
