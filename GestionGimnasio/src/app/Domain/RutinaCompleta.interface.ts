@@ -1,8 +1,8 @@
 import { Cliente } from "../services/cliente.service";
+import { Medida } from "../services/medidas-corporales.service";
 import { Ejercicio } from "./Ejercicio.interface";
 import { Empleado } from "./Empleado.interface";
-import { ItemRutinaEjercicio } from "./ItemRutinaEjercicio";
-import { ItemRutinaMedida } from "./ItemRutinaMedida";
+
 
 
 export interface ItemRutinaEjercicioInterface {
@@ -13,7 +13,6 @@ export interface ItemRutinaEjercicioInterface {
   codigoEquipo: string;
 }
 
-import { Medida } from "../services/medidas-corporales.service";
 
 export interface ItemRutinaMedidaInterface {
   medidaCorporal: Medida;
@@ -30,7 +29,7 @@ export interface RutinaCompleta {
     lesiones: string;
     enfermedades: string;
     esVigente: boolean;
-    ejercicios: ItemRutinaEjercicio[];
-    medidas: ItemRutinaMedida[];
+    ejercicios: ItemRutinaEjercicioInterface[];
+    medidas: ItemRutinaMedidaInterface[];
     
 }

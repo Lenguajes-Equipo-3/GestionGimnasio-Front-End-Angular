@@ -95,7 +95,12 @@ ngOnInit(): void {
   }
 
   guardarRutina(){
+    console.log('📝 Datos  rutina actual', this.rutinaContextService.getRutinaActual.toString)
      this.rutinaContextService.setEjercicios(this.itemRutinaEjercicio);
+      this.rutinaContextService.createRutina;
+          console.log('📝 Datos  crerar', this.rutinaContextService.getRutinaActual)
+
   this.formVisible = false;
+ 
   }
 }//end 
