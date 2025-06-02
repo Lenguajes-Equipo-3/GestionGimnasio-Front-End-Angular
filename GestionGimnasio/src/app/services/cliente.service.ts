@@ -15,6 +15,7 @@ export interface Cliente {
   nombreContactoEmergencia: string;
   telefonoContactoEmergencia: string;
   fotografia: string;
+  gmail: string; 
 }
 
 @Injectable({
@@ -36,13 +37,22 @@ export class ClienteService {
   }
 
   // Insertar un nuevo cliente
-  insertar(cliente: Cliente): Observable<Cliente> {
-    return this.http.post<Cliente>(`${this.baseUrl}`, cliente);
+  insertar(cliente: Cliente , imagen: File): Observable<Cliente> {
+
+    const formData = new FormData();
+    formData.append('cliente', new Blob([JSON.stringify(cliente)], { type: 'application/json' }));
+    formData.append('imagen', imagen);
+
+    return this.http.post<Cliente>(`${this.baseUrl}`, formData);
   }
 
   // Actualizar los datos de un cliente
-  actualizar(cliente: Cliente): Observable<Cliente> {
-    return this.http.put<Cliente>(`${this.baseUrl}/${cliente.idCliente}`, cliente);
+  actualizar(cliente: Cliente , imagen: File): Observable<Cliente> {
+    const formData = new FormData();
+    formData.append('cliente', new Blob([JSON.stringify(cliente)], { type: 'application/json' }));
+    formData.append('imagen', imagen);
+
+    return this.http.put<Cliente>(`${this.baseUrl}/${cliente.idCliente}`, formData);
   }
 
   // Eliminar un cliente
