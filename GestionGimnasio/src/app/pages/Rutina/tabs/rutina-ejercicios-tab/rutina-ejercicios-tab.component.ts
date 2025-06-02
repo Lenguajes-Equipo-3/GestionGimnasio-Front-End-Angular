@@ -73,6 +73,8 @@ ngOnInit(): void {
       repeticiones: this.repeticiones,
       codigoEquipo: this.codigoEquipo
     };
+      this.limpiarFormularioEjercicio(); // Limpiar después de guardar
+
     // Esto asegura que Angular detecte el cambio
   this.itemRutinaEjercicio = [...this.itemRutinaEjercicio, nuevo];
     this.formVisible = false;
@@ -100,12 +102,26 @@ ngOnInit(): void {
   this.rutinaContextService.insertar(rutina).subscribe({
     next: (res) => {
         alert(  "Rutina creada con éxito");
+        this.limpiarTodo();
     },
     error: (err) => {
       alert(' Error al crear rutina:');
     }
   });
 }
+limpiarFormularioEjercicio(): void {
+  this.ejercicioSeleccionado = null;
+  this.series = 0;
+  this.repeticiones = 0;
+  this.codigoEquipo = '';
+  this.formVisible = false;
+}
+limpiarTodo(): void {
+  this.itemRutinaEjercicio = [];
+  this.limpiarFormularioEjercicio();
+}
+
+
 
   
 }//end 

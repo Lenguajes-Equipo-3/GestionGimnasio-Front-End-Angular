@@ -44,7 +44,7 @@
 }
 
 .info-item:hover {
-  box-shadow: 0 3px 10px rgba(126, 34, 206, 0.4);
+  box-shadow: 0 3px 10px rgba(152, 100, 198, 0.4);
 }
 
 /* Label junto al input */
@@ -76,16 +76,16 @@
 
 /* Botón personalizado */
 button[mat-raised-button] {
-  background-color: #7e22ce;
+  background-color: #b122cee0;
   color: white;
-  font-weight: 60;
+  font-weight: 80;
   padding: 8px 20px;
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 
 button[mat-raised-button]:hover:not(:disabled) {
-  background-color: #6b21a8;
+  background-color: #e340ec;
 }
 
 /* Responsividad: en pantallas muy pequeñas apilar verticalmente */
@@ -140,13 +140,9 @@ mat-card {
 }
 .cliente-contenedor {
   display: flex;
+  background-color: #f3e8ff;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap; /* Para que se acomode en móvil */
   margin-bottom: 1rem;
-}
-
-.cliente-card {
-  flex: 1 1 45%;
-  max-width: 430px;
 }

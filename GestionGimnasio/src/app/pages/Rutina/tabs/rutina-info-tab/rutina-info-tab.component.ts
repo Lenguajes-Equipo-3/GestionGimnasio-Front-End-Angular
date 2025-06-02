@@ -46,8 +46,8 @@ formDesactivado = false;
     ) {}
 
      ngOnInit(): void {
-    // Fecha de renovación = fecha de creación + 3 meses
   this.fechaRenovacion = new Date(this.fechaCreacion);
+  this.limpiarCampos();
   this.fechaRenovacion.setMonth(this.fechaRenovacion.getMonth() + 3);
 
   // Suscripción para obtener el cliente
@@ -77,9 +77,17 @@ formDesactivado = false;
     this.fechaRenovacion,
     this.esVigente
   );
-  
+  this.limpiarCampos();
 
   alert('Pase al siguiente paso.');
+}
+private limpiarCampos() {
+  this.objetivo = '';
+  this.lesiones = '';
+  this.enfermedades = '';
+  this.fechaRenovacion = new Date(this.fechaCreacion);
+  this.fechaRenovacion.setMonth(this.fechaRenovacion.getMonth() + 3);
+  this.esVigente = true;
 }
 }
 
