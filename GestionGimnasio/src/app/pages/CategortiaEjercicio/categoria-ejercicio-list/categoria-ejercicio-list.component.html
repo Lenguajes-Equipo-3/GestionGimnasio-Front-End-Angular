@@ -22,7 +22,7 @@
 
   <div class="exercise-grid">
     <mat-card class="exercise-card" *ngFor="let categoria of categoriasFiltradas">
-  
+
       <div class="card-header">
         <span class="exercise-name">{{ categoria.nombreCategoria }}</span>
         <div class="card-actions">
@@ -34,8 +34,8 @@
           </button>
         </div>
       </div>
-  
-      <img mat-card-image [src]="categoria.imagen" alt="Imagen de {{ categoria.nombreCategoria }}" class="card-image"/>
+     
+      <img mat-card-image [src]="URLImagen+categoria.imagen" alt="Imagen de {{ categoria.nombreCategoria}}" class="card-image"/>
       
     </mat-card>
   </div>

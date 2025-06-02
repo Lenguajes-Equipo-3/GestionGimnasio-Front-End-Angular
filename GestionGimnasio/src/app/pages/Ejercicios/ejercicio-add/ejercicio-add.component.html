@@ -89,41 +89,56 @@
       </div>
     </div>
 
-    <!-- Imágenes -->
-    <div formArrayName="imagenes" class="imagenes-container">
-      <h3>Imágenes</h3>
-      <div
-        *ngFor="let imagen of imagenes.controls; let i = index"
-        [formGroupName]="i"
-        class="form-group"
-      >
-        <label for="urlImagen" class="form-label">URL de la Imagen</label>
-        <input
-          id="urlImagen"
-          formControlName="urlImagen"
-          type="text"
-          class="form-control"
-          placeholder="URL de la imagen"
-        />
-        <label for="descripcionImagen" class="form-label"
-          >Descripción de la Imagen</label
-        >
-        <input
-          id="descripcionImagen"
-          formControlName="descripcionImagen"
-          type="text"
-          class="form-control"
-          placeholder="Descripción de la imagen (opcional)"
-        />
-        <button type="button" (click)="removeImagen(i)" class="btn btn-danger">
-          Eliminar Imagen
-        </button>
-      </div>
-      <button type="button" (click)="addImagen()" class="btn btn-primary">
-        Agregar Imagen
-      </button>
+    <div
+    *ngFor="let imagen of imagenes.controls; let i = index"
+    [formGroupName]="i"
+    class="form-group"
+  >
+  <label for="descripcionImagen{{ i }}" class="form-label">Imagen {{ i + 1 }}</label>
+
+<!-- Input de archivo -->
+<input
+  id="fileInput{{ i }}"
+  type="file"
+  class="form-control"
+  (change)="onFileSelected($event, i)"
+  accept="image/*"
+/>
+   
+  
+    <!-- Campo oculto para almacenar la URL generada -->
+    <input
+      type="hidden"
+      formControlName="urlImagen"
+    />
+  
+
+
+<!-- Previsualización de la imagen -->
+<div *ngIf="previews[i]" class="mt-2">
+  <img [src]="previews[i]" alt="Vista previa" width="150" height="auto" />
+</div>
+  
+    <!-- Descripción -->
+    <label for="descripcionImagen{{ i }}" class="form-label">Descripción de la Imagen</label>
+    <input
+      id="descripcionImagen{{ i }}"
+      formControlName="descripcionImagen"
+      type="text"
+      class="form-control"
+      placeholder="Descripción de la imagen (opcional)"
+    />
+  
+    <button type="button" (click)="removeImagen(i)" class="btn btn-danger mt-2">
+      Eliminar Imagen
+    </button>
+
+  
     </div>
 
+    <button type="button" (click)="addImagen()" class="btn btn-primary">
+      Agregar Imagen
+    </button>
     <!-- Botón de Guardar -->
     <button
       type="submit"

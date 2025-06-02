@@ -3,13 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { UsuarioLoginRequest } from '../Domain/usuario-login-request';
 import { UsuarioLoginResponse } from '../Domain/usuario-login-response';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private baseUrl = 'https://api-security-proyecto-dkh3cxh6h0b8g7d7.canadacentral-01.azurewebsites.net/security/api/auth/login';
+
+  private baseUrl = `${environment.api_SECURITY_URL}`;
+
 
   constructor(private http: HttpClient) { }
 

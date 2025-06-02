@@ -3,6 +3,7 @@ import { Cliente, ClienteService } from '../../../services/cliente.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-cliente-lista',
@@ -13,6 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 export class ClienteListaComponent implements OnInit {
   clientes: Cliente[] = [];
   nombreBusqueda: string = '';
+  urlImagen: string = `${environment.apiURL}`+'media/';
 
   constructor(private clienteService: ClienteService, private router: Router) {}
 

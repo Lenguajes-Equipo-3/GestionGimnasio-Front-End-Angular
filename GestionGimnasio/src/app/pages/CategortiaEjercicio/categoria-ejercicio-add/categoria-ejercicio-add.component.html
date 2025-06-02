@@ -7,8 +7,19 @@
   </div>
 
   <div class="form-field">
-    <label for="imagen">URL Imagen:</label>
-    <input id="imagen" formControlName="imagen" type="text" placeholder="URL de imagen" />
+    <label for="imagen">Seleccionar imagen:</label>
+    <input
+      id="imagen"
+      type="file"
+      accept="image/*"
+      (change)="onFileSelected($event)"
+    />
+  </div>
+  
+  <!-- Opcional: vista previa -->
+  <div class *ngIf="imagenPreview" class="preview-container">
+    <p class="previa">Vista previa:</p>
+    <img [src]="imagenPreview" alt="Imagen seleccionada" class="preview-img" />
   </div>
 
   <div class="modal-buttons">

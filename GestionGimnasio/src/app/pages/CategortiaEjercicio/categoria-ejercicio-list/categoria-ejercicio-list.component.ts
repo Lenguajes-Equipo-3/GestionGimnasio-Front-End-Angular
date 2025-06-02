@@ -8,6 +8,7 @@ import { Categoria } from '../../../Domain/CategoriaEjercicio.interface';
 import { CategoriaEjercicioAddComponent } from '../categoria-ejercicio-add/categoria-ejercicio-add.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ActualizarCategoriaEjercicioComponent } from '../actualizar-categoria-ejercicio/actualizar-categoria-ejercicio.component';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-categoria-ejercicio-list',
@@ -20,6 +21,7 @@ export class CategoriaEjercicioListComponent implements OnInit {
   categorias: Categoria[] = [];
   categoriasFiltradas: Categoria[] = [];
   searchText: string = '';
+  URLImagen: string = `${environment.apiURL}` + 'media/';
 
   constructor(
     private categoriaEjercicioService: CategoriaEjercicioService,

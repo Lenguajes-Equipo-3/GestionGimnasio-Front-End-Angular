@@ -17,6 +17,10 @@
     <label>Teléfono:</label>
     <input [(ngModel)]="cliente.telefono" name="telefono" required>
 
+    <label>Correco Electronico:</label>
+    <input [(ngModel)]="cliente.gmail" name="telefono" type="]
+    " required>
+
     <label>Dirección:</label>
     <input [(ngModel)]="cliente.direccion" name="direccion" required>
 
@@ -26,8 +30,22 @@
     <label>Teléfono de Emergencia:</label>
     <input [(ngModel)]="cliente.telefonoContactoEmergencia" name="telefonoContactoEmergencia" required>
 
-    <label>Fotografía:</label>
-    <input [(ngModel)]="cliente.fotografia" name="fotografia">
+    <div class="form-field">
+      <label for="imagen">Seleccionar imagen:</label>
+      <input
+        id="imagen"
+        type="file"
+        accept="image/*"
+        capture="environment"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+    
+    <!-- Opcional: vista previa -->
+    <div class *ngIf="imagenPreview" class="preview-container">
+      <p class="previa">Vista previa:</p>
+      <img [src]="imagenPreview" alt="Imagen seleccionada" class="preview-img" />
+    </div>
 
     <button type="submit" class="boton-agregar-cliente">
       {{ esNuevo ? 'Guardar Cliente' : 'Actualizar Cliente' }}
