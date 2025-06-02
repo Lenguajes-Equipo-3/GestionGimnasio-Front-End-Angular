@@ -1,0 +1,107 @@
+<!-- Título principal -->
+<h2 style="margin-bottom: 1rem;">Rutina de Ejercicios</h2>
+
+  <div style="margin-top: 1rem;">
+  <button mat-raised-button color="primary" 
+          (click)="guardarRutina()" 
+          [disabled]="itemRutinaEjercicio.length === 0">
+    Guardar rutina
+  </button>
+</div>
+<mat-hint *ngIf="itemRutinaEjercicio.length === 0" style="color: #c62828;">
+  Debes agregar al menos un ejercicio para guardar la rutina.
+</mat-hint>
+
+<!-- Tabla de ejercicios añadidos al cliente -->
+<mat-card style="margin-top: 3rem;">
+  
+  <mat-card-title> Lista de ejercicios en rutina</mat-card-title>
+  <mat-divider></mat-divider>
+
+  <div style="overflow-x: auto;">
+    <table mat-table [dataSource]="itemRutinaEjercicio" class="mat-elevation-z8" style="width: 100%; margin-top: 1rem;">
+
+      <!-- Nombre del ejercicio -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Ejercicio</th>
+        <td mat-cell *matCellDef="let e">{{ e.ejercicio.nombreEjercicio }}</td>
+      </ng-container>
+
+      <!-- Series -->
+      <ng-container matColumnDef="series">
+        <th mat-header-cell *matHeaderCellDef>Series</th>
+        <td mat-cell *matCellDef="let e">{{ e.series }}</td>
+      </ng-container>
+
+      <!-- Repeticiones -->
+      <ng-container matColumnDef="repeticiones">
+        <th mat-header-cell *matHeaderCellDef>Reps</th>
+        <td mat-cell *matCellDef="let e">{{ e.repeticiones }}</td>
+      </ng-container>
+
+      <!-- Código del equipo -->
+      <ng-container matColumnDef="codigoEquipo">
+        <th mat-header-cell *matHeaderCellDef>Equipo</th>
+        <td mat-cell *matCellDef="let e">{{ e.codigoEquipo }}</td>
+      </ng-container>
+
+      <!-- Acciones -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let e; let i = index">
+          <button mat-button color="accent" (click)="editarEjercicio(i)">Editar</button>
+          <button mat-button color="warn" (click)="eliminarEjercicio(i)">Eliminar</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['nombre', 'series', 'repeticiones', 'codigoEquipo', 'acciones']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['nombre', 'series', 'repeticiones', 'codigoEquipo', 'acciones'];"></tr>
+    </table>
+  </div>
+</mat-card>
+
+<!-- Formulario para agregar datos del ejercicio -->
+<mat-card *ngIf="formVisible" style="margin-top: 2rem;">
+  <mat-card-title>Agregar ejercicio: {{ ejercicioSeleccionado?.nombreEjercicio }}</mat-card-title>
+  <mat-divider></mat-divider>
+
+  <div style="padding: 1rem; display: flex; flex-direction: column; gap: 1rem;">
+    <mat-form-field appearance="outline">
+      <mat-label>Series</mat-label>
+      <input matInput type="number" [(ngModel)]="series">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Repeticiones</mat-label>
+      <input matInput type="number" [(ngModel)]="repeticiones">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Código del equipo</mat-label>
+      <input matInput [(ngModel)]="codigoEquipo">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="guardarEjercicio()">Guardar</button>
+  </div>
+</mat-card>
+
+
+<h2 style="margin-bottom: 1rem;">Ejercicios disponibles</h2>
+
+<!-- Categorías y ejercicios disponibles -->
+<div *ngFor="let categoria of ejerciciosPorCategoria | keyvalue" style="margin-bottom: 1rem;">
+  <mat-card>
+    <mat-card-title>{{ categoria.key }}</mat-card-title>
+    <mat-divider></mat-divider>
+
+    <!-- GRID DE EJERCICIOS -->
+    <div class="ejercicios-grid">
+      <div
+        *ngFor="let ejercicio of categoria.value"
+        class="ejercicio-item">
+        <span>{{ ejercicio.nombreEjercicio }}</span>
+        <button mat-stroked-button color="primary" (click)="abrirFormulario(ejercicio)">Agregar</button>
+      </div>
+    </div>
+  </mat-card>
+</div>

@@ -9,7 +9,9 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
 
+
   private baseUrl = `${environment.api_SECURITY_URL}`;
+
 
   constructor(private http: HttpClient) { }
 

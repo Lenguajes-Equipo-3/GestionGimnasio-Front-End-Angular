@@ -1,0 +1,65 @@
+mat-form-field {
+  width: 100%;
+}
+
+input {
+  border-radius: 8px;
+}
+
+.purple-background {
+  background-color: #f3e8ff;
+  border: 1px solid #d8b4fe;
+  color: #4c1d95;
+}
+
+label {
+  font-weight: bold;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 900px;
+  margin: 1rem auto;
+  background-color:#f3e8ff;
+  padding: 1rem;
+}
+
+.info-row {
+  margin-bottom: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: #3d3b3b;
+}
+
+.formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .formulario mat-form-field {
+    flex: 1 1 calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .formulario mat-form-field {
+    flex: 1 1 100%;
+  }
+}
+.cliente-contenedor {
+  display: flex;
+  background-color: #f3e8ff;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap; /* Para que se acomode en móvil */
+  margin-bottom: 1rem;
+}
+
+.cliente-card {
+  background-color: #f3e8ff;
+  flex: 1 1 45%;
+  max-width: 430px;
+}

@@ -51,6 +51,15 @@
       <span *ngIf="!collapsed">Categoria Ejercicio</span>
     </a>
 
+    
+    <a
+      mat-list-item
+      routerLink="/rutina"
+      *ngIf="userRole === 'ADMIN' || userRole === 'ENTRENADOR'"
+    >
+      <mat-icon>assignment_add</mat-icon>
+      <span *ngIf="!collapsed">Rutina</span>
+    </a>
     <!-- Solo ADMIN ve esta opción -->
     <a mat-list-item routerLink="/admin" *ngIf="userRole === 'ADMIN'">
       <mat-icon>schedule</mat-icon>
