@@ -70,7 +70,7 @@
           <div class="imagenes">
             <img
               *ngFor="let imagen of ejercicio.imagenes"
-              [src]="imagen.urlImagen"
+              [src]="urlImagenes+imagen.urlImagen"
               [alt]="imagen.descripcionImagen || 'Imagen del ejercicio'"
               class="imagen-ejercicio"
             />

@@ -3,6 +3,8 @@ import { Cliente, ClienteService } from '../../../services/cliente.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { environment } from '../../../../environments/environment';
+import { Prueba } from '../../../services/prueba.service';
 
 @Component({
   selector: 'app-cliente-lista',
@@ -11,10 +13,12 @@ import { Router, RouterModule } from '@angular/router';
   styleUrls: ['./cliente-lista.component.css']
 })
 export class ClienteListaComponent implements OnInit {
+
   clientes: Cliente[] = [];
   nombreBusqueda: string = '';
+  urlImagen: string = `${environment.apiURL}`+'media/';
 
-  constructor(private clienteService: ClienteService, private router: Router) {}
+  constructor(private clienteService: ClienteService, private router: Router ) {}
 
   ngOnInit(): void {
     this.cargarClientes();
@@ -48,5 +52,8 @@ export class ClienteListaComponent implements OnInit {
       }
     });
   }
+
+
+  
 
 }

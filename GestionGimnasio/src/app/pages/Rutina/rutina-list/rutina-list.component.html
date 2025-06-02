@@ -1,4 +1,5 @@
 <div class="clientes-header">
+   <p class="titulo">Lista de clientes</p>
   <div class="buscar-container">
     <input
       type="text"
@@ -40,6 +41,10 @@
         >
           Ver Rutinas
         </button>
+
+
+        <button (click)="generarReporte(cliente.idCliente)">Generar Reporte</button>
+
       </td>
     </tr>
   </tbody>

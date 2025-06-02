@@ -38,7 +38,7 @@
 .form-field input {
   padding: 0.5rem 1rem;
   background-color: #e1dddd;
-  color: #fff;
+  color: #161010;
   border: 1px solid #ba14c6;
   border-radius: 6px;
   outline: none;
@@ -75,4 +75,22 @@
 
 .btn:hover {
   filter: brightness(1.1);
+}
+
+.preview-container {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.preview-img {
+  max-width: 240px; /* ajusta según tu diseño */
+  max-height: 200px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  object-fit: cover; /* mantiene proporción sin deformar */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.previa{
+  color: #7e31eb;
 }

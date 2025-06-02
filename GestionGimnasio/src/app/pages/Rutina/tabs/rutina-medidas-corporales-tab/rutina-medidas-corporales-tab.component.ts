@@ -71,12 +71,25 @@ guardarMedidas(): void {
     ...this.medidasOpcionales,
   ];
 
-
   this.rutinaContextService.setMedidas(todasMedidas);
+    this.limpiarCampos(); // Limpiar después de guardar
+
   alert('Medidas guardadas. Puede pasar al siguiente paso.');
 }
 
+limpiarCampos(): void {
+  this.medidasObligatorias = this.medidasObligatorias.map(item => ({
+    ...item,
+    valor: 0
+  }));
+
+  this.medidasOpcionales = this.medidasOpcionales.map(item => ({
+    ...item,
+    valor: 0
+  }));
+}
 
   
 }
+
 

@@ -14,7 +14,8 @@ import { Categoria } from '../../../Domain/CategoriaEjercicio.interface';
 })
 export class CategoriaEjercicioAddComponent {
   categoriaForm: FormGroup;
-
+  imagenSeleccionada: File | null = null;
+  imagenPreview: string | null = null;
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CategoriaEjercicioAddComponent>,
@@ -30,16 +31,36 @@ export class CategoriaEjercicioAddComponent {
   }
 
   guardarCategoria() {
-    if (this.categoriaForm.valid) {
+    if (this.categoriaForm.valid && this.imagenSeleccionada) {
       const nuevaCategoria: Categoria = this.categoriaForm.value;
-      console.log('Nueva categoría a enviar:', nuevaCategoria);
   
-      this.categoriaEjercicioService.createCategoria(nuevaCategoria).subscribe();
+      console.log('Enviando categoría con imagen:', nuevaCategoria);
   
-      this.dialogRef.close('refresh'); // Para recargar la lista después
+      this.categoriaEjercicioService.createCategoria(nuevaCategoria, this.imagenSeleccionada)
+        .subscribe({
+          next: () => this.dialogRef.close('refresh'),
+          error: err => {
+            console.error('Error al guardar categoría:', err);
+            alert('Hubo un error al guardar la categoría.');
+          }
+        });
+    } else {
+      alert('Complete todos los campos y seleccione una imagen.');
     }
   }
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.imagenSeleccionada = input.files[0];
   
+      // Vista previa
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagenPreview = reader.result as string;
+      };
+      reader.readAsDataURL(this.imagenSeleccionada);
+    }
+  }
 
   cerrar() {
     this.dialogRef.close();

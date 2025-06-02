@@ -60,4 +60,18 @@ export class RutinaListComponent implements OnInit {
   verRutinasCliente(cliente: Cliente) {
     this.router.navigate(['/rutina/cliente', cliente.idCliente]);
   }
+
+
+
+  generarReporte(idCliente: number) {
+    this.rutinaContext.generarReporte(idCliente).subscribe({
+    next: () => {
+      console.log('Reporte generado exitosamente');
+    },
+
+    error: (err) => {
+        console.error('Error al generar el reporte:', err);
+      }
+    });
+  }
 }

@@ -19,6 +19,7 @@ import { Categoria } from '../../../Domain/CategoriaEjercicio.interface';
 import { CategoriaEjercicioService } from '../../../services/categoriaEjercicio.service';
 import { EjercicioService } from '../../../services/ejercicio.service';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-ejercicio-update',
@@ -32,6 +33,10 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
   @Output() ejercicioActualizado = new EventEmitter<void>(); // Evento para notificar al padre
   ejercicioForm: FormGroup;
   categorias: Categoria[] = [];
+  archivosSeleccionados: File[] = [];
+  nombreArchivos: string[] = [];
+  previews: string[] = [];
+  urlImagenes: string = environment.apiURL + 'media/'; // URL base para las imágenes
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +53,8 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
       codigoEquipo: ['', [Validators.maxLength(20)]],
       imagenes: this.fb.array([]),
     });
+
+    // Inicializar previews con cadenas vacías
   }
 
   ngOnInit(): void {
@@ -74,21 +81,30 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
 
   cargarEjercicio(): void {
     if (this.ejercicio) {
-      this.ejercicioForm.patchValue(this.ejercicio); // Carga todos los valores, incluido el ID
-      this.imagenes.clear(); // Limpiar imágenes antes de cargarlas
+      this.ejercicioForm.patchValue({
+        categoriaEjercicio: this.ejercicio.categoriaEjercicio,
+        nombreEjercicio: this.ejercicio.nombreEjercicio,
+        descripcionEjercicio: this.ejercicio.descripcionEjercicio,
+        codigoEquipo: this.ejercicio.codigoEquipo,
+      });
+  
+      this.imagenes.clear();
+  
       this.ejercicio.imagenes.forEach((imagen) => {
         this.imagenes.push(
           this.fb.group({
-            urlImagen: [imagen.urlImagen, Validators.required],
-            descripcionImagen: [
-              imagen.descripcionImagen,
-              Validators.maxLength(255),
-            ],
+            urlImagen: [imagen.urlImagen],
+            descripcionImagen: [imagen.descripcionImagen || '', Validators.maxLength(255)],
           })
         );
       });
+  
+      this.previews = this.ejercicio.imagenes.map(
+        (imagen) => this.urlImagenes + imagen.urlImagen
+      );
     }
   }
+  
 
   get imagenes(): FormArray {
     return this.ejercicioForm.get('imagenes') as FormArray;
@@ -101,29 +117,76 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
         descripcionImagen: ['', Validators.maxLength(255)],
       })
     );
+    this.archivosSeleccionados.push(null as any);
+    this.nombreArchivos.push('');
+    this.previews.push('');
   }
-
   removeImagen(index: number): void {
     this.imagenes.removeAt(index);
-  }
-
-  onSubmit(): void {
-    if (this.ejercicioForm.valid) {
-      const updatedEjercicio = {
-        ...this.ejercicio,
-        ...this.ejercicioForm.value,
+    this.archivosSeleccionados.splice(index, 1);
+    this.nombreArchivos.splice(index, 1);
+    this.previews.splice(index, 1);
+   }
+  onFileSelected(event: Event, index: number): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.archivosSeleccionados[index] = file;
+      this.nombreArchivos[index] = file.name;
+      this.imagenes.at(index).get('urlImagen')?.setValue(file.name);
+  
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.previews[index] = reader.result as string;
       };
+      reader.readAsDataURL(file);
+    }
+  }
+  onSubmit(): void {
+    const hayAlMenosUnaImagen = this.archivosSeleccionados.some((file) => !!file);
+  
+    if (!hayAlMenosUnaImagen && this.imagenes.length === 0) {
+      alert('Debe seleccionar al menos una imagen para actualizar el ejercicio.');
+      return; 
+    }
+  
+    if (this.ejercicioForm.valid) {
+      const formData = new FormData();
+  
+      const formValue = this.ejercicioForm.value;
 
-      if (!updatedEjercicio.id) {
-        console.error('El ejercicio no tiene un ID válido.');
-        alert('Error: El ejercicio no tiene un ID válido.');
-        return;
-      }
-
-      this.ejercicioService.updateEjercicio(updatedEjercicio).subscribe({
+      const ejercicioActualizado: Ejercicio = {
+        id: this.ejercicio.id,
+        categoriaEjercicio: formValue.categoriaEjercicio,
+        nombreEjercicio: formValue.nombreEjercicio,
+        descripcionEjercicio: formValue.descripcionEjercicio,
+        codigoEquipo: formValue.codigoEquipo,
+        imagenes: formValue.imagenes.map((img: any) => ({
+          urlImagen: img.urlImagen, // el backend la completa
+          descripcionImagen: img.descripcionImagen || ''
+        }))
+      };
+  
+      formData.append(
+        'ejercicio',
+        new Blob([JSON.stringify(ejercicioActualizado)], {
+          type: 'application/json',
+        })
+      );
+      
+      // Agregar imágenes nuevas
+      this.archivosSeleccionados.forEach((archivo) => {
+        if (archivo) {
+          formData.append('imagenes', archivo);
+        }
+      });
+      console.log('Ejercicio actualizado (formulario):', this.ejercicioForm.value);
+      console.log('Ejercicio armado para enviar:', ejercicioActualizado);
+      // Consumir servicio
+      this.ejercicioService.updateEjercicioConImagenes(ejercicioActualizado, this.archivosSeleccionados).subscribe({
         next: () => {
           alert('Ejercicio actualizado con éxito');
-          this.ejercicioActualizado.emit(); // Notificar al componente padre
+          this.ejercicioActualizado.emit();
         },
         error: (err) => {
           console.error(err);
@@ -132,4 +195,6 @@ export class EjercicioUpdateComponent implements OnInit, OnChanges {
       });
     }
   }
+  
 }
+  

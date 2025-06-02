@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EjercicioService } from '../../../services/ejercicio.service';
 import { CategoriaEjercicioService } from '../../../services/categoriaEjercicio.service';
 import { Categoria } from '../../../Domain/CategoriaEjercicio.interface';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-ejercicio-add',
@@ -13,15 +14,20 @@ import { Categoria } from '../../../Domain/CategoriaEjercicio.interface';
   styleUrls: ['./ejercicio-add.component.css'],
 })
 export class EjercicioAddComponent implements OnInit {
+
   @Output() ejercicioRegistrado = new EventEmitter<void>();
 
   ejercicioForm: FormGroup;
   categorias: Categoria[] = [];
-
+imagenPreview: any;
+nombreArchivos: string[] = [];
+archivosSeleccionados: File[] = []; // Para enviar al backend
+previews: string[] = [];
   constructor(
     private fb: FormBuilder,
     private ejercicioService: EjercicioService,
-    private categoriaEjercicioService: CategoriaEjercicioService
+    private categoriaEjercicioService: CategoriaEjercicioService,
+    private cdr: ChangeDetectorRef
   ) {
     this.ejercicioForm = this.fb.group({
       categoriaEjercicio: [null, Validators.required], // Cambiado a un objeto
@@ -61,23 +67,74 @@ export class EjercicioAddComponent implements OnInit {
   }
 
   removeImagen(index: number): void {
-    this.imagenes.removeAt(index);
+    this.imagenes.removeAt(index);                  // Elimina del FormArray
+  
+    this.archivosSeleccionados.splice(index, 1);    // Elimina el archivo seleccionado
+    this.nombreArchivos.splice(index, 1);           // Elimina el nombre del archivo
+    this.previews.splice(index, 1);                 // Elimina la vista previa
   }
+  onFileSelected(event: Event, index: number): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.archivosSeleccionados[index] = file;
+      this.nombreArchivos[index] = file.name;
+  
+      // Guardar temporalmente el nombre en el FormGroup
+      this.imagenes.at(index).get('urlImagen')?.setValue(file.name);
+  
+      // Crear la vista previa con FileReader
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.previews[index] = reader.result as string;
+        this.cdr.detectChanges(); // <- fuerza actualización inmediata
 
+      };
+      reader.readAsDataURL(file);
+    }
+  }
   onSubmit(): void {
+    const hayImagenes = this.archivosSeleccionados.some((f) => !!f);
+  
+    if (!hayImagenes) {
+      alert('Debe seleccionar al menos una imagen.');
+      return;
+    }
+  
     if (this.ejercicioForm.valid) {
-      this.ejercicioService.createEjercicio(this.ejercicioForm.value).subscribe({
+      const formData = new FormData();
+  
+      const nuevoEjercicio = {
+        ...this.ejercicioForm.value,
+        imagenes: this.ejercicioForm.value.imagenes.map((img: any) => ({
+          descripcionImagen: img.descripcionImagen || '',
+        })),
+      };
+  
+      formData.append(
+        'ejercicio',
+        new Blob([JSON.stringify(nuevoEjercicio)], { type: 'application/json' })
+      );
+  
+      this.archivosSeleccionados.forEach((archivo) => {
+        if (archivo) {
+          formData.append('imagenes', archivo);
+        }
+      });
+  
+      this.ejercicioService.createEjercicioFormData(formData).subscribe({
         next: () => {
-          alert('Ejercicio registrado con éxito');
-          this.ejercicioForm.reset();
-          this.imagenes.clear();
-          this.ejercicioRegistrado.emit(); 
+          alert('Ejercicio creado con éxito');
+          this.ejercicioRegistrado.emit(); // Emitir evento para notificar al componente padre
+       // o cerrar modal, etc.
         },
         error: (err) => {
-          console.error(err);
-          alert('Error al registrar el ejercicio');
+          console.error('Error al crear el ejercicio:', err);
+          alert('Error al crear el ejercicio');
         },
       });
     }
   }
+  
+  
 }

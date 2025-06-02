@@ -52,10 +52,11 @@ export class RutinaInfoTabComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
+
   ngOnInit(): void {
-    // Fecha de renovación = fecha de creación + 3 meses
-    this.fechaRenovacion = new Date(this.fechaCreacion);
-    this.fechaRenovacion.setMonth(this.fechaRenovacion.getMonth() + 3);
+  this.fechaRenovacion = new Date(this.fechaCreacion);
+  this.limpiarCampos();
+  this.fechaRenovacion.setMonth(this.fechaRenovacion.getMonth() + 3);
 
     // Suscripción para obtener el cliente
     this.subscription = this.rutinaContext.rutina$.subscribe((rutina) => {
@@ -73,15 +74,23 @@ export class RutinaInfoTabComponent implements OnInit {
       alert('Por favor, complete todos los campos requeridos.');
       return;
     }
+  this.rutinaContext.setDatosGenerales(
+    this.objetivo,
+    this.lesiones,
+    this.enfermedades,
+    this.fechaRenovacion,
+    this.esVigente
+  );
+  this.limpiarCampos();
 
-    this.rutinaContext.setDatosGenerales(
-      this.objetivo,
-      this.lesiones,
-      this.enfermedades,
-      this.fechaRenovacion,
-      this.esVigente
-    );
-
-    alert('Pase al siguiente paso.');
-  }
+  alert('Pase al siguiente paso.');
+}
+private limpiarCampos() {
+  this.objetivo = '';
+  this.lesiones = '';
+  this.enfermedades = '';
+  this.fechaRenovacion = new Date(this.fechaCreacion);
+  this.fechaRenovacion.setMonth(this.fechaRenovacion.getMonth() + 3);
+  this.esVigente = true;
+}
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Categoria } from '../Domain/CategoriaEjercicio.interface';
-
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -11,7 +11,7 @@ import { Categoria } from '../Domain/CategoriaEjercicio.interface';
 
 })
 export class CategoriaEjercicioService {
-  private apiUrl = 'http://localhost:8080/proyecto/api/categorias-ejercicio';
+  private apiUrl = `${environment.apiURL}`+'api/categorias-ejercicio';
 
   constructor(private http: HttpClient) {}
 
@@ -19,15 +19,26 @@ export class CategoriaEjercicioService {
     return this.http.get<Categoria[]>(this.apiUrl);
   }
 
-  createCategoria(categoria: Categoria): Observable<Categoria> {
-    return this.http.post<Categoria>(this.apiUrl, categoria);
+  createCategoria(categoria: Categoria, imagen: File): Observable<Categoria> {
+    const formData = new FormData();
+    formData.append('categoria', new Blob([JSON.stringify(categoria)], { type: 'application/json' }));
+    formData.append('imagen', imagen);
+    console.log('Enviando categoría con imagen:',imagen);
+    return this.http.post<Categoria>(this.apiUrl, formData);
   }
+  
 
-  updateCategoria(categoria: Categoria): Observable<Categoria> {
-    console.log(categoria);
-    const url = `${this.apiUrl}/${categoria.idCategoria}`;
-    return this.http.put<Categoria>(url, categoria);
+  updateCategoria(categoria: Categoria, imagen: File | null): Observable<any> {
+    const formData = new FormData();
+    formData.append('categoriaDTO', new Blob([JSON.stringify(categoria)], { type: 'application/json' }));
+    
+    if (imagen) {
+      formData.append('imagen', imagen);
+    }
+  
+    return this.http.put(`${this.apiUrl}/actualizar`, formData); // Ajustá la URL según tu endpoint real
   }
+   
   deleteCategoria(id: number): Observable<void> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete<void>(url);

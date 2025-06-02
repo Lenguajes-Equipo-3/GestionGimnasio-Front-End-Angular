@@ -1,25 +1,42 @@
-:host {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    background-color: darkcyan;
-  }
-  
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  button {
-    margin-top: 10px;
-  }
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  width: 400px;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.icon {
+  font-size: 50px;
+  margin-bottom: 10px;
+ 
+  display: flex;
+  height: auto;
+  width: auto;
+}
+
+.clientes {
+  background-color: #8261be;
+}
+
+.rutinas {
+  background-color: #8261be;
+}
+
+.ejercicios {
+  background-color: #8261be;
+}
+

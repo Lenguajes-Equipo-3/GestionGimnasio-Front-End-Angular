@@ -7,7 +7,7 @@ import { Ejercicio } from '../../../Domain/Ejercicio.interface';
 import { Categoria } from '../../../Domain/CategoriaEjercicio.interface';
 import { EjercicioAddComponent } from '../ejercicio-add/ejercicio-add.component';
 import { EjercicioUpdateComponent } from '../ejercicio-update/ejercicio-update.component';
-
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-ejercicio-list',
   standalone: true,
@@ -27,7 +27,7 @@ export class EjercicioListComponent implements OnInit {
   searchTerm: string = '';
   isLoading = true;
   mostrarFormulario: boolean = false; // Controla si se muestra el formulario o la lista
-
+urlImagenes: string = environment.apiURL + 'media/'; // URL base para las imágenes
   constructor(
     private ejercicioService: EjercicioService,
     private categoriaEjercicioService: CategoriaEjercicioService

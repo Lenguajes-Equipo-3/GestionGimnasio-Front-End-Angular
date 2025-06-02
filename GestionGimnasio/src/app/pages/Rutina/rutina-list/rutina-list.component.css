@@ -1,3 +1,10 @@
+.titulo {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #6a1b9a; /* morado fuerte */
+  margin-bottom: 1.5rem;
+}
 .clientes-container {
   padding: 24px;
   background-color: #f4f0fb;

@@ -13,7 +13,6 @@ export const RoleGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
   const expectedRoles = route.data['roles'] as string[];
   const userRole = authService.getRol(); // Método ya implementado en tu AuthService
 
-  console.log('RoleGuard → expectedRoles:', expectedRoles, 'userRole:', userRole);
 
   // Verifica si hay token y si el rol del usuario está autorizado
   if (!authService.isAuthenticated() || !userRole || !expectedRoles.includes(userRole.toUpperCase())) {
