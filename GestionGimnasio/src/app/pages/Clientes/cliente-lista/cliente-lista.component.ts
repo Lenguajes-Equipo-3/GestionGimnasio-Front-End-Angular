@@ -18,22 +18,12 @@ export class ClienteListaComponent implements OnInit {
   nombreBusqueda: string = '';
   urlImagen: string = `${environment.apiURL}`+'media/';
 
-  constructor(private clienteService: ClienteService, private router: Router ,private prueba : Prueba) {}
+  constructor(private clienteService: ClienteService, private router: Router ) {}
 
   ngOnInit(): void {
     this.cargarClientes();
   }
-  generarReporte(idCliente: number) {
-    this.prueba.generarReporte(idCliente).subscribe({
-    next: () => {
-      console.log('Reporte generado exitosamente');
-    },
 
-    error: (err) => {
-        console.error('Error al generar el reporte:', err);
-      }
-    });
-  }
   cargarClientes(): void {
     this.clienteService.obtenerTodos().subscribe((clientes) => {
       this.clientes = clientes;

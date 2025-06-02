@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Cliente } from './cliente.service';
 import { Empleado } from '../Domain/Empleado.interface';
 import { HttpClient } from '@angular/common/http';
 import { Medida } from './medidas-corporales.service';
 import { EmpleadoService } from './empleado.service';
+import { environment } from '../../environments/environment';
 import {
   Rutina,
   ItemRutinaEjercicio,
@@ -17,9 +18,9 @@ import {
 export class RutinaContextService {
   private rutinaSubject = new BehaviorSubject<Rutina>(this.crearRutinaVacia());
   rutina$ = this.rutinaSubject.asObservable();
-  private clienteUrl = 'http://localhost:8080/proyecto/api/clientes';
-  private MedidasUrl = 'http://localhost:8080/proyecto/api/medidascorporales';
-  private RutinasUrl = 'http://localhost:8080/proyecto/api/rutinas';
+  private clienteUrl = environment.apiURL+'api/clientes';
+  private MedidasUrl = environment.apiURL+'api/medidascorporales';
+  private RutinasUrl = environment.apiURL+'api/rutinas';
 
   constructor(
     private http: HttpClient,
@@ -145,4 +146,16 @@ export class RutinaContextService {
   eliminarRutina(idRutina: number) {
     return this.http.delete(`${this.RutinasUrl}/${idRutina}`);
   }
+
+  generarReporte(idCliente: number): Observable<any> {
+    return this.http.get(this.RutinasUrl+`/rutina/reporte/${idCliente}`, {
+      responseType: 'blob'
+    }).pipe(
+      tap(blob => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+      })
+    );
+  }
+
 }

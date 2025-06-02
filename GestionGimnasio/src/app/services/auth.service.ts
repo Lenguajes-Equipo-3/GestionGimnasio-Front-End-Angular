@@ -45,7 +45,7 @@ export class AuthService {
     if (!lastAction) return false;
 
     const currentTime = Date.now();
-    const timeout = 5 * 60 * 1000000; // 5 minutos
+    const timeout = 5 * 60 * 1000; // 5 minutos
     return (currentTime - parseInt(lastAction, 10)) < timeout;
   }
 
