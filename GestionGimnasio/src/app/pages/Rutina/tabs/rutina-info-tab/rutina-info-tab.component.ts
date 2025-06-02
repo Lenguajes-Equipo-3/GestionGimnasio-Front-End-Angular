@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Output,EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -15,61 +15,65 @@ import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Empleado } from '../../../../Domain/Empleado.interface';
 
-
 @Component({
   selector: 'app-rutina-info-tab',
-  imports: [CommonModule, MatDatepickerModule,
-  MatNativeDateModule,
-  MatSelectModule,
-  MatButtonModule, MatCardModule, ReactiveFormsModule, MatAutocompleteModule,FormsModule, MatFormFieldModule, MatInputModule],
-   standalone: true,
-   templateUrl: './rutina-info-tab.component.html',
-  styleUrl: './rutina-info-tab.component.css'
-  
+  imports: [
+    CommonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
+  standalone: true,
+  templateUrl: './rutina-info-tab.component.html',
+  styleUrl: './rutina-info-tab.component.css',
 })
-export class RutinaInfoTabComponent  implements OnInit{
-  
+export class RutinaInfoTabComponent implements OnInit {
   cliente: Cliente | null = null;
   empleado: Empleado | null = null;
   private subscription!: Subscription;
   objetivo = '';
- lesiones = '';
- enfermedades = '';
- fechaRenovacion!: Date;
- esVigente = true;
- fechaCreacion: Date = new Date(); // Automáticamente asignada al cargar el componente
-formDesactivado = false;
+  lesiones = '';
+  enfermedades = '';
+  fechaRenovacion!: Date;
+  esVigente = true;
+  fechaCreacion: Date = new Date(); // Automáticamente asignada al cargar el componente
+  formDesactivado = false;
 
   @Output() datosGuardados = new EventEmitter<void>();
-   constructor(private rutinaContext: RutinaContextService,
-       private dialog: MatDialog
-    ) {}
+  constructor(
+    private rutinaContext: RutinaContextService,
+    private dialog: MatDialog
+  ) {}
 
-     ngOnInit(): void {
+
+  ngOnInit(): void {
   this.fechaRenovacion = new Date(this.fechaCreacion);
   this.limpiarCampos();
   this.fechaRenovacion.setMonth(this.fechaRenovacion.getMonth() + 3);
 
-  // Suscripción para obtener el cliente
-  this.subscription = this.rutinaContext.rutina$.subscribe(rutina => {
-    this.cliente = rutina.cliente ?? null;
-    this.empleado = rutina.empleado ?? null;
-    console.log('Empleado recibido:', this.empleado);
-  });
+    // Suscripción para obtener el cliente
+    this.subscription = this.rutinaContext.rutina$.subscribe((rutina) => {
+      this.cliente = rutina.cliente ?? null;
+      this.empleado = rutina.empleado ?? null;
+      console.log('Empleado recibido:', this.empleado);
+    });
   }
-      ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  
-
- guardar() {
-  if (!this.objetivo || !this.fechaRenovacion) {
-    alert('Por favor, complete todos los campos requeridos.');
-    return;
-    
-  }
-
+  guardar() {
+    if (!this.objetivo || !this.fechaRenovacion) {
+      alert('Por favor, complete todos los campos requeridos.');
+      return;
+    }
   this.rutinaContext.setDatosGenerales(
     this.objetivo,
     this.lesiones,
@@ -90,4 +94,3 @@ private limpiarCampos() {
   this.esVigente = true;
 }
 }
-

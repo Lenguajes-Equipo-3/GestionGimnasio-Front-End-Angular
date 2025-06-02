@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 import {
   Rutina,
   ItemRutinaEjercicio,
-  ItemRutinaMedida
+  ItemRutinaMedida,
 } from '../Domain/RutinaCompleta.interface';
 
 @Injectable({
@@ -55,24 +55,23 @@ export class RutinaContextService {
   }
 
   setEmpleado(): void {
-    const rutina = this.rutinaSubject.getValue();
-    const idEmpleado = localStorage.getItem('idEmpleado');
+  const rutina = this.rutinaSubject.getValue();
+  const idEmpleado = localStorage.getItem('idEmpleado');
 
-    if (!idEmpleado) {
-      console.error('No se encontró el idEmpleado en localStorage');
-      return;
-    }
-    const id = parseInt(idEmpleado, 10);
-    this.empleadoService.getEmpleadoById(id).subscribe({
-      next: (empleado: Empleado) => {
-        rutina.empleado = empleado;
-        this.rutinaSubject.next(rutina);
-      },
-      error: (err) => {
-        console.error('Error al obtener el empleado:', err);
-      },
-    });
+  if (!idEmpleado) {
+    console.error('No se encontró el idEmpleado en localStorage');
+    return;
   }
+
+  const id = parseInt(idEmpleado, 10);
+  this.empleadoService.getEmpleadoById(id).subscribe({
+    next: (empleado: Empleado) => {
+      rutina.empleado = empleado;
+      this.rutinaSubject.next(rutina); // Actualiza el BehaviorSubject
+      
+    },
+  });
+}
 
   setDatosGenerales(
     objetivo: string,
@@ -146,7 +145,6 @@ export class RutinaContextService {
   eliminarRutina(idRutina: number) {
     return this.http.delete(`${this.RutinasUrl}/${idRutina}`);
   }
-
   generarReporte(idCliente: number): Observable<any> {
     return this.http.get(this.RutinasUrl+`/rutina/reporte/${idCliente}`, {
       responseType: 'blob'
@@ -157,5 +155,6 @@ export class RutinaContextService {
       })
     );
   }
-
+  
 }
+
