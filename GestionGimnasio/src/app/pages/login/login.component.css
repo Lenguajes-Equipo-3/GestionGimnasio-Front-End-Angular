@@ -8,12 +8,13 @@
   box-sizing: border-box;
 }
 
-.login-form, .login-image {
-  
+.login-form,
+.login-image {
+
   background: #fff;
   border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .login-form {
@@ -69,4 +70,37 @@ h1 {
   font-size: 13px;
   color: #673ab7;
   text-decoration: none;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn:hover {
+  filter: brightness(0.9);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-visibility {
+  background-color: transparent;
+  border: none;
+  margin: 2px 5px 0 5px;
+}
+
+.btn-visibility mat-icon {
+  color: rgb(68, 71, 78);
 }

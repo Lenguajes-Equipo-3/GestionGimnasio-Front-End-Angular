@@ -14,12 +14,12 @@
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Contraseña</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" name="password" required />
-        <button mat-icon-button matSuffix type="button" (click)="hide = !hide">
+        <button class="btn-visibility" mat-icon-button matSuffix type="button" (click)="hide = !hide">
           <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
       </mat-form-field>
 
-      <button mat-flat-button color="primary" class="login-btn" type="submit">Iniciar Sesión</button>
+      <button mat-flat-button color="primary" class="login-btn btn-primary btn" type="submit">Iniciar Sesión</button>
     </form>
 
     <a href="#" class="forgot-password">¿Olvidó su contraseña?</a>
