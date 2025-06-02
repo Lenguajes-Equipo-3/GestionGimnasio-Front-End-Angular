@@ -9,9 +9,9 @@ import { Cliente } from '../../../services/cliente.service';
 @Component({
   standalone: true,
   selector: 'app-rutina-list',
-  imports: [CommonModule, MatDialogModule,FormsModule, RouterModule],
+  imports: [CommonModule, MatDialogModule, FormsModule, RouterModule],
   templateUrl: './rutina-list.component.html',
-  styleUrls: ['./rutina-list.component.css']
+  styleUrls: ['./rutina-list.component.css'],
 })
 export class RutinaListComponent implements OnInit {
   clientes: Cliente[] = [];
@@ -38,7 +38,7 @@ export class RutinaListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar clientes:', err);
-      }
+      },
     });
   }
 
@@ -53,7 +53,11 @@ export class RutinaListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al buscar clientes:', err);
-      }
+      },
     });
+  }
+
+  verRutinasCliente(cliente: Cliente) {
+    this.router.navigate(['/rutina/cliente', cliente.idCliente]);
   }
 }

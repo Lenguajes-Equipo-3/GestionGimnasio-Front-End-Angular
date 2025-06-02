@@ -9,7 +9,7 @@ import { UsuarioLoginResponse } from '../Domain/usuario-login-response';
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:8083/security/api/auth/login';
+  private baseUrl = 'https://api-security-proyecto-dkh3cxh6h0b8g7d7.canadacentral-01.azurewebsites.net/security/api/auth/login';
 
   constructor(private http: HttpClient) { }
 
